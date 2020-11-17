@@ -12,7 +12,10 @@ import DropdownBase from './components/DropdownBase';
 import Combustibles from './components/Combustibles';
 import Calculator from './components/Calculator';
 import Route from './components/Route';
+import TestSelect from './components/TestSelect';
+import AreaInput from './components/AreaInput';
 import { useState, useEffect } from 'react';
+import { Container } from '@material-ui/core';
 //import Content from './components/Content';
 
 //
@@ -54,6 +57,31 @@ const tecnologia = [
   }
 ];
 
+const followers = [
+  { "0-50k": [0, 50000] },
+  { "50k-100k": [50001, 100000] },
+  { "100k-250k": [100001, 250000] },
+  { "250k-500k": [250001, 500000] },
+  { "500k-750k": [500001, 750000] },
+  { "+1M": [750001, Number.MAX_SAFE_INTEGER] }
+];
+
+const edificacion = [
+  { "Residencial": [1000, 20] },
+  { "No residencial": [100, 5] }
+];
+
+const technology = [
+  { "PCM": [2, 3] },
+  { "Aislante": [4, 5] },
+  { "Pintura": [6, 7] }
+];
+
+const temporadas = [
+  { "Verano (Abr - Oct)": [2, 3] },
+  { "Invierno (Nov - Mar)": [4, 5] },
+];
+
 function App() {
   const [selected, setSelected] = useState(tecnologia[0]);
   const [selectedTwo, setSelectedTwo] = useState(tecnologia[0]);
@@ -70,7 +98,7 @@ function App() {
       </Route>
       <Route path="/potencialsolar">
           <div className="ui container body">
-          <h1 className="ui header">Producción energética total</h1>
+          <h1 className="ui header">Producción energética total en Monterrey</h1>
             <DropdownSimple
                 options={tecnologia} 
                 label="Selecciona una tecnología" 
@@ -82,7 +110,7 @@ function App() {
                 label="Selecciona una tecnología" 
                 selected={selectedTwo}
                 onSelectedChange={setSelectedTwo}/>
-          <h1 className="ui header">Potencial de reducción anual</h1>
+          <h1 className="ui header">Potencial de reducción anual de GEI total</h1>
           <DropdownBase
                 options={tecnologia} 
                 label="Selecciona una tecnología" 
@@ -97,10 +125,41 @@ function App() {
             tecnologia={selectedThree}
             combustible={selectedComb}
           />
+          <h1 className="ui header">Potencial de reducción anual de GEI específica</h1>
+          
           </div>
       </Route>
       <Route path="/edificiossustentables">
-        <h1>Edicios sustentables</h1>
+        <Container>
+          <h1>Generación de GEI por tipo de edificación</h1>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={4}>
+              < TestSelect options={edificacion} label="Tipo de edificación"/>
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <AreaInput/>
+              </Grid>
+            </Grid>
+
+            <h1>Generación de GEI por tipo de edificación y tecnología</h1>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={4}>
+              < TestSelect options={edificacion} label="Tipo de edificación"/>
+              </Grid>
+              <Grid item xs={12} sm={4}>
+              <TestSelect options={technology} label="Tipo de tecnología"/>
+              </Grid>
+              <Grid item xs={12} sm={4}>
+              
+              </Grid>
+              <Grid item xs={12} sm={4}>
+              <TestSelect options={temporadas} label="Temporada"/>
+              </Grid>
+              <Grid item xs={12} sm={4}>
+              <AreaInput />
+              </Grid>
+            </Grid>
+        </Container>
       </Route>
       <Route path="/visualizacion">
         <ChartsManager></ChartsManager>
