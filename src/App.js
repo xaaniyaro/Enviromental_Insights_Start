@@ -57,15 +57,6 @@ const tecnologia = [
   }
 ];
 
-const followers = [
-  { "0-50k": [0, 50000] },
-  { "50k-100k": [50001, 100000] },
-  { "100k-250k": [100001, 250000] },
-  { "250k-500k": [250001, 500000] },
-  { "500k-750k": [500001, 750000] },
-  { "+1M": [750001, Number.MAX_SAFE_INTEGER] }
-];
-
 const edificacion = [
   { "Residencial": [1000, 20] },
   { "No residencial": [100, 5] }
@@ -132,7 +123,7 @@ function App() {
       <Route path="/edificiossustentables">
         <Container>
           <h1>Generación de GEI por tipo de edificación</h1>
-            <Grid container spacing={2}>
+          <Grid container spacing={2}>
               <Grid item xs={12} sm={4}>
               < TestSelect options={edificacion} label="Tipo de edificación"/>
               </Grid>
@@ -140,7 +131,6 @@ function App() {
                 <AreaInput/>
               </Grid>
             </Grid>
-
             <h1>Generación de GEI por tipo de edificación y tecnología</h1>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={4}>

@@ -4,8 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import Charts from './Charts';
 import DropdownPlace from './DropdownPlace';
 
-
-
 const options = [
     {
         "label" : "Casa solar",
@@ -51,10 +49,10 @@ const useStyles = makeStyles((theme) => ({
     root: {
         marginTop: '60px',
         marginLeft: '60px',
-    }
-    /*mapframe: {
+    },
+    mapframe: {
         marginLeft: '60px'
-    }*/
+    }
   }));
 
 const ChartsManager = () =>{
@@ -82,9 +80,10 @@ const ChartsManager = () =>{
                     data={data2}
                     year={2018}></Charts>
                 </Grid>
-                /*<Grid item xs={12}>
-<iframe className={classes.mapframe} src="https://www.google.com/maps/d/u/1/embed?mid=1b6KEEkwvDiTquRcPP9TjbfQ38sDjUA4Q" width="1280" height="720"></iframe>
-</Grid>*/
+                <Grid item xs={12}>
+                    <iframe className={classes.mapframe} src="https://www.google.com/maps/d/u/1/embed?mid=1b6KEEkwvDiTquRcPP9TjbfQ38sDjUA4Q" width="1280" height="720"></iframe>
+                </Grid>
+                
         </Grid>
         </div>
     );
