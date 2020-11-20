@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import Charts from './Charts';
 import DropdownPlace from './DropdownPlace';
+import Typography from '@material-ui/core/Typography';
 
 const options = [
     {
@@ -47,11 +49,20 @@ const data2 = [
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop: '60px',
-        marginLeft: '60px',
+        marginTop: '60px'
     },
-    mapframe: {
-        marginLeft: '60px'
+    paper: {
+        padding: theme.spacing(2),
+        minWidth: '100%',
+        minHeight: '100%'
+    },
+    mapSection: {
+        marginTop: '50px'
+    },
+    chartsSection: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start'
     }
   }));
 
@@ -61,7 +72,7 @@ const ChartsManager = () =>{
 
     return(
         <div className={classes.root}>
-            <Grid container spacing={3} justify="center">
+            <Grid container spacing={1}>
                 <Grid item xs={12}>
                     <DropdownPlace
                         options={options}
@@ -69,19 +80,21 @@ const ChartsManager = () =>{
                         onSelectedChange={setSelected}
                         label="Selecciona estación"></DropdownPlace>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4} className={classes.chartsSection}>
                     <Charts
                     data={data1}
-                    year={2018}
                     ></Charts>
-                </Grid>
-                <Grid item xs={6}>
                     <Charts
-                    data={data2}
-                    year={2019}></Charts>
+                    data={data2}></Charts>
                 </Grid>
-                <Grid item xs={12}>
-                    <iframe className={classes.mapframe} src="https://www.google.com/maps/d/u/1/embed?mid=1b6KEEkwvDiTquRcPP9TjbfQ38sDjUA4Q" width="1280" height="720"></iframe>
+                <Grid item xs={8}>
+                    <Paper elevation={2} className={classes.paper}></Paper>
+                </Grid>
+                <Grid item xs={12} className={classes.mapSection}>
+                    <Typography variant="h4" gutterBottom>
+                        Mapa completo
+                    </Typography>
+                    <iframe className={classes.mapframe} src="https://www.google.com/maps/d/u/1/embed?mid=1b6KEEkwvDiTquRcPP9TjbfQ38sDjUA4Q" width="100%" height="720"></iframe>
                 </Grid>
                 
         </Grid>

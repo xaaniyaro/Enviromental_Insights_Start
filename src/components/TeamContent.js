@@ -7,6 +7,9 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
     container:{
         marginTop: 30
+    },
+    paper: {
+        padding: theme.spacing(2),
     }
     
   }));
@@ -16,18 +19,16 @@ const TeamContent = () => {
 
     return(
         <div className={classes.container}>
-            <Grid container spacing={1}>
+            <Grid container spacing={4}>
                 <Grid item xs={12} sm={12}>
-                    <Member></Member>
+                    <Paper elevation={3} className={classes.paper}>
+                        <Member></Member>
+                    </Paper>
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                    <Member></Member>
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                    <Member></Member>
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                    <Member></Member>
+                    <Paper elevation={3} className={classes.paper}>
+                        <Member></Member>
+                    </Paper>
                 </Grid>
             </Grid>
         </div>

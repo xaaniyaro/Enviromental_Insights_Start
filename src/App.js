@@ -18,6 +18,7 @@ import { useState, useEffect } from 'react';
 import { Container } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import TeamContent from './components/TeamContent';
+import { Filter } from '@material-ui/icons';
 //import Content from './components/Content';
 
 //
@@ -81,8 +82,7 @@ const useStyles = makeStyles(theme => ({
   },
   section: {
     marginTop: 30
-  }
-
+  },
 }));
 function App() {
 
@@ -147,12 +147,16 @@ function App() {
         </Container>
       </Route>
       <Route path="/visualizacion">
+        <Container>
         <ChartsManager></ChartsManager>
+        </Container>
       </Route>
       <Route path="/equipo">
+        <div classes={classes.teamBackground}>
         <Container>
           <TeamContent></TeamContent>
         </Container>
+        </div>
       </Route>
     </div>
     

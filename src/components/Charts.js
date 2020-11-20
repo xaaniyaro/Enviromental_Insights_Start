@@ -1,13 +1,12 @@
 import React, { PureComponent } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-const Charts = ({year, data}) => {
+const Charts = ({ data}) => {
     
 
     return(
         <div>
-            <h1>{year}</h1>
-            <BarChart width={600} height={300} data={data}
+            <BarChart width={400} height={200} data={data}
             margin={{top: 5, right: 30, left: 20, bottom: 5}}>
             <CartesianGrid strokeDasharray="3 3"/>
             <XAxis dataKey="name"/>
