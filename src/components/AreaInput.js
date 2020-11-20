@@ -14,36 +14,38 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 const useStyles = makeStyles(theme => ({
-  formControl: {
+  margin: {
     margin: theme.spacing(1),
-    minWidth: 240
-  }
+  },
+  textField: {
+    width: '30ch',
+  },
 }));
 
-export default function AreaInput() {
+export default function AreaInput( {areaValue, onValueChange, idInput, idHelper} ) {
   const classes = useStyles();
-  const [area, setArea] = React.useState('');
 
-  const handleChange = () => (event) => {
-    setArea(event.target.value);
+  
+  const handleChange = (event) => {
+    onValueChange(event.target.value);
   };
 
     return(
         <div>
-            <FormControl variant="outlined" className={classes.formControl}>
-            <FormHelperText id="outlined-area-helper-text">Área</FormHelperText>
-          <OutlinedInput
-            id="outlined-adornment-area"
-            value={area}
-            onChange={handleChange}
-            endAdornment={<InputAdornment position="end">m²</InputAdornment>}
-            aria-describedby="outlined-area-helper-text"
-            inputProps={{
-              'aria-label': 'area',
-            }}
-            labelWidth={0}
-          />
-         </FormControl>
+          <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+            <OutlinedInput
+              id={idInput}
+              value={areaValue}
+              onChange={handleChange}
+              endAdornment={<InputAdornment position="end">m²</InputAdornment>}
+              aria-describedby={idHelper}
+              inputProps={{
+                'aria-label': 'area',
+              }}
+              labelWidth={0}
+            />
+            <FormHelperText id={idHelper}>Área</FormHelperText>
+          </FormControl>
         </div>
     );
 

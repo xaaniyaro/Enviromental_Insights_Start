@@ -3,19 +3,21 @@ import ReactDOM from 'react-dom';
 
 import './App.css';
 import AppBar from './components/AppBar';
-import SolarCalculator from './components/SolarCalculator';
+import { makeStyles } from "@material-ui/core/styles";
 import ChartsManager from './components/ChartsManager';
-import Grid from '@material-ui/core/Grid';
 import Dropdown from './components/Dropdown';
 import DropdownSimple from './components/DropdownSimple';
 import DropdownBase from './components/DropdownBase';
 import Combustibles from './components/Combustibles';
 import Calculator from './components/Calculator';
 import Route from './components/Route';
-import TestSelect from './components/TestSelect';
-import AreaInput from './components/AreaInput';
+import Edificacion from './components/Edificacion';
+import EdificacionSegundo from './components/EdificacionSegundo'
+import SectionHeader from './components/SectionHeader';
 import { useState, useEffect } from 'react';
 import { Container } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
+import TeamContent from './components/TeamContent';
 //import Content from './components/Content';
 
 //
@@ -73,7 +75,18 @@ const temporadas = [
   { "Invierno (Nov - Mar)": [4, 5] },
 ];
 
+const useStyles = makeStyles(theme => ({
+  mainContent: {
+      marginTop: 20
+  },
+  section: {
+    marginTop: 30
+  }
+
+}));
 function App() {
+
+  const classes = useStyles();
   const [selected, setSelected] = useState(tecnologia[0]);
   const [selectedTwo, setSelectedTwo] = useState(tecnologia[0]);
   const [selectedThree, setSelectedThree] = useState(tecnologia[0]);
@@ -121,41 +134,25 @@ function App() {
           </div>
       </Route>
       <Route path="/edificiossustentables">
-        <Container>
-          <h1>Generación de GEI por tipo de edificación</h1>
-          <Grid container spacing={2}>
-              <Grid item xs={12} sm={4}>
-              < TestSelect options={edificacion} label="Tipo de edificación"/>
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <AreaInput/>
-              </Grid>
-            </Grid>
-            <h1>Generación de GEI por tipo de edificación y tecnología</h1>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={4}>
-              < TestSelect options={edificacion} label="Tipo de edificación"/>
-              </Grid>
-              <Grid item xs={12} sm={4}>
-              <TestSelect options={technology} label="Tipo de tecnología"/>
-              </Grid>
-              <Grid item xs={12} sm={4}>
-              
-              </Grid>
-              <Grid item xs={12} sm={4}>
-              <TestSelect options={temporadas} label="Temporada"/>
-              </Grid>
-              <Grid item xs={12} sm={4}>
-              <AreaInput />
-              </Grid>
-            </Grid>
+        <Container className={classes.mainContent}>
+            <SectionHeader title="Generaciones de GEI por tipo de edificio"></SectionHeader>
+            <br/>
+            <Edificacion edif={edificacion}></Edificacion>
+
+            <div className={classes.section}>
+            <SectionHeader title="Generaciones de GEI por varios parámetros"></SectionHeader>
+            <br/>
+            <EdificacionSegundo edif={edificacion} tech={technology} temp={temporadas}></EdificacionSegundo>
+            </div>
         </Container>
       </Route>
       <Route path="/visualizacion">
         <ChartsManager></ChartsManager>
       </Route>
       <Route path="/equipo">
-        <h1>Equipo</h1>
+        <Container>
+          <TeamContent></TeamContent>
+        </Container>
       </Route>
     </div>
     

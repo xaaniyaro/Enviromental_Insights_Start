@@ -9,20 +9,19 @@ const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 240
-  },
+  }/*,
   selectElement: {
     marginTop: 18
   },
   iLabel: {
     marginTop: 18
-  }
+  }*/
 }));
 
-export default function TestSelect({ options, label }) {
+export default function TestSelect({ options, label, selected, onSelectedChange }) {
   const classes = useStyles();
 
-  const [value, setValue] = React.useState("");
-  const handleChange = event => setValue(event.target.value);
+  const handleChange = event => onSelectedChange(event.target.value);
 
   return (
     <div>
@@ -32,7 +31,7 @@ export default function TestSelect({ options, label }) {
           className={classes.selectElement}
           labelId="optionsL"
           id="options"
-          value={value}
+          value={selected}
           onChange={handleChange}
           label={label}
         >

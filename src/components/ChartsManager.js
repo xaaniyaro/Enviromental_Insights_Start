@@ -78,7 +78,7 @@ const ChartsManager = () =>{
                 <Grid item xs={6}>
                     <Charts
                     data={data2}
-                    year={2018}></Charts>
+                    year={2019}></Charts>
                 </Grid>
                 <Grid item xs={12}>
                     <iframe className={classes.mapframe} src="https://www.google.com/maps/d/u/1/embed?mid=1b6KEEkwvDiTquRcPP9TjbfQ38sDjUA4Q" width="1280" height="720"></iframe>

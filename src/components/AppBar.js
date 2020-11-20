@@ -47,7 +47,7 @@ export default function MenuAppBar() {
           <Typography variant="h6" className={classes.title}>
             Nombre del proyecto
           </Typography>
-          <Button color="inherit"><Link href="/">Inicio</Link></Button>
+          <Link href="/"><Button color="inherit">Inicio</Button></Link>
             <div>
               <Button
                 aria-label="account of current user"
@@ -72,12 +72,12 @@ export default function MenuAppBar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}><Link href="/potencialsolar">Potencial solar</Link></MenuItem>
-                <MenuItem onClick={handleClose}><Link href="/edificiossustentables">Edificios sustentables</Link></MenuItem>
+                <Link href="/potencialsolar"><MenuItem onClick={handleClose}>Potencial solar</MenuItem></Link>
+                <Link href="/edificiossustentables"><MenuItem onClick={handleClose}>Edificios sustentables</MenuItem></Link>
               </Menu>
             </div>
-            <Button color="inherit"><Link href="/visualizacion">Visualización de datos</Link></Button>
-            <Button color="inherit"><Link href="/equipo">Sobre el equipo</Link></Button>
+            <Link href="/visualizacion"><Button color="inherit">Visualización de datos</Button></Link>
+            <Link href="/equipo"><Button color="inherit">Conoce al equipo</Button></Link>
         </Toolbar>
       </AppBar>
     </div>
