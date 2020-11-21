@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+
 import React, { useState, useEffect, useRef } from 'react';
 
 const DropdownSimple = ({ options, selected, onSelectedChange, label }) => {
