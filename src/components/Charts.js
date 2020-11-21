@@ -13,7 +13,7 @@ const Charts = ({ data}) => {
             <YAxis/>
             <Tooltip/>
             <Legend />
-            <Bar dataKey="Wh" fill="#82ca9d" />
+            <Bar dataKey="Watts/h por año" fill="#82ca9d" />
             </BarChart>
         </div>
     );
