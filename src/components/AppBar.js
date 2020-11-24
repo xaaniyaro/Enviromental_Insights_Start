@@ -13,6 +13,36 @@ import FormGroup from '@material-ui/core/FormGroup';
 import Link from './Link';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import PropTypes from 'prop-types';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
+
+function ElevationScroll(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined,
+  });
+
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
+
+ElevationScroll.propTypes = {
+  children: PropTypes.element.isRequired,
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,9 +54,12 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  appbar: {
+    background: "#418F01"
+  }
 }));
 
-export default function MenuAppBar() {
+export default function MenuAppBar(props) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -40,12 +73,16 @@ export default function MenuAppBar() {
     setAnchorEl(null);
   };
 
+  
+
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <CssBaseline />
+      <ElevationScroll {...props}>
+      <AppBar className={classes.appbar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Nombre del proyecto
+            Plataforma
           </Typography>
           <Link href="/"><Button color="inherit">Inicio</Button></Link>
             <div>
@@ -77,9 +114,11 @@ export default function MenuAppBar() {
               </Menu>
             </div>
             <Link href="/visualizacion"><Button color="inherit">Visualización de datos</Button></Link>
-            <Link href="/equipo"><Button color="inherit">Conoce al equipo</Button></Link>
+            <Link href="/equipo"><Button color="inherit">Equipo de trabajo</Button></Link>
         </Toolbar>
       </AppBar>
+      </ElevationScroll>
+      <Toolbar />
     </div>
   );
 }

@@ -6,47 +6,27 @@ import Route from './components/Route';
 import Edificacion from './components/Edificacion';
 import EdificacionSegundo from './components/EdificacionSegundo'
 import SectionHeader from './components/SectionHeader';
+import HomeComponent from './components/HomeComponent';
+import SolarEstruc from './components/SolarEstruc';
 import { Container } from '@material-ui/core';
+import Member from './components/Member';
 //import Content from './components/Content';
 
 //
 
-
-/*const combustibles = [
-  {
-    "label": "Diesel",
-    "value": 0.00027 
-  },
-  {
-    "label": "Gas natural",
-    "value": 0.0002
-  },
-  {
-    "label": "GLP",
-    "value": 0.00023
-  }
+// Primer valor : energia electrica
+// Segundo valor: energia termica
+const tecnologia = [
+  { "Colectores térmicos": [0, 280.1]},
+  { "Colectores híbridos": [44.49, 228.97]},
+  { "Paneles fotovoltáicos": [0, 171.62]}
 ];
 
-const tecnologia = [
-  {
-    "label": "Colectores térmicos",
-    "valueheat": 280.1,
-    "valueelec": 0,
-    "img" : "/termic.png"
-  },
-  {
-    "label": "Colectores híbridos",
-    "valueheat": 228.97,
-    "valueelec": 44.49,
-    "img" : "/hybrid.png"
-  },
-  {
-    "label": "Paneles fotovoltáicos",
-    "valueheat": 0,
-    "valueelec": 171.62,
-    "img" : "/panel.png"
-  }
-];*/
+const combustibles = [
+  {"Diesel": [0.00027]},
+  {"Gas natural": [0.0002]},
+  {"GLP": [0.0023]}
+]
 
 const edificacion = [
   { "Residencial": [1000, 20] },
@@ -82,10 +62,12 @@ function App() {
     <div>
       <AppBar />
       <Route path="/">
-        <h1>Home</h1>
+        <HomeComponent></HomeComponent>
       </Route>
       <Route path="/potencialsolar">
-          
+          <Container>
+              <SolarEstruc tecnologia={tecnologia}></SolarEstruc>
+          </Container>
       </Route>
       <Route path="/edificiossustentables">
         <Container className={classes.mainContent}>
@@ -106,11 +88,7 @@ function App() {
         </Container>
       </Route>
       <Route path="/equipo">
-        <div classes={classes.teamBackground}>
-        <Container>
-          
-        </Container>
-        </div>
+        <Member></Member>
       </Route>
     </div>
     

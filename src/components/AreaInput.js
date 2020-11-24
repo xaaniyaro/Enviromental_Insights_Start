@@ -20,6 +20,11 @@ const useStyles = makeStyles(theme => ({
   textField: {
     width: '30ch',
   },
+  root: {
+    '& .MuiInputAdornment-root': {
+      fontWeight: 'bold'
+    }
+  }
 }));
 
 export default function AreaInput( {areaValue, onValueChange, idInput, idHelper} ) {
@@ -32,7 +37,7 @@ export default function AreaInput( {areaValue, onValueChange, idInput, idHelper}
 
     return(
         <div>
-          <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+          <FormControl className={clsx(classes.margin, classes.textField, classes.root)} variant="outlined">
             <OutlinedInput
               id={idInput}
               value={areaValue}
@@ -41,6 +46,7 @@ export default function AreaInput( {areaValue, onValueChange, idInput, idHelper}
               aria-describedby={idHelper}
               inputProps={{
                 'aria-label': 'area',
+                  className: classes.input
               }}
               labelWidth={0}
             />

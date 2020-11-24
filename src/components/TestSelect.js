@@ -6,10 +6,15 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from "@material-ui/core/Select";
 
 const useStyles = makeStyles(theme => ({
-  formControl: {
+  root: {
     margin: theme.spacing(1),
-    minWidth: 240
-  }/*,
+    minWidth: '30ch',
+    "& label.MuiInputLabel-outlined": {
+      color: "black",
+      fontWeight: 'bold'
+    }
+  },
+    /*,
   selectElement: {
     marginTop: 18
   },
@@ -25,10 +30,9 @@ export default function TestSelect({ options, label, selected, onSelectedChange 
 
   return (
     <div>
-      <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="optionsL" className={classes.iLabel}>{label}</InputLabel>
+      <FormControl variant="outlined" className={classes.root}>
+        <InputLabel id="optionsL">{label}</InputLabel>
         <Select
-          className={classes.selectElement}
           labelId="optionsL"
           id="options"
           value={selected}
