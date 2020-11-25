@@ -9,13 +9,7 @@ import {
     CardMedia,
     Typography,
     Grid,
-    Button,
-    Checkbox,
-    FormControlLabel,
-    Radio,
-    RadioGroup,
-    FormLabel,
-    Slider
+    Button
 } from '@material-ui/core';
 
 function Banner(props) {

@@ -1,5 +1,4 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
@@ -24,7 +23,7 @@ const DoctorView = ({imgSrc, nombre, puesto, title, desc}) => {
             <Paper elevation={2} className={classes.paperBack}>
             <Box display="flex" justifyContent="center" m={1} p={1} >
                         <Box p={1}>
-                            <img src={imgSrc} className={classes.photos}></img>
+                            <img src={imgSrc} alt={imgSrc} className={classes.photos}></img>
                         </Box>
                     </Box>
                     <Box display="flex" justifyContent="center" >

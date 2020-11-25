@@ -54,10 +54,10 @@ const Member = () => {
                     <MemberView imgSrc="diana.png" nombre="Diana Rosete Taboada" puesto="Estudiante IMA" title="h6" desc="subtitle2"></MemberView>
                 </Grid>
                 <Grid item xs={12} sm= {2}>
-                    <MemberView imgSrc="luis.png" nombre="Luis Almanza Vazquez" puesto="Estudiante IME" title="h6" desc="subtitle2"></MemberView>
+                    <MemberView imgSrc="luis.png" nombre="Luis Almanza Vazquez" puesto="Estudiante IMT" title="h6" desc="subtitle2"></MemberView>
                 </Grid>
                 <Grid item xs={12} sm= {2}>
-                    Juande
+                <MemberView imgSrc="juande.png" nombre="Juan de Dios Martínez" puesto="Estudiante IME" title="h6" desc="subtitle2"></MemberView>
                 </Grid>
                 <Grid item xs={12} sm= {2}>
                     <MemberView imgSrc="ivann.png" nombre="Iván Contreras Rodríguez" puesto="Estudiante ITC" title="h6" desc="subtitle2"></MemberView>

@@ -10,6 +10,8 @@ import HomeComponent from './components/HomeComponent';
 import SolarEstruc from './components/SolarEstruc';
 import { Container } from '@material-ui/core';
 import Member from './components/Member';
+import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 //import Content from './components/Content';
 
 //
@@ -22,11 +24,11 @@ const tecnologia = [
   { "Paneles fotovoltáicos": [0, 171.62]}
 ];
 
-const combustibles = [
+/*const combustibles = [
   {"Diesel": [0.00027]},
   {"Gas natural": [0.0002]},
   {"GLP": [0.0023]}
-]
+]*/
 
 const edificacion = [
   { "Residencial": [1000, 20] },
@@ -71,15 +73,19 @@ function App() {
       </Route>
       <Route path="/edificiossustentables">
         <Container className={classes.mainContent}>
-            <SectionHeader title="Generaciones de GEI por tipo de edificio"></SectionHeader>
-            <br/>
-            <Edificacion edif={edificacion}></Edificacion>
+        <Paper elevation={1}>
+            <Box p={2}>
+              <SectionHeader title="Generaciones de GEI por tipo de edificio"></SectionHeader>
+              <br/>
+              <Edificacion edif={edificacion}></Edificacion>
 
-            <div className={classes.section}>
-            <SectionHeader title="Generaciones de GEI por varios parámetros"></SectionHeader>
-            <br/>
-            <EdificacionSegundo edif={edificacion} tech={technology} temp={temporadas}></EdificacionSegundo>
-            </div>
+              <div className={classes.section}>
+              <SectionHeader title="Generaciones de GEI por varios parámetros"></SectionHeader>
+              <br/>
+              <EdificacionSegundo edif={edificacion} tech={technology} temp={temporadas}></EdificacionSegundo>
+              </div>
+            </Box>
+          </Paper>
         </Container>
       </Route>
       <Route path="/visualizacion">

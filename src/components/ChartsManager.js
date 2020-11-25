@@ -91,9 +91,6 @@ const ChartsManager = () =>{
                     </Typography>
                     <iframe className={classes.mapframe} title="completemap" src="https://www.google.com/maps/d/u/1/embed?mid=1b6KEEkwvDiTquRcPP9TjbfQ38sDjUA4Q" width="100%" height="720"></iframe>
                 </Grid>
-                <Grid item xs={12}>
-<iframe className={classes.mapframe} src="https://www.google.com/maps/d/u/1/embed?mid=1b6KEEkwvDiTquRcPP9TjbfQ38sDjUA4Q" width="1280" height="720"></iframe>
-</Grid>
         </Grid>
         </div>
     );
