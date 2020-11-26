@@ -36,10 +36,10 @@ const Member = () => {
                     <MemberView imgSrc="gijon.png" nombre="Dr. Miguel Ángel Gijón Rivera" puesto="Responsable Edificios Sustentables" title="h5" desc="subtitle1"></MemberView>
                 </Grid>
                 <Grid item xs={12} sm= {4}>
-                    <MemberView imgSrc="ivan.png" nombre="Msc. Ivan Acosta Pazmiño" puesto="Estudiante doctorado" title="h6" desc="subtitle2"></MemberView>
+                    <MemberView imgSrc="ivan.png" nombre="Msc. Ivan Acosta Pazmiño" puesto="Coordinador Potencial Solar" title="h6" desc="subtitle2"></MemberView>
                 </Grid>
                 <Grid item xs={12} sm= {4}>
-                    <MemberView imgSrc="caribay.png" nombre="Msc. Caribay Godoy Rangel" puesto="Estudiante doctorado" title="h6" desc="subtitle2"></MemberView>
+                    <MemberView imgSrc="caribay.png" nombre="Msc. Caribay Godoy Rangel" puesto="Coordinadora Edificios Sustentables" title="h6" desc="subtitle2"></MemberView>
                 </Grid>
                 <Grid item xs={12} sm= {4}>
                     <MemberView imgSrc="jorge.png" nombre="Msc. Jorge Alfonso Tirado" puesto="Profesionista" title="h6" desc="subtitle2"></MemberView>

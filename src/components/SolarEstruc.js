@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
         marginTop: '30px'
     },
     electricBack: {
-        backgroundColor: "#327BB8",
+        backgroundColor: "#004783",
         width: "100%",
         height: "100%"
     },
@@ -32,12 +32,16 @@ const useStyles = makeStyles(theme => ({
         color: "white"
     },
     heatBack: {
-        backgroundColor: "#B83632",
+        backgroundColor: "#FF0000",
         width: "100%",
         height: "100%"
     },
     heatR: {
         color: "white"
+    },
+    helpImg: {
+        width: "116px",
+        height: "60px"
     }
   }));
 
@@ -62,7 +66,7 @@ const SolarEstruc = ( {tecnologia} ) => {
         <Grid container spacing={3} justify="space-between">
             <Grid item xs={12} sm={9}>
                 <Typography variant="h4" className={classes.header}>
-                    Producción energética
+                    Calculadora total
                 </Typography>
             </Grid>
             <Grid item xs={12} sm={3}>
@@ -80,18 +84,18 @@ const SolarEstruc = ( {tecnologia} ) => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item xs={12} sm={9}>
+            <Grid item xs={12} sm={7}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={12}>
-                    <Typography variant="h5">
-                        Total
-                    </Typography>
+                        <Typography variant="h5">
+                            Producción energética
+                        </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Paper className={classes.electricBack}>
                             <Box display="flex" justifyContent="center" p={2}>
                                 <Typography variant="subtitle2" className={classes.electricR}>
-                                    28.82 watts h / año
+                                    28.82 watts h/año
                                 </Typography>
                             </Box>
                         </Paper>
@@ -100,36 +104,94 @@ const SolarEstruc = ( {tecnologia} ) => {
                         <Paper className={classes.heatBack}>
                             <Box display="flex" justifyContent="center" p={2}>
                                 <Typography variant="subtitle2" className={classes.heatR}>
-                                    28.82 watts h / año
+                                    28.82 watts h/año
                                 </Typography>
                             </Box>
                         </Paper>
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                    <Typography variant="h5">
-                        Específica
-                    </Typography>
+                        <Typography variant="h5">
+                            Reducción de emisiones de GEI
+                        </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Paper className={classes.electricBack}>
-                            <Box display="flex" justifyContent="center" p={2}>
-                                <Typography variant="subtitle2" className={classes.electricR}>
-                                    28.82 watts h / año
-                                </Typography>
-                            </Box>
+                            <Grid container alignItems="center">
+                                <Grid item xs={12} sm={3}>
+                                    <Box display="flex" justifyContent="flex-start" p={3}>
+                                        <img src="electricy_white.png" width="26px" height="50px" alt="icon"/>
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={12} sm={9}>
+                                    <Box display="flex" justifyContent="center" p={4}>
+                                        <Typography variant="subtitle2" className={classes.electricR}>
+                                            28.82 ton CO2/año
+                                        </Typography>
+                                    </Box>
+                                </Grid>
+                            </Grid>
                         </Paper>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Paper className={classes.heatBack}>
-                            <Box display="flex" justifyContent="center" p={2}>
-                                <Typography variant="subtitle2" className={classes.heatR}>
-                                    28.82 watts h / año
-                                </Typography>
-                            </Box>
+                        <Grid container alignItems="center">
+                                <Grid item xs={12} sm={3}>
+                                    <Box display="flex" justifyContent="flex-start" p={3}>
+                                        <img src="heat_white.png" width="42px" height="50px" alt="icon"/>
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={12} sm={9}>
+                                    <Box display="flex" justifyContent="center" p={4}>
+                                    <Typography variant="subtitle2" className={classes.heatR}>
+                                        28.82 ton CO2/año
+                                    </Typography>
+                                    </Box>
+                                </Grid>
+                            </Grid>
                         </Paper>
                     </Grid>
                 </Grid>
                 
+            </Grid>
+            <Grid item xs={12} sm={2}>
+                <Paper>
+                    <Grid container spacing={1}>
+                        <Grid item xs={12} sm={12}>
+                            <Box display="flex" justifyContent="center" p={1}>
+                                <img src="panel.png" className={classes.helpImg} alt="panel"></img>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                            <Box display="flex" justifyContent="center">
+                                <Typography variant="subtitle2">
+                                    Suma
+                                </Typography>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                            <Box display="flex" justifyContent="center">
+                                <Typography variant="subtitle2">
+                                    57.64 watts h/año
+                                </Typography>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                            <Box display="flex" justifyContent="center" marginTop="10px">
+                                <Typography variant="subtitle2">
+                                    Suma
+                                </Typography>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                            <Box display="flex" justifyContent="center">
+                                <Typography variant="subtitle2">
+                                    57.64 tonCO2/año
+                                </Typography>
+                            </Box>
+                        </Grid>
+                    </Grid>
+                    
+                </Paper>
             </Grid>
         </Grid>
         </Box>
