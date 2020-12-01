@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
+import AreaInput from './AreaInput';
 import TestSelect from './TestSelect';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -40,11 +41,16 @@ const useStyles = makeStyles(theme => ({
     },
     heatR: {
         color: "white"
+    },
+    helpImg: {
+        width: "116px",
+        height: "60px"
     }
   }));
 
+
+
 const SolarEstruc = ( {tecnologia} ) => {
-    
     const classes = useStyles();
 
     const [iconName, setIconName] = React.useState("placeholder.png");
@@ -54,11 +60,11 @@ const SolarEstruc = ( {tecnologia} ) => {
     const [selectedH, setSelectedH] = React.useState('');
     const [resultE, setResultE] = React.useState('');
     const [resultH, setResultH] = React.useState('');
+    const [area, setArea] = React.useState(0);
     const [sumResults, setSumResults] = React.useState(0);
     const [geiE, setGeiE] = React.useState('');
     const [geiH, setGeiH] = React.useState('');
     const [sumGei, setSumGei] = React.useState(0);
-    
 
     const handleOption = (optionValue) => {
         setSelected(optionValue);
@@ -67,11 +73,20 @@ const SolarEstruc = ( {tecnologia} ) => {
         setSelectedH(arr[1]);
     }
 
+    const handleArea = (areaValue) =>{
+        setArea(areaValue);
+    }
+
+    const handleFuel = (fuelValue) =>{
+        let val = parseFloat(fuelValue);
+        setFuel(val);
+    }
+
     useEffect( () =>{
         const calculateResults = () => {
-            let calcuE = selectedE * 13000000 / 1000;
+            let calcuE = selectedE * area / 1000;
             setResultE(calcuE.toFixed(2));
-            let calcuH = selectedH * 13000000 / 1000;
+            let calcuH = selectedH * area / 1000;
             setResultH(calcuH.toFixed(2));
         }
         const decideIcon = () => {
@@ -87,7 +102,7 @@ const SolarEstruc = ( {tecnologia} ) => {
         }
         calculateResults();
         decideIcon();
-    }, [selectedE, selectedH]);
+    }, [selectedE, selectedH, area]);
 
     useEffect( () =>{
         const calculateGei = () => {
@@ -111,14 +126,7 @@ const SolarEstruc = ( {tecnologia} ) => {
         }
         makeSum();
     }, [geiE, geiH]);
-
-    const handleFuel = (fuelValue) =>{
-        let val = parseFloat(fuelValue);
-        setFuel(val);
-    }
     
-
-
     return(
         <div>
         <Paper elevation={1} className={classes.backPaper}>
@@ -126,7 +134,7 @@ const SolarEstruc = ( {tecnologia} ) => {
         <Grid container spacing={3} justify="space-between">
             <Grid item xs={12} sm={9}>
                 <Typography variant="h4" className={classes.header}>
-                    Calculadora total
+                    Calculadora específica
                 </Typography>
             </Grid>
             <Grid item xs={12} sm={3}>
@@ -137,10 +145,13 @@ const SolarEstruc = ( {tecnologia} ) => {
             <Grid item xs={12} sm={3}>
                 <Grid container spacing={1}>
                     <Grid item xs={12} sm={12}>
-                        <TestSelect options={tecnologia} label="Tecnología" selected={selected} onSelectedChange={handleOption}/>
+                        < TestSelect options={tecnologia} label="Tecnología" selected={selected} onSelectedChange={handleOption}/>
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <DisplayFuel selectedH={selectedH} onFuelChange={handleFuel} />
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <AreaInput onValueChange={handleArea} areaValue={area} idInput="input2" idHelper="input2-helper"/>
                     </Grid>
                 </Grid>
             </Grid>

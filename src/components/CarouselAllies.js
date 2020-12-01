@@ -24,10 +24,6 @@ function Banner(props) {
                 <Typography className="Title">
                     {props.item.Name}
                 </Typography>
-
-                <Typography className="Caption">
-                    {props.item.Caption}
-                </Typography>
             </CardContent>
         </Grid>
     )
@@ -70,47 +66,107 @@ function Banner(props) {
 
 const items = [
     {
-        Name: "Potencial solar",
-        Caption: "Objetivos, alcance y metodologías",
+        Name: "Nuestros aliados",
+        //Caption: "Objetivos, alcance y metodologías",
         contentPosition: "left",
         Items: [
             {
                 //Name: "Macbook Pro",
-                Image: "solarA.jpg"
+                Image: "aliado1.png"
             },
             {
                 //Name: "iPhone",
-                Image: "solarB.jpg"
+                Image: "aliado2.png"
             }
         ]
     },
     {
-        Name: "Edificios sustentables",
-        Caption: "Objetivos, alcance y metodologías",
+        Name: "Nuestros aliados",
+        //Caption: "Objetivos, alcance y metodologías",
         contentPosition: "middle",
         Items: [
             {
                 //Name: "Washing Machine WX9102",
-                Image: "sustA.jpg"
+                Image: "aliado3.jpg"
             },
             {
                 //Name: "Learus Vacuum Cleaner",
-                Image: "sustB.jpg"
+                Image: "aliado4.png"
             }
         ]
     },
     {
-        Name: "Tecnologías aplicadas",
-        Caption: "Algunos ejemplos",
+        Name: "Nuestros aliados",
+        //Caption: "Algunos ejemplos",
         contentPosition: "right",
         Items: [
             {
                 //Name: "Living Room Lamp",
-                Image: "solarC.jpg"
+                Image: "aliado5.jpg"
             },
             {
                 //Name: "Floral Vase",
-                Image: "sustC.png"
+                Image: "aliado1.png"
+            }
+        ]
+    },
+    {
+        Name: "Nuestros socios",
+        //Caption: "Objetivos, alcance y metodologías",
+        contentPosition: "left",
+        Items: [
+            {
+                //Name: "Macbook Pro",
+                Image: "socio1.png"
+            },
+            {
+                //Name: "iPhone",
+                Image: "socio2.png"
+            }
+        ]
+    },
+    {
+        Name: "Nuestros socios",
+        //Caption: "Objetivos, alcance y metodologías",
+        contentPosition: "middle",
+        Items: [
+            {
+                //Name: "Washing Machine WX9102",
+                Image: "socio3.png"
+            },
+            {
+                //Name: "Learus Vacuum Cleaner",
+                Image: "socio4.jpg"
+            }
+        ]
+    },
+    {
+        Name: "Nuestros socios",
+        //Caption: "Algunos ejemplos",
+        contentPosition: "right",
+        Items: [
+            {
+                //Name: "Living Room Lamp",
+                Image: "socio5.png"
+            },
+            {
+                //Name: "Floral Vase",
+                Image: "socio6.png"
+            }
+        ]
+    },
+    {
+        Name: "Nuestros socios",
+        //Caption: "Algunos ejemplos",
+        contentPosition: "right",
+        Items: [
+            {
+                //Name: "Living Room Lamp",
+                Image: "socio7.jpg"
+            },
+            {
+                //Name: "Floral Vase",
+                Image: "socio1.png"
             }
         ]
     }

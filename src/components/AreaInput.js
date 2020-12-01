@@ -36,23 +36,23 @@ export default function AreaInput( {areaValue, onValueChange, idInput, idHelper}
   };
 
     return(
-        <div>
-          <FormControl className={clsx(classes.margin, classes.textField, classes.root)} variant="outlined">
-            <OutlinedInput
-              id={idInput}
-              value={areaValue}
-              onChange={handleChange}
-              endAdornment={<InputAdornment position="end">m²</InputAdornment>}
-              aria-describedby={idHelper}
-              inputProps={{
-                'aria-label': 'area',
-                  className: classes.input
-              }}
-              labelWidth={0}
-            />
-            <FormHelperText id={idHelper}>Área</FormHelperText>
-          </FormControl>
-        </div>
+      <div>
+        <FormControl className={clsx(classes.margin, classes.textField, classes.root)} variant="outlined">
+          <OutlinedInput
+            id={idInput}
+            value={areaValue}
+            onChange={handleChange}
+            endAdornment={<InputAdornment position="end">m²</InputAdornment>}
+            aria-describedby={idHelper}
+            type='number'
+            inputProps={{
+              'aria-label': 'area',
+                className: classes.input
+            }}
+            labelWidth={0}
+          />
+          <FormHelperText id={idHelper}>Área</FormHelperText>
+        </FormControl>
+      </div>
     );
-
 }

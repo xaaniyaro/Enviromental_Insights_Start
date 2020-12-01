@@ -8,6 +8,7 @@ import EdificacionSegundo from './components/EdificacionSegundo'
 import SectionHeader from './components/SectionHeader';
 import HomeComponent from './components/HomeComponent';
 import SolarEstruc from './components/SolarEstruc';
+import SolarEstructure from './components/SolarEstructure';
 import { Container } from '@material-ui/core';
 import Member from './components/Member';
 import Box from '@material-ui/core/Box';
@@ -16,19 +17,14 @@ import Paper from '@material-ui/core/Paper';
 
 //
 
+
 // Primer valor : energia electrica
 // Segundo valor: energia termica
 const tecnologia = [
   { "Colectores térmicos": [0, 280.1]},
   { "Colectores híbridos": [44.49, 228.97]},
-  { "Paneles fotovoltáicos": [0, 171.62]}
+  { "Paneles fotovoltáicos": [171.62, 0]}
 ];
-
-/*const combustibles = [
-  {"Diesel": [0.00027]},
-  {"Gas natural": [0.0002]},
-  {"GLP": [0.0023]}
-]*/
 
 const edificacion = [
   { "Residencial": [1000, 20] },
@@ -69,6 +65,8 @@ function App() {
       <Route path="/potencialsolar">
           <Container>
               <SolarEstruc tecnologia={tecnologia}></SolarEstruc>
+              <br/>
+              <SolarEstructure tecnologia={tecnologia}></SolarEstructure>
           </Container>
       </Route>
       <Route path="/edificiossustentables">
