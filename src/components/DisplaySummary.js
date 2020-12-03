@@ -19,57 +19,82 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-const DisplaySummary = ({sumR, sumG, imgName}) => {
+const DisplaySummary = ({ sumG, imgName}) => {
     const classes = useStyles();
 
-    return(
-        <div>
-            <Paper>
-                <Grid container spacing={1}>
-                    <Grid item xs={12} sm={12}>
-                        <Box display="flex" justifyContent="center" p={1}>
-                            <Typography variant="h6">
-                                Resumen
-                            </Typography>
-                        </Box>
+    if( sumG < 0){
+        return(
+            <div>
+                <Paper>
+                    <Grid container spacing={1}>
+                        <Grid item xs={12} sm={12}>
+                            <Box display="flex" justifyContent="center" p={1}>
+                                <Typography variant="h6">
+                                    Resumen
+                                </Typography>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                            <Box display="flex" justifyContent="center" p={1}>
+                                <img src={imgName} className={classes.helpImg} alt="panel"></img>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                            <Box display="flex" justifyContent="center" marginTop="10px">
+                                <Typography variant="subtitle1">
+                                    Total GEI evitados
+                                </Typography>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                            <Box display="flex" justifyContent="center">
+                                <Typography variant="subtitle2">
+                                    0 tCO2/año
+                                </Typography>
+                            </Box>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={12}>
-                        <Box display="flex" justifyContent="center" p={1}>
-                            <img src={imgName} className={classes.helpImg} alt="panel"></img>
-                        </Box>
+                </Paper>
+            </div>
+        );
+    }
+    else{
+        return(
+            <div>
+                <Paper>
+                    <Grid container spacing={1}>
+                        <Grid item xs={12} sm={12}>
+                            <Box display="flex" justifyContent="center" p={1}>
+                                <Typography variant="h6">
+                                    Resumen
+                                </Typography>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                            <Box display="flex" justifyContent="center" p={1}>
+                                <img src={imgName} className={classes.helpImg} alt="panel"></img>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                            <Box display="flex" justifyContent="center" marginTop="10px">
+                                <Typography variant="subtitle1">
+                                    Total GEI evitados
+                                </Typography>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                            <Box display="flex" justifyContent="center">
+                                <Typography variant="subtitle2">
+                                    {sumG.toLocaleString()} tCO2/año
+                                </Typography>
+                            </Box>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={12}>
-                        <Box display="flex" justifyContent="center">
-                            <Typography variant="subtitle1">
-                                Suma PE
-                            </Typography>
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        <Box display="flex" justifyContent="center">
-                            <Typography variant="subtitle2">
-                                {sumR} watts h/año
-                            </Typography>
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        <Box display="flex" justifyContent="center" marginTop="10px">
-                            <Typography variant="subtitle1">
-                                Suma REGEI
-                            </Typography>
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        <Box display="flex" justifyContent="center">
-                            <Typography variant="subtitle2">
-                                {sumG} tonCO2/año
-                            </Typography>
-                        </Box>
-                    </Grid>
-                </Grid>
-            </Paper>
-        </div>
-    );
+                </Paper>
+            </div>
+        );
+    }
+    
 }
 
 export default DisplaySummary;

@@ -52,9 +52,9 @@ const SolarEstruc = ( {tecnologia} ) => {
     const [selected, setSelected] = React.useState('');
     const [selectedE, setSelectedE] = React.useState('');
     const [selectedH, setSelectedH] = React.useState('');
+    const [selectedT, setSelectedT] = React.useState('');
     const [resultE, setResultE] = React.useState('');
     const [resultH, setResultH] = React.useState('');
-    const [sumResults, setSumResults] = React.useState(0);
     const [geiE, setGeiE] = React.useState('');
     const [geiH, setGeiH] = React.useState('');
     const [sumGei, setSumGei] = React.useState(0);
@@ -63,50 +63,49 @@ const SolarEstruc = ( {tecnologia} ) => {
     const handleOption = (optionValue) => {
         setSelected(optionValue);
         let arr = optionValue.split(',');
-        setSelectedE(arr[0]);
-        setSelectedH(arr[1]);
+        setSelectedT(arr[0]);
+        setSelectedE(arr[1]);
+        setSelectedH(arr[2]);
     }
 
     useEffect( () =>{
         const calculateResults = () => {
-            let calcuE = selectedE * 13000000 / 1000;
-            setResultE(calcuE.toFixed(2));
-            let calcuH = selectedH * 13000000 / 1000;
-            setResultH(calcuH.toFixed(2));
+            let calcuE = selectedE * 13400000 / 1000000;
+            setResultE(Math.round(calcuE));
+            let calcuH = selectedH * 13400000 / 1000000;
+            setResultH(Math.round(calcuH));
         }
         const decideIcon = () => {
-            if(selectedE > 0 && selectedH > 0){
-                setIconName("hybrid.png")
+            if(selectedT === 'ct'){
+                setIconName("termic.png")
             }
-            else if(selectedE > 0){
-                setIconName("panel.png");
+            else if(selectedT === 'pv'){
+                setIconName("hybrid.png");
             }
-            else if( selectedH > 0){
-                setIconName("termic.png");
+            else if(selectedT === 'lc'){
+                setIconName("https://www.solar-payback.com/wp-content/uploads/2017/07/parabolic-trough.jpg");
+            }
+            else if(selectedT === 'pf'){
+                setIconName("https://www.solar-payback.com/wp-content/uploads/2017/07/flat-plate-collector.jpg");
             }
         }
         calculateResults();
         decideIcon();
-    }, [selectedE, selectedH]);
+    }, [selectedE, selectedH, selectedT]);
 
     useEffect( () =>{
         const calculateGei = () => {
-            let calcGeiE = resultE * 1000 * 0.0004536;
-            setGeiE(calcGeiE.toFixed(2));
-            let calcGeiH = resultH * 1000 * fuel;
-            setGeiH(calcGeiH.toFixed(2));
-        }
-        const makeSumsR = () => {
-            let sumR = parseFloat(resultH) + parseFloat(resultE);
-            setSumResults(sumR);
+            let calcGeiE = resultE * 1000000 * 0.0004536;
+            setGeiE(Math.round(calcGeiE));
+            let calcGeiH = resultH * 1000000 * fuel;
+            setGeiH(Math.round(calcGeiH));
         }
         calculateGei();
-        makeSumsR();
     }, [resultE, resultH, fuel]);
 
     useEffect( () =>{
         const makeSum = () => {
-            let sumG = parseFloat(geiE) + parseFloat(geiH);
+            let sumG = parseInt(geiE) + parseInt(geiH);
             setSumGei(sumG);
         }
         makeSum();
@@ -117,7 +116,19 @@ const SolarEstruc = ( {tecnologia} ) => {
         setFuel(val);
     }
     
-
+    function reset() {
+        setIconName('placeholder.png');
+        setFuel('');
+        setSelected('');
+        setSelectedE('');
+        setSelectedH('');
+        setSelectedT('');
+        setResultE('');
+        setResultH('');
+        setGeiE('');
+        setGeiH('');
+        setSumGei(0);
+    }
 
     return(
         <div>
@@ -131,7 +142,7 @@ const SolarEstruc = ( {tecnologia} ) => {
             </Grid>
             <Grid item xs={12} sm={3}>
                 <Box display="flex" justifyContent="flex-end">
-                    <Button variant="contained">Resetear</Button>
+                    <Button variant="contained" onClick={reset}>Resetear</Button>
                 </Box>
             </Grid>
             <Grid item xs={12} sm={3}>
@@ -141,6 +152,23 @@ const SolarEstruc = ( {tecnologia} ) => {
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <DisplayFuel selectedH={selectedH} onFuelChange={handleFuel} />
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <Box p={1} marginTop={3}>
+                        <Paper elevation={1}>
+                            <Box p={1}>
+                                <Typography variant="body1">
+                                    Área considerada:
+                                </Typography>
+                                <Typography variant="body1">
+                                    13,400,000 m²
+                                </Typography>
+                                <Typography variant="body2">
+                                    *Corresponde al área de Monterrey
+                                </Typography>
+                            </Box>
+                        </Paper>
+                        </Box>
                     </Grid>
                 </Grid>
             </Grid>
@@ -154,14 +182,14 @@ const SolarEstruc = ( {tecnologia} ) => {
                     <Grid item xs={12} sm={6}>
                         <DisplayEnergy 
                         choice={true} 
-                        units="watts h/año" 
+                        units="MWh/AC " 
                         result={resultE}>
                         </DisplayEnergy>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <DisplayEnergy 
                         choice={false} 
-                        units="watts h/año" 
+                        units="MWh" 
                         result={resultH}>
                         </DisplayEnergy>
                     </Grid>
@@ -173,14 +201,14 @@ const SolarEstruc = ( {tecnologia} ) => {
                     <Grid item xs={12} sm={6}>
                         <DisplayEnergy 
                         choice={true} 
-                        units="ton CO2/año" 
+                        units="tCO2/año" 
                         result={geiE}>
                         </DisplayEnergy>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                     <DisplayEnergy 
                         choice={false} 
-                        units="ton CO2/año" 
+                        units="tCO2/año" 
                         result={geiH}>
                         </DisplayEnergy>
                     </Grid>
@@ -188,7 +216,7 @@ const SolarEstruc = ( {tecnologia} ) => {
                 
             </Grid>
             <Grid item xs={12} sm={2}>
-                <DisplaySummary sumG={sumGei} sumR={sumResults} imgName={iconName}/>
+                <DisplaySummary sumG={sumGei} imgName={iconName}/>
             </Grid>
         </Grid>
         </Box>

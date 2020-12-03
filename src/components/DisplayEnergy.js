@@ -38,7 +38,7 @@ const DisplayEnergy = ({choice, units, result}) => {
                             <Grid item xs={12} sm={9}>
                                 <Box display="flex" justifyContent="center" p={2}>
                                     <Typography variant="subtitle2" className={classes.fontStyle}>
-                                        {result} {units}
+                                        {result.toLocaleString()} {units}
                                     </Typography>
                                 </Box>
                             </Grid>
@@ -65,7 +65,7 @@ const DisplayEnergy = ({choice, units, result}) => {
                                 <Grid item xs={12} sm={9}>
                                     <Box display="flex" justifyContent="center" p={2}>
                                     <Typography variant="subtitle2" className={classes.fontStyle}>
-                                        {result} {units}
+                                        {result.toLocaleString()} {units}
                                     </Typography>
                                     </Box>
                                 </Grid>

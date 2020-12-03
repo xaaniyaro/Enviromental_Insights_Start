@@ -21,9 +21,10 @@ import Paper from '@material-ui/core/Paper';
 // Primer valor : energia electrica
 // Segundo valor: energia termica
 const tecnologia = [
-  { "Colectores térmicos": [0, 280.1]},
-  { "Colectores híbridos": [44.49, 228.97]},
-  { "Paneles fotovoltáicos": [171.62, 0]}
+  { "Colectores térmicos": ['ct', 0, 280.1]},
+  { "Colectores híbridos PV/T": ['pv', 44.49, 228.97]},
+  { "Colectores híbridos LCPV/T": ['lc', 80.98, 120.56]},
+  { "Paneles fotovoltáicos": ['pf', 171.62, 0]}
 ];
 
 const edificacion = [
