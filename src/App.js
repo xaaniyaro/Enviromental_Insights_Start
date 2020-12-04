@@ -7,6 +7,7 @@ import Edificacion from './components/Edificacion';
 import EdificacionSegundo from './components/EdificacionSegundo'
 import SectionHeader from './components/SectionHeader';
 import HomeComponent from './components/HomeComponent';
+import CarouselS from './components/CarouselS';
 import SolarEstruc from './components/SolarEstruc';
 import SolarEstructure from './components/SolarEstructure';
 import { Container } from '@material-ui/core';
@@ -64,6 +65,7 @@ function App() {
         <HomeComponent></HomeComponent>
       </Route>
       <Route path="/potencialsolar">
+          <CarouselS />
           <Container>
               <SolarEstruc tecnologia={tecnologia}></SolarEstruc>
               <br/>

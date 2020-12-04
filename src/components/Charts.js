@@ -1,13 +1,15 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 const Charts = ({data, title}) => {
     
 
     return(
         <div>
+            <Typography variant="h6">
+                {title}
+            </Typography>
             <BarChart width={400} height={200} data={data}
             margin={{top: 5, right: 5, left: 5, bottom: 5}}>
             <CartesianGrid strokeDasharray="3 3"/>

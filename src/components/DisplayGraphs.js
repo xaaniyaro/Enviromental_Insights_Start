@@ -62,41 +62,43 @@ const data4 = [
 ];
 
 const dataList = {
-    "cs" : [
+    cs : [
         {year:2018, data:data1},
         {year:2019, data:data2}],
-    "sn" : [
+    sn : [
         {year:2018, data:data3},
         {year:2019, data:data2}],
-    "gp" : [
+    gp : [
         {year:2018, data:data4},
         {year:2019, data:data1}],
-    "sc": [
+    sc: [
         {year:2018, data:data3},
         {year:2019, data:data4}],
-    "pi" : [
+    pi : [
         {year:2018, data:data1},
         {year:2019, data:data3}],
-    "cm": [
+    cm: [
         {year:2018, data:data4},
         {year:2019, data:data2}],
-    "co" : [
+    co : [
         {year:2018, data:data4},
         {year:2019, data:data3}]
 };
 
 const DisplayGraphs = ({selected}) => {
-    let chosen = dataList[selected.selectedSta];
+        //console.log(selected);
+    let chosen = dataList[selected];
         //console.log(chosen);
         if(chosen !== undefined){
-            chosen.map((item) => {
-                return(
-                    <div>
-                        <Charts 
-                        data={item.data} />
-                    </div>
-                );
-            })
+            return(
+                <div>
+                {chosen.map((item) => (
+                    <Charts 
+                    title={item.year}
+                    data={item.data} />
+                ))}
+                </div>
+            );
         }
         else{
             return null;
