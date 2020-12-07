@@ -10,7 +10,7 @@ const Charts = ({data, title}) => {
             <Typography variant="h6">
                 {title}
             </Typography>
-            <BarChart width={400} height={200} data={data}
+            <BarChart width={375} height={200} data={data}
             margin={{top: 5, right: 5, left: 5, bottom: 5}}>
             <CartesianGrid strokeDasharray="3 3"/>
             <XAxis dataKey="name"/>

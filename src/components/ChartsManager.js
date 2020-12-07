@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 //import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-//import Paper from '@material-ui/core/Paper';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import TestSelect from './TestSelect';
 import DisplayMap from './DisplayMap';
@@ -54,23 +55,35 @@ const ChartsManager = () =>{
 
     return(
         <div className={classes.root}>
-            <Grid container spacing={1}>
+            <Grid container spacing={3}>
                 <Grid item xs={12} sm={12}>
-                    <TestSelect options={options} label={"Estación"} selected={selected} onSelectedChange={handleOption} />
+                <Paper elevation={1}>
+                    <Box p={2}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={12}>
+                                <TestSelect options={options} label={"Estación"} selected={selected} onSelectedChange={handleOption} />
+                            </Grid>
+                            <Grid item xs={12} sm={4}>
+                                <DisplayGraphs selected={selectedSta}/>
+                            </Grid>
+                            <Grid item xs={12} sm={8}>
+                                <DisplayMap srcString={selectedMap} />
+                            </Grid>
+                        </Grid>
+                    </Box>
+                </Paper>
                 </Grid>
-                <Grid item xs={12} sm={4}>
-                    <DisplayGraphs selected={selectedSta}/>
+                <Grid item xs={12} sm={12}>
+                    <Paper elevation={1}>
+                        <Box p={2}>
+                            <Typography variant="h4" gutterBottom>
+                                Mapa completo
+                            </Typography>
+                            <iframe className={classes.mapframe} title="completemap" src="https://www.google.com/maps/d/u/1/embed?mid=1b6KEEkwvDiTquRcPP9TjbfQ38sDjUA4Q" width="100%" height="720"></iframe>
+                        </Box>
+                    </Paper>
                 </Grid>
-                <Grid item xs={12} sm={8}>
-                    <DisplayMap srcString={selectedMap} />
-                </Grid>
-                <Grid item xs={12} className={classes.mapSection}>
-                    <Typography variant="h4" gutterBottom>
-                        Mapa completo
-                    </Typography>
-                    <iframe className={classes.mapframe} title="completemap" src="https://www.google.com/maps/d/u/1/embed?mid=1b6KEEkwvDiTquRcPP9TjbfQ38sDjUA4Q" width="100%" height="720"></iframe>
-                </Grid>
-        </Grid>
+            </Grid>
         </div>
     );
 };

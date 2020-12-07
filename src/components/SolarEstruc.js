@@ -213,7 +213,7 @@ const SolarEstruc = ( {tecnologia} ) => {
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={12}>
                         <Typography variant="h5">
-                            Producción energética
+                            Producción energética anual
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>

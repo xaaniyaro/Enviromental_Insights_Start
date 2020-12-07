@@ -5,15 +5,12 @@ import ChartsManager from './components/ChartsManager';
 import Route from './components/Route';
 import Edificacion from './components/Edificacion';
 import EdificacionSegundo from './components/EdificacionSegundo'
-import SectionHeader from './components/SectionHeader';
 import HomeComponent from './components/HomeComponent';
 import CarouselS from './components/CarouselS';
 import SolarEstruc from './components/SolarEstruc';
 import SolarEstructure from './components/SolarEstructure';
 import { Container } from '@material-ui/core';
 import Member from './components/Member';
-import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
 //import Content from './components/Content';
 
 //
@@ -74,19 +71,9 @@ function App() {
       </Route>
       <Route path="/edificiossustentables">
         <Container className={classes.mainContent}>
-        <Paper elevation={1}>
-            <Box p={2}>
-              <SectionHeader title="Generaciones de GEI por tipo de edificio"></SectionHeader>
-              <br/>
               <Edificacion edif={edificacion}></Edificacion>
-
-              <div className={classes.section}>
-              <SectionHeader title="Generaciones de GEI por varios parámetros"></SectionHeader>
               <br/>
-              <EdificacionSegundo edif={edificacion} tech={technology} temp={temporadas}></EdificacionSegundo>
-              </div>
-            </Box>
-          </Paper>
+              <EdificacionSegundo tech={technology} temp={temporadas} edif={edificacion}/>
         </Container>
       </Route>
       <Route path="/visualizacion">

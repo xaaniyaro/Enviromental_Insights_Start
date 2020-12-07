@@ -173,20 +173,20 @@ const SolarEstruc = ( {tecnologia} ) => {
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={12}>
                         <Typography variant="h5">
-                            Producción energética
+                            Producción energética anual
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <DisplayEnergy 
                         choice={true} 
-                        units="watts h/año" 
+                        units="MWh/AC" 
                         result={resultE}>
                         </DisplayEnergy>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <DisplayEnergy 
                         choice={false} 
-                        units="watts h/año" 
+                        units="MWh" 
                         result={resultH}>
                         </DisplayEnergy>
                     </Grid>
@@ -198,14 +198,14 @@ const SolarEstruc = ( {tecnologia} ) => {
                     <Grid item xs={12} sm={6}>
                         <DisplayEnergy 
                         choice={true} 
-                        units="ton CO2/año" 
+                        units="tCO2/año" 
                         result={geiE}>
                         </DisplayEnergy>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                     <DisplayEnergy 
                         choice={false} 
-                        units="ton CO2/año" 
+                        units="tCO2/año" 
                         result={geiH}>
                         </DisplayEnergy>
                     </Grid>
