@@ -11,6 +11,7 @@ import SolarEstruc from './components/SolarEstruc';
 import SolarEstructure from './components/SolarEstructure';
 import { Container } from '@material-ui/core';
 import Member from './components/Member';
+import DisplayWeather from './components/DisplayWeather';
 //import Content from './components/Content';
 
 //
@@ -78,6 +79,7 @@ function App() {
       </Route>
       <Route path="/visualizacion">
         <Container>
+        <DisplayWeather/>
         <ChartsManager></ChartsManager>
         </Container>
       </Route>
