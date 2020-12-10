@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appbar: {
-    background: "#418F01"
+    background: "#261149"
   }
 }));
 
@@ -80,10 +80,9 @@ export default function MenuAppBar(props) {
       <ElevationScroll {...props}>
       <AppBar className={classes.appbar}>
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            Plataforma
-          </Typography>
-          <Link href="/"><Button color="inherit">Inicio</Button></Link>
+          <div className={classes.title}>
+            <Link href="/" ><Button color="inherit">Logo</Button></Link>
+          </div>
             <div>
               <Button
                 aria-label="account of current user"
@@ -91,7 +90,7 @@ export default function MenuAppBar(props) {
                 aria-haspopup="true"
                 onClick={handleMenu}
                 color="inherit"
-              > Calculadoras
+              > Herramientas
               </Button>
               <Menu
                 id="menu-appbar"
@@ -110,10 +109,10 @@ export default function MenuAppBar(props) {
               >
                 <Link href="/potencialsolar"><MenuItem onClick={handleClose}>Potencial solar</MenuItem></Link>
                 <Link href="/edificiossustentables"><MenuItem onClick={handleClose}>Edificios sustentables</MenuItem></Link>
+                <Link href="/visualizacion"><MenuItem onClick={handleClose}>Visualizacion de datos</MenuItem></Link>
               </Menu>
             </div>
-            <Link href="/visualizacion"><Button color="inherit">Visualización de datos</Button></Link>
-            <Link href="/equipo"><Button color="inherit">Equipo de trabajo</Button></Link>
+            <Link href="/contacto"><Button color="inherit">Contacto</Button></Link>
         </Toolbar>
       </AppBar>
       </ElevationScroll>

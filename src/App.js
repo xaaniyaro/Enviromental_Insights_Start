@@ -26,9 +26,11 @@ const tecnologia = [
 ];
 
 const edificacion = [
-  { "Residencial": [1000, 20] },
-  { "No residencial": [100, 5] }
+  { "Residencial": ['yes'] },
+  { "No residencial": ['no'] }
 ];
+
+
 
 const technology = [
   { "PCM": [2, 3] },
@@ -73,7 +75,7 @@ function App() {
         <Container className={classes.mainContent}>
               <Edificacion edif={edificacion}></Edificacion>
               <br/>
-              <EdificacionSegundo tech={technology} temp={temporadas} edif={edificacion}/>
+              
         </Container>
       </Route>
       <Route path="/visualizacion">

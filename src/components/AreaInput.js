@@ -47,7 +47,7 @@ export default function AreaInput( {areaValue, onValueChange, idInput, idHelper}
             type='number'
             inputProps={{
               'aria-label': 'area',
-                className: classes.input
+              className: classes.input
             }}
             labelWidth={0}
           />

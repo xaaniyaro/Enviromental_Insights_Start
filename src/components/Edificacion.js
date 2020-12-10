@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button';
 import DisplayConsumo from './DisplayConsumo';
 import DisplayEnergy from './DisplayEnergy';
+import DisplayEdif from './DisplayEdif';
 
 const useStyles = makeStyles(theme => ({
     results: {
@@ -49,24 +50,21 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const Edificacion = ( {edif} ) => {
+const Edificacion = ( {edif, residencial, noresidencial} ) => {
     const classes = useStyles();
 
     const [selected, setSelected] = React.useState('');
     const [selectedE, setSelectedE] = React.useState('');
     const [selectedH, setSelectedH] = React.useState('');
+    const [selectedEUI, setSelectedEUI] = React.useState('');
+    const [selectedFactor, setSelectedFactor] = React.useState('');
     const [resultE, setResultE] = React.useState('');
     const [resultH, setResultH] = React.useState('');
-    const [sumR, setSumR] = React.useState(0);
-    const [percentageE, setPercentageE] = React.useState(0);
-    const [percentageH, setPercentageH] = React.useState(0);
+    const [gei, setGei] = React.useState(0);
     const [area, setArea] = React.useState(0);
 
     const handleOption = (optionValue) => {
-        setSelected(optionValue);
-        let arr = optionValue.split(',');
-        setSelectedE(arr[0]);
-        setSelectedH(arr[1]);
+        setSelected(optionValue)
     }
 
     const handleArea = (areaValue) =>{
@@ -75,43 +73,36 @@ const Edificacion = ( {edif} ) => {
 
     useEffect( () =>{
         const calculateResults = () => {
-            let calcuE = selectedE * area;
-            setResultE(calcuE.toFixed(2));
-            let calcuH = selectedH * area;
-            setResultH(calcuH.toFixed(2));
+            let calcuE = area * selectedEUI * (selectedE/100) ;
+            setResultE(parseFloat(calcuE.toFixed(2)));
+            let calcuH = area * selectedEUI * (selectedH/100);
+            setResultH(parseFloat(calcuH.toFixed(2)));
+        }
+        const calculateGei = () => {
+            let calc = selectedFactor * area;
+            setGei(parseFloat(calc.toFixed(2)));
         }
         calculateResults();
-    }, [selectedE, selectedH, area]);
+        calculateGei();
+    }, [selectedE, selectedH, selectedEUI, selectedFactor, area]);
 
-    useEffect( () =>{
-        const calculateSum = () => {
-            let sum = parseFloat(resultE) + parseFloat(resultH);
-            setSumR(sum);
-        }
-        calculateSum();
-    }, [resultE, resultH]);
-
-    useEffect( () =>{
-        const calculateP = () => {
-            if(sumR > 0){
-                let eP = 100 * resultE /sumR;
-                setPercentageE(eP.toFixed(2));
-                let eH = 100 * resultH /sumR;
-                setPercentageH(eH.toFixed(2));
-            }
-        }
-        calculateP();
-    }, [resultH, resultE, sumR]);
+    const handleEdifType = (edifValue) =>{
+        let arr = edifValue.split(",");
+        setSelectedEUI(parseFloat(arr[0]));
+        setSelectedE(parseFloat(arr[1]));
+        setSelectedH(parseFloat(arr[2]));
+        setSelectedFactor(parseFloat(arr[3]));
+    }
 
     function reset() {
         setSelected('');
         setSelectedE('');
         setSelectedH('');
-        setPercentageE(0);
-        setPercentageH(0);
-        setSumR(0);
+        setSelectedEUI('');
+        setSelectedFactor('');
         setResultE('');
         setResultH('');
+        setGei('');
         setArea(0);
     }
     
@@ -139,20 +130,18 @@ const Edificacion = ( {edif} ) => {
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <Box display="flex" justifyContent="center">
+                            <DisplayEdif selectedEdif={selected} onEdifChange={handleEdifType} />
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <Box display="flex" justifyContent="center">
                             <AreaInput onValueChange={handleArea} areaValue={area} idInput="input1" idHelper="input1-helper"/>
                         </Box>
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                        <Box display="flex" justifyContent="center">
                         <Typography variant="body1">
-                            *Cálculos para Monterrey
+                            *Cálculos para Monterrey, México
                         </Typography>
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        <Box display="flex" justifyContent="center">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230187.55064046764!2d-100.44318182881534!3d25.648728127237323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86629531b437f8f5%3A0xa3d3d3ca6ac89894!2sMonterrey%2C%20Nuevo%20Leon!5e0!3m2!1sen!2smx!4v1607558133312!5m2!1sen!2smx" width="200" height="200" frameborder="0" title="MTY" style={{border:0}} allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-                        </Box>
                     </Grid>
                 </Grid>
             </Grid>
@@ -166,41 +155,22 @@ const Edificacion = ( {edif} ) => {
                     <Grid item xs={12} sm={6}>
                         <DisplayEnergy 
                         choice={true} 
-                        units="MWh/AC" 
+                        units="kWh/año" 
                         result={resultE}>
                         </DisplayEnergy>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <DisplayEnergy 
                         choice={false} 
-                        units="MWh" 
+                        units="MJ/año" 
                         result={resultH}>
-                        </DisplayEnergy>
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        <Typography variant="h6">
-                            Equivalente a 
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <DisplayEnergy 
-                        choice={true} 
-                        units="%" 
-                        result={percentageE}>
-                        </DisplayEnergy>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <DisplayEnergy 
-                        choice={false} 
-                        units="%" 
-                        result={percentageH}>
                         </DisplayEnergy>
                     </Grid>
                 </Grid>
                 
             </Grid>
             <Grid item xs={12} sm={2}>
-                <DisplayConsumo sum={sumR} />
+                <DisplayConsumo gei={gei} percentageE={selectedE} percentageH={selectedH}/>
             </Grid>
         </Grid>
         </Box>
