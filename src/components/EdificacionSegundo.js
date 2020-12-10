@@ -156,8 +156,8 @@ const EdificacionSegundo = ( {edif, tech, temp} ) => {
             <Box p={2}>
         <Grid container spacing={3} justify="space-between">
             <Grid item xs={12} sm={9}>
-                <Typography variant="h4" className={classes.header}>
-                    Calculadora de emisiones de GEI por varios parámetros
+                <Typography variant="h5">
+                    Calculadora de emisiones de GEI aplicando tecnologías en techos
                 </Typography>
             </Grid>
             <Grid item xs={12} sm={3}>
@@ -181,7 +181,7 @@ const EdificacionSegundo = ( {edif, tech, temp} ) => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item xs={12} sm={7}>
+            <Grid item xs={12} sm={6}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={12}>
                         <Typography variant="h5">
@@ -224,7 +224,7 @@ const EdificacionSegundo = ( {edif, tech, temp} ) => {
                 </Grid>
                 
             </Grid>
-            <Grid item xs={12} sm={2}>
+            <Grid item xs={12} sm={3}>
                 <DisplayAhorro ahorro={difC} evitados={difE}/>
             </Grid>
         </Grid>

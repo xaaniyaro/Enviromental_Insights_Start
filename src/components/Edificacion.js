@@ -133,10 +133,26 @@ const Edificacion = ( {edif} ) => {
             <Grid item xs={12} sm={3}>
                 <Grid container spacing={1}>
                     <Grid item xs={12} sm={12}>
-                        < TestSelect options={edif} label="Tipo de edificio" selected={selected} onSelectedChange={handleOption}/>
+                        <Box display="flex" justifyContent="center">
+                            < TestSelect options={edif} label="Tipo de edificio" selected={selected} onSelectedChange={handleOption}/>
+                        </Box>
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                        <AreaInput onValueChange={handleArea} areaValue={area} idInput="input1" idHelper="input1-helper"/>
+                        <Box display="flex" justifyContent="center">
+                            <AreaInput onValueChange={handleArea} areaValue={area} idInput="input1" idHelper="input1-helper"/>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <Box display="flex" justifyContent="center">
+                        <Typography variant="body1">
+                            *Cálculos para Monterrey
+                        </Typography>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <Box display="flex" justifyContent="center">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230187.55064046764!2d-100.44318182881534!3d25.648728127237323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86629531b437f8f5%3A0xa3d3d3ca6ac89894!2sMonterrey%2C%20Nuevo%20Leon!5e0!3m2!1sen!2smx!4v1607558133312!5m2!1sen!2smx" width="200" height="200" frameborder="0" title="MTY" style={{border:0}} allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                        </Box>
                     </Grid>
                 </Grid>
             </Grid>
@@ -161,11 +177,30 @@ const Edificacion = ( {edif} ) => {
                         result={resultH}>
                         </DisplayEnergy>
                     </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <Typography variant="h6">
+                            Equivalente a 
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <DisplayEnergy 
+                        choice={true} 
+                        units="%" 
+                        result={percentageE}>
+                        </DisplayEnergy>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <DisplayEnergy 
+                        choice={false} 
+                        units="%" 
+                        result={percentageH}>
+                        </DisplayEnergy>
+                    </Grid>
                 </Grid>
                 
             </Grid>
             <Grid item xs={12} sm={2}>
-                <DisplayConsumo percentageE={percentageE} percentageH={percentageH} sum={sumR} />
+                <DisplayConsumo sum={sumR} />
             </Grid>
         </Grid>
         </Box>

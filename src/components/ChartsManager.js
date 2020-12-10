@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import TestSelect from './TestSelect';
+import SelectComponent from './SelectComponent';
 import DisplayMap from './DisplayMap';
 import DisplayGraphs from './DisplayGraphs';
 
@@ -61,7 +61,7 @@ const ChartsManager = () =>{
                     <Box p={2}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={12}>
-                                <TestSelect options={options} label={"Estación"} selected={selected} onSelectedChange={handleOption} />
+                                <SelectComponent options={options} label={"Estación"} selected={selected} onSelectedChange={handleOption} />
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 <DisplayGraphs selected={selectedSta}/>

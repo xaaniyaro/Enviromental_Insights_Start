@@ -86,9 +86,9 @@ const SolarEstruc = ( {tecnologia} ) => {
     useEffect( () =>{
         const calculateResults = () => {
             let calcuE = selectedE * area / 1000000;
-            setResultE(calcuE.toFixed(2));
+            setResultE(parseFloat(calcuE.toFixed(2)));
             let calcuH = selectedH * area / 1000000;
-            setResultH(calcuH.toFixed(2));
+            setResultH(parseFloat(calcuH.toFixed(2)));
         }
         const decideIcon = () => {
             if(selectedT === 'ct'){
@@ -111,17 +111,17 @@ const SolarEstruc = ( {tecnologia} ) => {
     useEffect( () =>{
         const calculateGei = () => {
             let calcGeiE = resultE * 1000000 * 0.0004536;
-            setGeiE(calcGeiE.toFixed(2));
+            setGeiE(parseFloat(calcGeiE.toFixed(2)));
             let calcGeiH = resultH * 1000000 * fuel;
-            setGeiH(calcGeiH.toFixed(2));
+            setGeiH(parseFloat(calcGeiH.toFixed(2)));
         }
         calculateGei();
     }, [resultE, resultH, fuel]);
 
     useEffect( () =>{
         const makeSum = () => {
-            let sumG = parseFloat(geiE) + parseFloat(geiH);
-            setSumGei(sumG);
+            let sumG = geiE + geiH;
+            setSumGei(sumG);                
         }
         makeSum();
     }, [geiE, geiH]);

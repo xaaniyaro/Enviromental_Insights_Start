@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     }
   }));*/
 
-const DisplayConsumo = ({ percentageE, percentageH, sum }) => {
+const DisplayConsumo = ({ sum }) => {
     //const classes = useStyles();
 
     if( sum < 0){
@@ -32,20 +32,6 @@ const DisplayConsumo = ({ percentageE, percentageH, sum }) => {
                             <Box display="flex" justifyContent="center" p={1}>
                                 <Typography variant="h6">
                                     Resumen
-                                </Typography>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12} sm={12}>
-                            <Box display="flex" justifyContent="center">
-                                <Typography variant="subtitle2">
-                                    ⚡: 0 %
-                                </Typography>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12} sm={12}>
-                            <Box display="flex" justifyContent="center">
-                                <Typography variant="subtitle2">
-                                    🌡: 0 %
                                 </Typography>
                             </Box>
                         </Grid>
@@ -81,30 +67,16 @@ const DisplayConsumo = ({ percentageE, percentageH, sum }) => {
                             </Box>
                         </Grid>
                         <Grid item xs={12} sm={12}>
-                            <Box display="flex" justifyContent="center">
-                                <Typography variant="subtitle2">
-                                    ⚡: {percentageE} %
-                                </Typography>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12} sm={12}>
-                            <Box display="flex" justifyContent="center">
-                                <Typography variant="subtitle2">
-                                    🌡: {percentageH} %
-                                </Typography>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12} sm={12}>
                             <Box display="flex" justifyContent="center" marginTop="10px">
                                 <Typography variant="subtitle1">
-                                    Total GEI emitidos
+                                Total GEI emitidos
                                 </Typography>
                             </Box>
                         </Grid>
                         <Grid item xs={12} sm={12}>
                             <Box display="flex" justifyContent="center">
                                 <Typography variant="subtitle2">
-                                    {sum} tCO2 
+                                    {sum} tCO2
                                 </Typography>
                             </Box>
                         </Grid>

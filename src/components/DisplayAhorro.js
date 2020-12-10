@@ -36,32 +36,9 @@ const DisplayAhorro = ({ ahorro, evitados }) => {
                             </Box>
                         </Grid>
                         <Grid item xs={12} sm={12}>
-                            <Box display="flex" justifyContent="center" marginTop="10px">
-                                <Typography variant="subtitle1">
-                                    Ahorro energético anual
-                                </Typography>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12} sm={12}>
-                            <Box display="flex" justifyContent="center">
-                                <Typography variant="subtitle2">
-                                    0 kWh
-                                </Typography>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12} sm={12}>
-                            <Box display="flex" justifyContent="center" marginTop="10px">
-                                <Typography variant="subtitle1">
-                                    GEI evitados
-                                </Typography>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12} sm={12}>
-                            <Box display="flex" justifyContent="center">
-                                <Typography variant="subtitle2">
-                                    0 tCO2 
-                                </Typography>
-                            </Box>
+                            <Typography gutterBottom variant="body1" align="center">
+                                Intenta cambiar los parámetros
+                            </Typography>
                         </Grid>
                     </Grid>
                 </Paper>
@@ -72,41 +49,45 @@ const DisplayAhorro = ({ ahorro, evitados }) => {
         return(
             <div>
                 <Paper>
-                    <Grid container spacing={1}>
+                    <Grid container spacing={2}>
                         <Grid item xs={12} sm={12}>
                             <Box display="flex" justifyContent="center" p={1}>
-                                <Typography variant="h6">
+                                <Typography gutterBottom variant="h6">
                                     Resumen
                                 </Typography>
                             </Box>
                         </Grid>
                         <Grid item xs={12} sm={12}>
-                            <Box display="flex" justifyContent="center" marginTop="10px">
-                                <Typography variant="subtitle1">
-                                    Ahorro energético anual
-                                </Typography>
-                            </Box>
+                            <Typography variant="subtitle1" align="center">
+                                GEI emitidos (sin tecnología)
+                            </Typography>
                         </Grid>
                         <Grid item xs={12} sm={12}>
                             <Box display="flex" justifyContent="center">
                                 <Typography variant="subtitle2">
-                                    {ahorro} kWh
+                                    100 tCO2 
                                 </Typography>
                             </Box>
                         </Grid>
                         <Grid item xs={12} sm={12}>
-                            <Box display="flex" justifyContent="center" marginTop="10px">
-                                <Typography variant="subtitle1">
+                            <Typography variant="subtitle1" align="center">
+                                GEI emitidos (con tecnología)
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                            <Box display="flex" justifyContent="center">
+                                <Typography variant="subtitle2">
+                                    80 tCO2 
+                                </Typography>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                                <Typography variant="subtitle2" align="center">
                                     GEI evitados
                                 </Typography>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12} sm={12}>
-                            <Box display="flex" justifyContent="center">
-                                <Typography variant="subtitle2">
-                                    {evitados} tCO2 
+                                <Typography gutterBottom variant="body2" align="center">
+                                    20 tCO2 
                                 </Typography>
-                            </Box>
                         </Grid>
                     </Grid>
                 </Paper>

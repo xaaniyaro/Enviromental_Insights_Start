@@ -17,9 +17,9 @@ const DisplayWeather = () => {
     useEffect( () =>{
         const callApi = async () =>{
             let ts = Math.round((new Date()).getTime() / 1000);
-            let claveapi = 'wwllgjjsz04yssmmqjnub1hqpwzikplw';
+            let claveapi = 'cmktt6j4diosqgfidj0f9u0twtvmofzi';
             let plainText = 'api-key' + claveapi + 'station-id101004t' + ts;
-            let secretKey = 'ctvyix5lmpwxqzac63eenda3nl2imcwz'; 
+            let secretKey = 'rxidkkcbjxdjh293omoownp3f9qoe2no'; 
             let signature = CryptoJS.HmacSHA256(plainText, secretKey).toString(CryptoJS.enc.Hex);
 
             const { data } = await axios.get('https://api.weatherlink.com/v2/current/101004', {
@@ -29,6 +29,7 @@ const DisplayWeather = () => {
                     't': ts
                 },
             });
+
             setWind(data.sensors[0].data[0].wind_speed_last);
             setRad(data.sensors[0].data[0].solar_rad);
         };
@@ -48,10 +49,10 @@ const DisplayWeather = () => {
             let first = Math.round(before.getTime() / 1000);
             //Convirtiendo a UNIX timestamp la fecha actual
             let last = Math.round((new Date()).getTime() / 1000);
-            let claveapi = 'wwllgjjsz04yssmmqjnub1hqpwzikplw';
+            let claveapi = 'cmktt6j4diosqgfidj0f9u0twtvmofzi';
 
             let plainText = 'api-key' + claveapi + 'end-timestamp' + last + 'start-timestamp'+ first +'station-id101004t' + last;
-            let secretKey = 'ctvyix5lmpwxqzac63eenda3nl2imcwz'; 
+            let secretKey = 'rxidkkcbjxdjh293omoownp3f9qoe2no'; 
             let signature = CryptoJS.HmacSHA256(plainText, secretKey).toString(CryptoJS.enc.Hex);
 
             const { data } = await axios.get('https://api.weatherlink.com/v2/historic/101004', {
@@ -89,7 +90,7 @@ const DisplayWeather = () => {
                 <Box p={2}>
                     <DisplayStat title="Velocidad de viento" img="https://media.giphy.com/media/ygx8X4iqGFVwRDOCn7/giphy.gif" data={wind} units="m/s"/>
                     <DisplayStat title="Radiación solar" img="https://media.giphy.com/media/QTBptzxDcMWsG9OeFw/giphy.gif" data={rad} units="w/m²"/>
-                    <DisplayTemp data={data}/>                
+                    <DisplayTemp data={data}/> 
                 </Box>
             </Paper>
         </div>

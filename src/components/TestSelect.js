@@ -4,6 +4,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from '@material-ui/core/FormControl';
 import Select from "@material-ui/core/Select";
+import { createMuiTheme } from '@material-ui/core/styles';
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -11,9 +13,9 @@ const useStyles = makeStyles(theme => ({
     minWidth: '30ch',
     "& label.MuiInputLabel-outlined": {
       color: "black",
-      fontWeight: 'bold'
+      //fontWeight: 'bold'
     }
-  },
+  }
     /*,
   selectElement: {
     marginTop: 18
@@ -23,6 +25,19 @@ const useStyles = makeStyles(theme => ({
   }*/
 }));
 
+const formLabelsTheme = createMuiTheme({
+  overrides: {
+    MuiFormLabel: {
+      asterisk: {
+        color: "#db3131",
+        "&$error": {
+          color: "#db3131"
+        }
+      }
+    }
+  }
+});
+
 export default function TestSelect({ options, label, selected, onSelectedChange }) {
   const classes = useStyles();
 
@@ -30,25 +45,29 @@ export default function TestSelect({ options, label, selected, onSelectedChange 
 
   return (
     <div>
-      <FormControl variant="outlined" className={classes.root}>
-        <InputLabel id="optionsL">{label}</InputLabel>
-        <Select
-          labelId="optionsL"
-          id="options"
-          value={selected}
-          onChange={handleChange}
-          label={label}
-        >
-          {options.map(element => (
-            <MenuItem
-              value={element[Object.keys(element)] + ""}
-              key={Object.keys(element)[0]}
-            >
-              {Object.keys(element)[0]}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <MuiThemeProvider theme={formLabelsTheme}>
+            <form noValidate autoComplete="off">
+              <FormControl required variant="outlined" className={classes.root}>
+                <InputLabel id="optionsL">{label}</InputLabel>
+                <Select
+                  labelId="optionsL"
+                  id="options"
+                  value={selected}
+                  onChange={handleChange}
+                  label={label}
+                >
+                  {options.map(element => (
+                    <MenuItem
+                      value={element[Object.keys(element)] + ""}
+                      key={Object.keys(element)[0]}
+                    >
+                      {Object.keys(element)[0]}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+      </form>
+      </MuiThemeProvider>
     </div>
   );
 }

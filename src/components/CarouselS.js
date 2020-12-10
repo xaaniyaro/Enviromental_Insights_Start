@@ -148,7 +148,7 @@ class BannerExample extends React.Component {
         super(props);
 
         this.state = {
-            autoPlay: true,
+            autoPlay: false,
             timer: 500,
             animation: "fade",
             indicators: true,
