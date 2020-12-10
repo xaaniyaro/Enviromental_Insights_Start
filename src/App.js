@@ -1,64 +1,59 @@
-import Menu from './components/Menu';
-import ReactDOM from 'react-dom';
-
 import './App.css';
 import AppBar from './components/AppBar';
-import SolarCalculator from './components/SolarCalculator';
+import { makeStyles } from "@material-ui/core/styles";
 import ChartsManager from './components/ChartsManager';
-import Grid from '@material-ui/core/Grid';
-import Dropdown from './components/Dropdown';
-import DropdownSimple from './components/DropdownSimple';
-import DropdownBase from './components/DropdownBase';
-import Combustibles from './components/Combustibles';
-import Calculator from './components/Calculator';
 import Route from './components/Route';
-import { useState, useEffect } from 'react';
+import Edificacion from './components/Edificacion';
+import EdificacionSegundo from './components/EdificacionSegundo'
+import HomeComponent from './components/HomeComponent';
+import CarouselS from './components/CarouselS';
+import SolarEstruc from './components/SolarEstruc';
+import SolarEstructure from './components/SolarEstructure';
+import { Container } from '@material-ui/core';
+import Member from './components/Member';
 //import Content from './components/Content';
 
 //
 
 
-const combustibles = [
-  {
-    "label": "Diesel",
-    "value": 0.00027 
-  },
-  {
-    "label": "Gas natural",
-    "value": 0.0002
-  },
-  {
-    "label": "GLP",
-    "value": 0.00023
-  }
-];
-
+// Primer valor : energia electrica
+// Segundo valor: energia termica
 const tecnologia = [
-  {
-    "label": "Colectores térmicos",
-    "valueheat": 280.1,
-    "valueelec": 0,
-    "img" : "/termic.png"
-  },
-  {
-    "label": "Colectores híbridos",
-    "valueheat": 228.97,
-    "valueelec": 44.49,
-    "img" : "/hybrid.png"
-  },
-  {
-    "label": "Paneles fotovoltáicos",
-    "valueheat": 0,
-    "valueelec": 171.62,
-    "img" : "/panel.png"
-  }
+  { "Colectores térmicos": ['ct', 0, 280.1]},
+  { "Colectores híbridos PV/T": ['pv', 44.49, 228.97]},
+  { "Colectores híbridos LCPV/T": ['lc', 80.98, 120.56]},
+  { "Paneles fotovoltáicos": ['pf', 171.62, 0]}
 ];
 
+const edificacion = [
+  { "Residencial": ['yes'] },
+  { "No residencial": ['no'] }
+];
+
+
+
+const technology = [
+  { "PCM": [2, 3] },
+  { "Aislante": [4, 5] },
+  { "Pintura": [6, 7] }
+];
+
+const temporadas = [
+  { "Verano (Abr - Oct)": [2, 3] },
+  { "Invierno (Nov - Mar)": [4, 5] },
+];
+
+const useStyles = makeStyles(theme => ({
+  mainContent: {
+      marginTop: 20
+  },
+  section: {
+    marginTop: 30
+  },
+}));
 function App() {
-  const [selected, setSelected] = useState(tecnologia[0]);
-  const [selectedTwo, setSelectedTwo] = useState(tecnologia[0]);
-  const [selectedThree, setSelectedThree] = useState(tecnologia[0]);
-  const [selectedComb, setSelectComb] = useState(combustibles[0]);
+
+  const classes = useStyles();
   //const [toggleTech, setToggleTech] = useState(true);
   
 
@@ -66,47 +61,30 @@ function App() {
     <div>
       <AppBar />
       <Route path="/">
-        <h1>Home</h1>
+        <HomeComponent></HomeComponent>
       </Route>
       <Route path="/potencialsolar">
-          <div className="ui container body">
-          <h1 className="ui header">Producción energética total</h1>
-            <DropdownSimple
-                options={tecnologia} 
-                label="Selecciona una tecnología" 
-                selected={selected}
-                onSelectedChange={setSelected}/>
-          <h1 className="ui header">Producción energética específica</h1>
-          <Dropdown
-                options={tecnologia} 
-                label="Selecciona una tecnología" 
-                selected={selectedTwo}
-                onSelectedChange={setSelectedTwo}/>
-          <h1 className="ui header">Potencial de reducción anual</h1>
-          <DropdownBase
-                options={tecnologia} 
-                label="Selecciona una tecnología" 
-                selected={selectedThree}
-                onSelectedChange={setSelectedThree}/>
-          <Combustibles
-          combustibles={combustibles}
-          selectedComb={selectedComb}
-          setSelectComb={setSelectComb}
-          selected={selectedThree} />
-          <Calculator 
-            tecnologia={selectedThree}
-            combustible={selectedComb}
-          />
-          </div>
+          <CarouselS />
+          <Container>
+              <SolarEstruc tecnologia={tecnologia}></SolarEstruc>
+              <br/>
+              <SolarEstructure tecnologia={tecnologia}></SolarEstructure>
+          </Container>
       </Route>
       <Route path="/edificiossustentables">
-        <h1>Edicios sustentables</h1>
+        <Container className={classes.mainContent}>
+              <Edificacion edif={edificacion}></Edificacion>
+              <br/>
+              
+        </Container>
       </Route>
       <Route path="/visualizacion">
-        <ChartsManager></ChartsManager>
+        <Container>
+          <ChartsManager></ChartsManager>
+        </Container>
       </Route>
       <Route path="/equipo">
-        <h1>Equipo</h1>
+        <Member></Member>
       </Route>
     </div>
     
