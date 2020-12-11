@@ -75,7 +75,7 @@ const Edificacion = ( {edif, residencial, noresidencial} ) => {
         const calculateResults = () => {
             let calcuE = area * selectedEUI * (selectedE/100) ;
             setResultE(parseFloat(calcuE.toFixed(2)));
-            let calcuH = area * selectedEUI * (selectedH/100);
+            let calcuH = area * selectedEUI * (selectedH/100) * 36;
             setResultH(parseFloat(calcuH.toFixed(2)));
         }
         const calculateGei = () => {
