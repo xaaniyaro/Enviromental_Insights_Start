@@ -91,7 +91,12 @@ const DisplayWeather = () => {
         <div>
             <Paper elevation ={1}>
                 <Box p={2}>
-                    <Grid container spacing={1}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={12}>
+                            <Box fontSize={30}>
+                                Datos de Estación San José
+                            </Box>
+                        </Grid>
                         <Grid item xs={12} sm={4}>
                         <DisplayStat title="Velocidad de viento" img="https://media.giphy.com/media/ygx8X4iqGFVwRDOCn7/giphy.gif" data={wind} units="m/s"/>
                         <DisplayStat title="Radiación solar" img="https://media.giphy.com/media/QTBptzxDcMWsG9OeFw/giphy.gif" data={rad} units="w/m²"/>

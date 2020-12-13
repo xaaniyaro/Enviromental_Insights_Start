@@ -30,19 +30,6 @@ const edificacion = [
   { "No residencial": ['no'] }
 ];
 
-
-
-const technology = [
-  { "PCM": [2, 3] },
-  { "Aislante": [4, 5] },
-  { "Pintura": [6, 7] }
-];
-
-const temporadas = [
-  { "Verano (Abr - Oct)": [2, 3] },
-  { "Invierno (Nov - Mar)": [4, 5] },
-];
-
 const useStyles = makeStyles(theme => ({
   mainContent: {
       marginTop: 20
@@ -75,7 +62,7 @@ function App() {
         <Container className={classes.mainContent}>
               <Edificacion edif={edificacion}></Edificacion>
               <br/>
-              
+              <EdificacionSegundo edif={edificacion} />
         </Container>
       </Route>
       <Route path="/visualizacion">

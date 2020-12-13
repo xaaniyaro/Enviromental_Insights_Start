@@ -61,6 +61,11 @@ const ChartsManager = () =>{
                     <Box p={2}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={12}>
+                                <Box fontSize={28}>
+                                    Datos históricos de las estaciones
+                                </Box>
+                            </Grid> 
+                            <Grid item xs={12} sm={12}>
                                 <SelectComponent options={options} label={"Estación"} selected={selected} onSelectedChange={handleOption} />
                             </Grid>
                             <Grid item xs={12} sm={4}>
@@ -77,7 +82,7 @@ const ChartsManager = () =>{
                     <Paper elevation={1}>
                         <Box p={2}>
                             <Typography variant="h4" gutterBottom>
-                                Mapa completo
+                                Mapa completo de las estaciones
                             </Typography>
                             <iframe className={classes.mapframe} title="completemap" src="https://www.google.com/maps/d/u/1/embed?mid=1b6KEEkwvDiTquRcPP9TjbfQ38sDjUA4Q" width="100%" height="720"></iframe>
                         </Box>

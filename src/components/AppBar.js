@@ -81,7 +81,7 @@ export default function MenuAppBar(props) {
       <AppBar className={classes.appbar}>
         <Toolbar>
           <div className={classes.title}>
-            <Link href="/" ><Button color="inherit">Logo</Button></Link>
+            <Link href="/" ><img src="logo.png" height="100%" width="200px"/></Link>
           </div>
             <div>
               <Button

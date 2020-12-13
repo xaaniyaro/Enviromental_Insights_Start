@@ -11,7 +11,8 @@ import {
     CardMedia,
     Typography,
     Grid,
-    Link
+    Link,
+    Box
 } from '@material-ui/core';
 
 function Banner(props) {
@@ -73,11 +74,11 @@ function Banner(props) {
                             horizontal: 'center',
                         }}
                         >
-                        <Typography style={{padding: 10}}>The content of the Popover.</Typography>
+                        Contenido
                     </Popover>
                     
                     <Typography className="MediaCaption">
-                    <Link href={item.Source} color="inherit">
+                    <Link href={item.Source} target="_blank" rel="noopener noreferrer" color="inherit">
                         {'Fuente'}
                     </Link>
                     </Typography>

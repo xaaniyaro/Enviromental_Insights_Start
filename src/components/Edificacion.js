@@ -48,9 +48,18 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
+const residencial = [
+    { "Departamento": [51.455, 75, 25, 0.000589794]}
+]
 
+const noresidencial = [
+    { "Restaurante": [179.4025, 54, 46, 0.000600508]},
+    { "Aulas": [191.6625, 100, 0, 0.000577039]},
+    { "Oficina": [169.6875, 100, 0, 0.000577039]},
+    { "Hospital": [395.71, 77, 23, 0.000588773]}
+]
 
-const Edificacion = ( {edif, residencial, noresidencial} ) => {
+const Edificacion = ( {edif} ) => {
     const classes = useStyles();
 
     const [selected, setSelected] = React.useState('');
@@ -75,7 +84,7 @@ const Edificacion = ( {edif, residencial, noresidencial} ) => {
         const calculateResults = () => {
             let calcuE = area * selectedEUI * (selectedE/100) ;
             setResultE(parseFloat(calcuE.toFixed(2)));
-            let calcuH = area * selectedEUI * (selectedH/100) * 36;
+            let calcuH = area * selectedEUI * (selectedH/100) * 3.6;
             setResultH(parseFloat(calcuH.toFixed(2)));
         }
         const calculateGei = () => {
@@ -130,12 +139,12 @@ const Edificacion = ( {edif, residencial, noresidencial} ) => {
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <Box display="flex" justifyContent="center">
-                            <DisplayEdif selectedEdif={selected} onEdifChange={handleEdifType} />
+                            <DisplayEdif selectedEdif={selected} onEdifChange={handleEdifType} resi={residencial} noresi={noresidencial}/>
                         </Box>
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <Box display="flex" justifyContent="center">
-                            <AreaInput onValueChange={handleArea} areaValue={area} idInput="input1" idHelper="input1-helper"/>
+                            <AreaInput onValueChange={handleArea} areaValue={area} idInput="input1" idHelper="input1-helper" label="Área de construcción"/>
                         </Box>
                     </Grid>
                     <Grid item xs={12} sm={12}>

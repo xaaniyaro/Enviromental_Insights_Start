@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function AreaInput( {areaValue, onValueChange, idInput, idHelper} ) {
+export default function AreaInput( {areaValue, onValueChange, idInput, idHelper, label} ) {
   const classes = useStyles();
 
   
@@ -51,7 +51,7 @@ export default function AreaInput( {areaValue, onValueChange, idInput, idHelper}
             }}
             labelWidth={0}
           />
-          <FormHelperText id={idHelper}>Área</FormHelperText>
+          <FormHelperText id={idHelper}>{label}</FormHelperText>
         </FormControl>
       </div>
     );

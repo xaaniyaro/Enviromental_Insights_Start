@@ -8,9 +8,10 @@ import Box from '@material-ui/core/Box'
 import Popover from '@material-ui/core/Popover';
 import Button from '@material-ui/core/Button';
 import DisplayEnergy from './DisplayEnergy';
-import DisplayFuel from './DisplayFuel';
+import DisplayCondition from './DisplayCondition';
 import DisplaySummary from './DisplaySummary';
 import InfoIcon from '@material-ui/icons/Info';
+import DisplayCalcu from './DisplayCalcu';
 
 const useStyles = makeStyles(theme => ({
     results: {
@@ -47,6 +48,12 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(2),
     },
   }));
+
+const combustibles = [
+    {"Diesel": [0.00027]},
+    {"Gas natural": [0.0002]},
+    {"GLP": [0.0023]}
+]
 
 const SolarEstruc = ( {tecnologia} ) => {
     
@@ -153,7 +160,7 @@ const SolarEstruc = ( {tecnologia} ) => {
         <Grid container spacing={3} justify="space-between">
             <Grid item xs={12} sm={9}>
                 <Typography variant="h4" className={classes.header}>
-                    Calculadora total
+                Calculadora Potencial Solar Específico
                 </Typography>
             </Grid>
             <Grid item xs={12} sm={3}>
@@ -167,7 +174,7 @@ const SolarEstruc = ( {tecnologia} ) => {
                         <TestSelect options={tecnologia} label="Tecnología" selected={selected} onSelectedChange={handleOption}/>
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                        <DisplayFuel selectedH={selectedH} onFuelChange={handleFuel} />
+                        <DisplayCondition param={selectedH} onChange={handleFuel} options={combustibles} label="Combustibles"/>
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <Box p={1} marginTop={2}>
@@ -232,22 +239,22 @@ const SolarEstruc = ( {tecnologia} ) => {
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <Typography variant="h5">
-                            Reducción de emisiones de GEI
+                            Reducción de emisiones de GEI anual
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <DisplayEnergy 
-                        choice={true} 
-                        units="tCO2/año" 
+                        <DisplayCalcu 
+                        choice={false} 
+                        units="tCO2" 
                         result={geiE}>
-                        </DisplayEnergy>
+                        </DisplayCalcu>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                    <DisplayEnergy 
+                        <DisplayCalcu 
                         choice={false} 
-                        units="tCO2/año" 
+                        units="tCO2" 
                         result={geiH}>
-                        </DisplayEnergy>
+                        </DisplayCalcu>
                     </Grid>
                 </Grid>
                 

@@ -8,8 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button';
 import DisplayEnergy from './DisplayEnergy';
-import DisplayFuel from './DisplayFuel';
+import DisplayCondition from './DisplayCondition';
 import DisplaySummary from './DisplaySummary';
+import DisplayCalcu from './DisplayCalcu';
 
 const useStyles = makeStyles(theme => ({
     results: {
@@ -48,7 +49,11 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-
+  const combustibles = [
+    {"Diesel": [0.00027]},
+    {"Gas natural": [0.0002]},
+    {"GLP": [0.0023]}
+]
 
 const SolarEstruc = ( {tecnologia} ) => {
     const classes = useStyles();
@@ -148,7 +153,7 @@ const SolarEstruc = ( {tecnologia} ) => {
         <Grid container spacing={3} justify="space-between">
             <Grid item xs={12} sm={9}>
                 <Typography variant="h4" className={classes.header}>
-                    Calculadora específica
+                Calculadora Potencial Solar Total
                 </Typography>
             </Grid>
             <Grid item xs={12} sm={3}>
@@ -162,10 +167,10 @@ const SolarEstruc = ( {tecnologia} ) => {
                         < TestSelect options={tecnologia} label="Tecnología" selected={selected} onSelectedChange={handleOption}/>
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                        <DisplayFuel selectedH={selectedH} onFuelChange={handleFuel} />
+                        <DisplayCondition param={selectedH} onChange={handleFuel} options={combustibles} label="Combustibles"/>
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                        <AreaInput onValueChange={handleArea} areaValue={area} idInput="input2" idHelper="input2-helper"/>
+                        <AreaInput onValueChange={handleArea} areaValue={area} idInput="input2" idHelper="input2-helper" label="Área"/>
                     </Grid>
                 </Grid>
             </Grid>
@@ -192,22 +197,22 @@ const SolarEstruc = ( {tecnologia} ) => {
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <Typography variant="h5">
-                            Reducción de emisiones de GEI
+                            Reducción de emisiones de GEI anual
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <DisplayEnergy 
-                        choice={true} 
-                        units="tCO2/año" 
+                        <DisplayCalcu 
+                        choice={false} 
+                        units="tCO2" 
                         result={geiE}>
-                        </DisplayEnergy>
+                        </DisplayCalcu>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                    <DisplayEnergy 
+                        <DisplayCalcu 
                         choice={false} 
-                        units="tCO2/año" 
+                        units="tCO2" 
                         result={geiH}>
-                        </DisplayEnergy>
+                        </DisplayCalcu>
                     </Grid>
                 </Grid>
                 
