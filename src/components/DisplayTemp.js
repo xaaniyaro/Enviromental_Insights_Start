@@ -1,16 +1,16 @@
 import React from 'react';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Label} from 'recharts';
-import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 const DisplayTemp = ({data}) => {
     if(data != null){
         return(
             <div>
-                <Typography gutterBottom variant="h6">
+                <Box fontSize={24} fontWeight="bold" textAlign="center">
                     Temperatura
-                </Typography>
+                </Box>
                 <LineChart width={500} height={250} data={data}
-                    margin={{top: 5, right: 30, left: 20, bottom: 20}}>
+                    margin={{top: 5, right: 10, left: 10, bottom: 20}}>
                 <XAxis dataKey="hour">
                     <Label value="Hora" offset={0} position="bottom" />
                 </XAxis>

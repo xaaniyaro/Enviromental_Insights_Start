@@ -6,7 +6,7 @@ const Charts = ({data}) => {
 
     return(
         <div>
-            <BarChart width={700} height={300} data={data}
+            <BarChart width={850} height={300} data={data}
             margin={{top: 5, right: 5, left: 30, bottom: 5}}>
             <CartesianGrid strokeDasharray="3 3"/>
             <XAxis dataKey="name">

@@ -13,6 +13,7 @@ import DisplaySummary from './DisplaySummary';
 import DisplayCalcu from './DisplayCalcu';
 import Popover from '@material-ui/core/Popover';
 import InfoIcon from '@material-ui/icons/Info';
+import DisplayInsight from './DisplayInsight';
 
 const useStyles = makeStyles(theme => ({
     results: {
@@ -74,6 +75,9 @@ const SolarEstruc = ( {tecnologia} ) => {
     const [geiH, setGeiH] = React.useState('');
     const [sumGei, setSumGei] = React.useState(0);
 
+    const [insightTree, setInsightTree] = React.useState(0);
+    const [insightEdif, setInsightEdif] = React.useState(0);
+
     const [anchorEl, setAnchorEl] = React.useState(null);
     
     const handleClick = (event) => {
@@ -106,9 +110,11 @@ const SolarEstruc = ( {tecnologia} ) => {
 
     useEffect( () =>{
         const calculateResults = () => {
-            let calcuE = selectedE * area / 1000000;
+            let calcuE = selectedE * area / 1000;
+            let calcIns = calcuE / 4116.4;
+            setInsightEdif(parseFloat(calcIns.toFixed(2)));
             setResultE(parseFloat(calcuE.toFixed(2)));
-            let calcuH = selectedH * area / 1000000;
+            let calcuH = selectedH * area / 1000;
             setResultH(parseFloat(calcuH.toFixed(2)));
         }
         const decideIcon = () => {
@@ -135,17 +141,13 @@ const SolarEstruc = ( {tecnologia} ) => {
             setGeiE(parseFloat(calcGeiE.toFixed(2)));
             let calcGeiH = resultH * 1000000 * fuel;
             setGeiH(parseFloat(calcGeiH.toFixed(2)));
+            let sumG = calcGeiE + calcGeiH;
+            setSumGei(parseFloat(sumG.toFixed(2))); 
+            let calcInsTree = sumG / 0.021;
+            setInsightTree(parseFloat(calcInsTree.toFixed(2)))
         }
         calculateGei();
     }, [resultE, resultH, fuel]);
-
-    useEffect( () =>{
-        const makeSum = () => {
-            let sumG = geiE + geiH;
-            setSumGei(sumG);                
-        }
-        makeSum();
-    }, [geiE, geiH]);
 
     function reset() {
         setIconName('placeholder.png');
@@ -288,6 +290,17 @@ const SolarEstruc = ( {tecnologia} ) => {
                         units="tCO2" 
                         result={geiH}>
                         </DisplayCalcu>
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <Typography variant="h6">
+                            Lo que equivale a:
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <DisplayInsight insight={insightEdif} toggle={true}/>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <DisplayInsight insight={insightTree} toggle={false}/>
                     </Grid>
                 </Grid>
                 

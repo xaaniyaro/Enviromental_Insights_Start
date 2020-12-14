@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import DisplayEnergy from './DisplayEnergy';
 import DisplayCondition from './DisplayCondition';
 import DisplaySummary from './DisplaySummary';
-
+import DisplayInsight from './DisplayInsight';
 import DisplayCalcu from './DisplayCalcu';
 
 const useStyles = makeStyles(theme => ({
@@ -69,6 +69,9 @@ const SolarEstruc = ( {tecnologia} ) => {
     const [geiE, setGeiE] = React.useState('');
     const [geiH, setGeiH] = React.useState('');
     const [sumGei, setSumGei] = React.useState(0);
+
+    const [insightTree, setInsightTree] = React.useState(0);
+    const [insightEdif, setInsightEdif] = React.useState(0);
     
 
     const handleOption = (optionValue) => {
@@ -82,6 +85,8 @@ const SolarEstruc = ( {tecnologia} ) => {
     useEffect( () =>{
         const calculateResults = () => {
             let calcuE = selectedE * 13400000 / 1000000;
+            let calcIns = calcuE / 4116.4;
+            setInsightEdif(parseFloat(calcIns.toFixed(2)));
             setResultE(Math.round(calcuE));
             let calcuH = selectedH * 13400000 / 1000000;
             setResultH(Math.round(calcuH));
@@ -106,21 +111,17 @@ const SolarEstruc = ( {tecnologia} ) => {
 
     useEffect( () =>{
         const calculateGei = () => {
-            let calcGeiE = resultE * 1000000 * 0.0004536;
+            let calcGeiE = resultE * 1000 * 0.0004536;
             setGeiE(Math.round(calcGeiE));
-            let calcGeiH = resultH * 1000000 * fuel;
+            let calcGeiH = resultH * 1000 * fuel;
             setGeiH(Math.round(calcGeiH));
+            let sumG = calcGeiE + calcGeiH;
+            setSumGei(parseFloat(sumG.toFixed(2))); 
+            let calcInsTree = sumG / 0.021;
+            setInsightTree(parseFloat(calcInsTree.toFixed(2)))
         }
         calculateGei();
     }, [resultE, resultH, fuel]);
-
-    useEffect( () =>{
-        const makeSum = () => {
-            let sumG = parseInt(geiE) + parseInt(geiH);
-            setSumGei(sumG);
-        }
-        makeSum();
-    }, [geiE, geiH]);
 
     const handleFuel = (fuelValue) =>{
         let val = parseFloat(fuelValue);
@@ -222,6 +223,17 @@ const SolarEstruc = ( {tecnologia} ) => {
                         units="tCO2" 
                         result={geiH}>
                         </DisplayCalcu>
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <Typography variant="h6">
+                            Lo que equivale a:
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <DisplayInsight insight={insightEdif} toggle={true}/>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <DisplayInsight insight={insightTree} toggle={false}/>
                     </Grid>
                 </Grid>
                 
