@@ -5,12 +5,11 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box'
-import Popover from '@material-ui/core/Popover';
 import Button from '@material-ui/core/Button';
 import DisplayEnergy from './DisplayEnergy';
 import DisplayCondition from './DisplayCondition';
 import DisplaySummary from './DisplaySummary';
-import InfoIcon from '@material-ui/icons/Info';
+
 import DisplayCalcu from './DisplayCalcu';
 
 const useStyles = makeStyles(theme => ({
@@ -70,18 +69,7 @@ const SolarEstruc = ( {tecnologia} ) => {
     const [geiE, setGeiE] = React.useState('');
     const [geiH, setGeiH] = React.useState('');
     const [sumGei, setSumGei] = React.useState(0);
-    const [anchorEl, setAnchorEl] = React.useState(null);
     
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
 
     const handleOption = (optionValue) => {
         setSelected(optionValue);
@@ -192,27 +180,6 @@ const SolarEstruc = ( {tecnologia} ) => {
                             </Box>
                         </Paper>
                         </Box>
-                    </Grid>
-                    <Grid item xd={12} sm={12}>
-                        <Button aria-describedby={id} onClick={handleClick}>
-                            <InfoIcon  color="primary"/>
-                        </Button>
-                        <Popover
-                            id={id}
-                            open={open}
-                            anchorEl={anchorEl}
-                            onClose={handleClose}
-                            anchorOrigin={{
-                                vertical: 'center',
-                                horizontal: 'right',
-                            }}
-                              transformOrigin={{
-                                vertical: 'center',
-                                horizontal: 'left',
-                            }}
-                            >
-                            <Typography cla ssName={classes.typography}>The content of the Popover.</Typography>
-                        </Popover>
                     </Grid>
                 </Grid>
             </Grid>

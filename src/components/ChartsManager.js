@@ -11,12 +11,14 @@ import DisplayGraphs from './DisplayGraphs';
 
 const options = [
     { "Casa solar": ["cs","https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3596.523444039503!2d-100.29087618498123!3d25.653937483685702!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s75QXMP36%2BHG!5e0!3m2!1sen!2smx!4v1606438557996!5m2!1sen!2smx"]},
+    { "Guadalupe": ["gp","https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3597.0018990998383!2d-100.36975118498155!3d25.638062483693027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s75QXJJQJ%2B6X!5e0!3m2!1sen!2smx!4v1607930169118!5m2!1sen!2smx"]}
+    /*
     { "San Nicolás": ["sn","https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3593.8132858218914!2d-100.28500118497944!3d25.743687483644937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s75QXPPV8%2BFV!5e0!3m2!1sen!2smx!4v1606438845466!5m2!1sen!2smx"]},
-    { "Guadalupe": ["gp","https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3596.5950414945682!2d-100.29125118498132!3d25.65156248368686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s75QXMP26%2BJ9!5e0!3m2!1sen!2smx!4v1606438587025!5m2!1sen!2smx"]},
     { "Santa Catarina": ["sc","https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3596.3199227960954!2d-100.4325011849811!3d25.66068748368282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s75QXMH69%2B7V!5e0!3m2!1sen!2smx!4v1606438647820!5m2!1sen!2smx"]},
     { "PIIT": ["pi","https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3593.162746230785!2d-100.12575118497897!3d25.76518748363515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s75QXQV8G%2B3H!5e0!3m2!1sen!2smx!4v1606438731493!5m2!1sen!2smx"]},
     { "Cumbres" : ["cm","https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3594.115689960202!2d-100.41875118497963!3d25.733687483649508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s75QXPHMM%2BF9!5e0!3m2!1sen!2smx!4v1606438784288!5m2!1sen!2smx"]},
     { "Contry": ["co","https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3597.4838421168556!2d-100.27712618498194!3d25.62206248370024!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s75QXJPCG%2BR2!5e0!3m2!1sen!2smx!4v1606439076792!5m2!1sen!2smx"]}
+    */
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -68,10 +70,10 @@ const ChartsManager = () =>{
                             <Grid item xs={12} sm={12}>
                                 <SelectComponent options={options} label={"Estación"} selected={selected} onSelectedChange={handleOption} />
                             </Grid>
-                            <Grid item xs={12} sm={4}>
+                            <Grid item xs={12} sm={8}>
                                 <DisplayGraphs selected={selectedSta}/>
                             </Grid>
-                            <Grid item xs={12} sm={8}>
+                            <Grid item xs={12} sm={4}>
                                 <DisplayMap srcString={selectedMap} />
                             </Grid>
                         </Grid>

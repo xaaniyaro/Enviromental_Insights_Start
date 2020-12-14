@@ -19,10 +19,10 @@ import Member from './components/Member';
 // Primer valor : energia electrica
 // Segundo valor: energia termica
 const tecnologia = [
-  { "Colectores térmicos": ['ct', 0, 280.1]},
-  { "Colectores híbridos PV/T": ['pv', 44.49, 228.97]},
-  { "Colectores híbridos LCPV/T": ['lc', 80.98, 120.56]},
-  { "Paneles fotovoltáicos": ['pf', 171.62, 0]}
+  { "Colectores térmicos": ['ct', 0, 447.83]},
+  { "Colectores híbridos PV/T": ['pv', 91.48, 168.31]},
+  { "Colectores híbridos LCPV/T": ['lc', 115.56, 339.12 ]},
+  { "Paneles fotovoltáicos": ['pf', 188.52, 0]}
 ];
 
 const edificacion = [

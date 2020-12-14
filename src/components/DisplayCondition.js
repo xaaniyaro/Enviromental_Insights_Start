@@ -10,6 +10,10 @@ const DisplayCondition = ({param, onChange, label, options}) => {
         setSelected(optionValue);
         onChange(optionValue);
     }
+    
+    function reset() {
+        setSelected('');
+    }
 
     if(param > 0){
         return(
@@ -19,7 +23,11 @@ const DisplayCondition = ({param, onChange, label, options}) => {
         );
     }
     else{
-        return null;
+        return(
+            <div>
+                {reset}
+            </div>
+        );
     }
 }
 

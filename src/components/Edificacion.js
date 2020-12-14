@@ -10,6 +10,8 @@ import Button from '@material-ui/core/Button';
 import DisplayConsumo from './DisplayConsumo';
 import DisplayEnergy from './DisplayEnergy';
 import DisplayEdif from './DisplayEdif';
+import InfoIcon from '@material-ui/icons/Info';
+import Popover from '@material-ui/core/Popover';
 
 const useStyles = makeStyles(theme => ({
     results: {
@@ -71,6 +73,19 @@ const Edificacion = ( {edif} ) => {
     const [resultH, setResultH] = React.useState('');
     const [gei, setGei] = React.useState(0);
     const [area, setArea] = React.useState(0);
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
 
     const handleOption = (optionValue) => {
         setSelected(optionValue)
@@ -147,11 +162,48 @@ const Edificacion = ( {edif} ) => {
                             <AreaInput onValueChange={handleArea} areaValue={area} idInput="input1" idHelper="input1-helper" label="Área de construcción"/>
                         </Box>
                     </Grid>
+                    <Grid item xd={12} sm={12}>
+                        <Button aria-describedby={id} onClick={handleClick}>
+                            <InfoIcon  color="primary"/>
+                        </Button>
+                        <Popover
+                            id={id}
+                            open={open}
+                            anchorEl={anchorEl}
+                            onClose={handleClose}
+                            anchorOrigin={{
+                                vertical: 'center',
+                                horizontal: 'right',
+                            }}
+                              transformOrigin={{
+                                vertical: 'center',
+                                horizontal: 'left',
+                            }}
+                            >
+                            <Box p={2}>
+                            Cálculos realizados bajo las siguientes consideraciones: 
+                            <ul>
+                                <li>Análisis de los patrones de consumo de los años 2018 y 2019.</li>
+                                <li>Medición de consumo de los meses: septiembre, octubre y noviembre de 2020.</li>
+                                <li>Edificaciones en el área metropolitana de Monterrey.</li>
+                                <li>Perfil horario por tipo de edificación:</li>
+                                <ul>
+                                    <li>Residencial: lunes a viernes: Ocupado 6:00 pm – 7:00 am. sábado y domingos: Ocupado 24 horas</li>
+                                    <li>Restaurante: lunes a viernes: Ocupado 8:00 am – 6:00 pm. sábado y domingos: Desocupado 24 horas</li>
+                                    <li>Aulas: lunes a viernes: Ocupado 7:00 am– 7:00 pm. sábado y domingos: Desocupado 24 horas</li>
+                                    <li>Oficinas: lunes a viernes: Ocupado 7:00 am– 7:00 pm. sábado y domingos: Desocupado 24 horas</li>
+                                    <li>Hospital: lunes a domingo: Ocupado 24 horas.</li>
+                                </ul>
+                            </ul>
+                        </Box>
+                        </Popover>
+                    </Grid>
                     <Grid item xs={12} sm={12}>
                         <Typography variant="body1">
                             *Cálculos para Monterrey, México
                         </Typography>
                     </Grid>
+
                 </Grid>
             </Grid>
             <Grid item xs={12} sm={7}>

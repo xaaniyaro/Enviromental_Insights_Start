@@ -1,23 +1,21 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 
-const Charts = ({data, title}) => {
+const Charts = ({data}) => {
     
 
     return(
         <div>
-            <Typography variant="h6">
-                {title}
-            </Typography>
-            <BarChart width={375} height={200} data={data}
-            margin={{top: 5, right: 5, left: 5, bottom: 5}}>
+            <BarChart width={700} height={300} data={data}
+            margin={{top: 5, right: 5, left: 30, bottom: 5}}>
             <CartesianGrid strokeDasharray="3 3"/>
-            <XAxis dataKey="name"/>
-            <YAxis/>
+            <XAxis dataKey="name">
+            </XAxis>
+            <YAxis label={{ value: 'Wh/m²', angle: -90, position: 'insideLeft' }}/>
             <Tooltip/>
             <Legend />
-            <Bar dataKey="wattshporaño" fill="#82ca9d" />
+            <Bar dataKey="2018" fill="#f35d46" />
+            <Bar dataKey="2019" fill="#4555a4" />
             </BarChart>
         </div>
     );

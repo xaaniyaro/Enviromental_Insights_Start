@@ -2,15 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import AppBar from './AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
-import BaseForm from './BaseForm';
-import Selector from './Select';
-import Adornado from './Adorment';
 
 function ElevationScroll(props) {
   const { children, window } = props;

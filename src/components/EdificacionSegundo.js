@@ -12,6 +12,8 @@ import DisplayCalcu from './DisplayCalcu';
 import DisplayEdif from './DisplayEdif';
 import DisplayCondition from './DisplayCondition';
 import DisplaySaving from './DisplaySaving';
+import InfoIcon from '@material-ui/icons/Info';
+import Popover from '@material-ui/core/Popover';
 
 //Primer valor para ubicar tecnologia, segundo valor EUI base, tercer valor factor emisiones
 const residencial = [
@@ -46,7 +48,8 @@ const useStyles = makeStyles(theme => ({
         height: "100%"
     },
     backPaper: {
-        marginTop: '30px'
+        marginTop: '30px',
+        marginBottom: "50px"
     },
     electricBack: {
         backgroundColor: "#004783",
@@ -75,11 +78,11 @@ const useStyles = makeStyles(theme => ({
 const Edificacion = ( {edif} ) => {
     const classes = useStyles();
 
-    const [selected, setSelected] = React.useState('');
-    const [selectedAux, setSelectedAux] = React.useState('');
-    const [selectedBase, setSelectedBase] = React.useState('');
-    const [selectedFactor, setSelectedFactor] = React.useState('');
-    const [selectedTech, setSelectedTech] = React.useState('');
+    const [selected, setSelected] = React.useState(null);
+    const [selectedAux, setSelectedAux] = React.useState(null);
+    const [selectedBase, setSelectedBase] = React.useState(null);
+    const [selectedFactor, setSelectedFactor] = React.useState(null);
+    const [selectedTech, setSelectedTech] = React.useState(null);
     const [area, setArea] = React.useState(0);
 
     const [resultBase, setResultBase] = React.useState('');
@@ -91,6 +94,19 @@ const Edificacion = ( {edif} ) => {
     const [ahorro, setAhorro] = React.useState(0);
     const [insight, setInsight] = React.useState(null);
     const [tree, setTree] = React.useState(null);
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
 
     const handleOption = (optionValue) => {
         setSelected(optionValue)
@@ -141,19 +157,22 @@ const Edificacion = ( {edif} ) => {
     
 
     function reset() {
-        setSelected('');
-        setSelectedAux('');
-        setSelectedBase('');
-        setSelectedFactor('');
-        setSelectedTech('');
+        setSelected(null);
+        setSelectedAux(null);
+        setSelectedBase(null);
+        setSelectedFactor(null);
+        setSelectedTech(null);
+        setArea(0);
+
+        setResultBase('');
+        setResultProy('');
+
+        setGeiB('');
+        setGeiP('');
+
         setAhorro(0);
         setInsight(null);
         setTree(null);
-        setGeiB('');
-        setGeiP('');
-        setResultBase('');
-        setResultProy('');
-        setArea(0);
     }
     
     return(
@@ -172,36 +191,52 @@ const Edificacion = ( {edif} ) => {
                 </Box>
             </Grid>
             <Grid item xs={12} sm={3}>
-                <Grid container spacing={1}>
-                    <Grid item xs={12} sm={12}>
-                        <Box display="flex" justifyContent="center">
-                            < TestSelect options={edif} label="Tipo de edificio" selected={selected} onSelectedChange={handleOption}/>
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        <Box display="flex" justifyContent="center">
-                            <DisplayEdif selectedEdif={selected} onEdifChange={handleEdifType} resi={residencial} noresi={noresidencial}/>
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        <Box display="flex" justifyContent="center">
-                            <DisplayCondition  options={tecnologias} label="Tecnología techo" param={selectedBase} onChange={handleTech}/>
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        <Box display="flex" justifyContent="center">
-                            <AreaInput onValueChange={handleArea} areaValue={area} idInput="input1" idHelper="input1-helper" label="Área de techo"/>
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        <DisplayAhorro ahorro={ahorro}/>
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        <Typography variant="body1">
-                            *Cálculos para Monterrey, México
-                        </Typography>
-                    </Grid>
-                </Grid>
+                <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="center">
+                < TestSelect options={edif} label="Tipo de edificio" selected={selected} onSelectedChange={handleOption}/>
+                <DisplayEdif selectedEdif={selected} onEdifChange={handleEdifType} resi={residencial} noresi={noresidencial}/>
+                <DisplayCondition  options={tecnologias} label="Tecnología techo" param={selectedBase} onChange={handleTech}/>
+                <AreaInput onValueChange={handleArea} areaValue={area} idInput="input1" idHelper="input1-helper" label="Área de techo"/>
+                </Box>
+                <Button aria-describedby={id} onClick={handleClick}>
+                    <InfoIcon  color="primary"/>
+                </Button>
+                <Popover
+                    id={id}
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                        vertical: 'center',
+                        horizontal: 'right',
+                    }}
+                        transformOrigin={{
+                        vertical: 'center',
+                        horizontal: 'left',
+                    }}
+                    >
+                    <Box p={2}>
+                    Cálculos realizados bajo las siguientes consideraciones: 
+                    <ul>
+                        <li>Simulaciones energéticas transitorias para un caso típico.</li>
+                        <li>Características del modelo Base: </li>
+                        <ul>
+                            <li>Construcción de envolvente típica de México</li>
+                                <ul>
+                                    <li>Muros: block arcilla y acabado de yeso y pintura.</li>
+                                    <li>Techos: Losa de Concreto de 15 cm, acabado de cemento al exterior y de yeso al interior.</li>
+                                    <li>Ventanas: Residencial: sencilla con vidrio claro de 6mm</li>
+                                    <li>No residencial: Muro cortina doble con espacio de aire de 13 mm entre dos hojas de vidrio de 6mm c/u)</li>
+                                </ul>
+                            <li>Relación Muro- Ventana: Residencial: 20% / No residencial: 39%</li>
+                            <li>Ventanas sólo en la fachada sur.</li>
+                        </ul>
+                        <li>Características del modelo experimental: Sólo difiere al modelo base en la aplicación de la tecnología a evaluar.</li>
+                    </ul>
+                    </Box>
+                </Popover>
+                <Box display="flex" fontSize={16}>
+                *Cálculos para Monterrey, México
+                </Box>
             </Grid>
             <Grid item xs={12} sm={7}>
                 <Grid container spacing={2}>
@@ -275,7 +310,9 @@ const Edificacion = ( {edif} ) => {
                         result={geiP}>
                         </DisplayCalcu>
                     </Grid>
-                    
+                    <Grid item xs={12} sm={12}>
+                        <DisplayAhorro ahorro={ahorro}/>
+                    </Grid>
                 </Grid>
             </Grid>
             <Grid item xs={12} sm={2}>
@@ -283,7 +320,7 @@ const Edificacion = ( {edif} ) => {
                         Lo que equivale a:
                     </Box>
                     <DisplaySaving insight={insight} toggle={true} />
-                    <DisplaySaving insight={insight} toggle={false}/>
+                    <DisplaySaving insight={tree} toggle={false}/>
                 </Grid>
         </Grid>
         </Box>

@@ -75,12 +75,12 @@
             
         }
 
-        transition: 300ms;
+        /*transition: 300ms;
         cursor: pointer;
         &:hover
         {
             filter: brightness(115%);
-        }
+        }*/
     }
 
     .BannerGrid
@@ -94,7 +94,7 @@
         background-color: #e7ebf6;
         height: 100%;
 
-        cursor: pointer;
+        //cursor: pointer;
 
         padding: 30px;
 
