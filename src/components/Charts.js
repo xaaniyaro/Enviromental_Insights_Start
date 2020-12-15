@@ -11,7 +11,7 @@ const Charts = ({data}) => {
             <CartesianGrid strokeDasharray="3 3"/>
             <XAxis dataKey="name">
             </XAxis>
-            <YAxis label={{ value: 'Wh/m²', angle: -90, position: 'insideLeft' }}/>
+            <YAxis label={{ value: 'kWh/m²', angle: -90, position: 'insideLeft' }}/>
             <Tooltip/>
             <Legend />
             <Bar dataKey="2018" fill="#f35d46" />

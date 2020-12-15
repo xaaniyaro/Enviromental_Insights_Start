@@ -171,7 +171,7 @@ const SolarEstruc = ( {tecnologia} ) => {
         <Grid container spacing={3} justify="space-between">
             <Grid item xs={12} sm={9}>
                 <Typography variant="h4" className={classes.header}>
-                Calculadora Potencial Solar Total
+                Calculadora Potencial Solar Específico
                 </Typography>
             </Grid>
             <Grid item xs={12} sm={3}>

@@ -8,13 +8,10 @@ const useStyles = makeStyles(theme => ({
     photos: {
         height: '120px',
         width: '120px'
-    },
-    paperBack: {
-        backgroundColor: "#f5f5f5"
     }
   }));
 
-const DoctorView = ({imgSrc, nombre, puesto, title, desc}) => {
+const DoctorView = ({imgSrc, nombre, puesto, size, desc}) => {
 
     const classes = useStyles();
 
@@ -26,16 +23,12 @@ const DoctorView = ({imgSrc, nombre, puesto, title, desc}) => {
                             <img src={imgSrc} alt={imgSrc} className={classes.photos}></img>
                         </Box>
                     </Box>
-                    <Box display="flex" justifyContent="center" >
-                            <Typography variant={title} gutterBottom>
-                                {nombre}
-                            </Typography>      
+                    <Box display="flex" justifyContent="center" m={1} fontFamily="Tenor Sans" fontWeight="bold" fontSize={20}>
+                        {nombre}
+                    </Box>   
+                    <Box display="flex" justifyContent="center" m={1} fontFamily="Tenor Sans" fontWeight="bold" fontSize={16}>
+                        {puesto}
                     </Box>
-                    <Box display="flex" justifyContent="center">  
-                            <Typography variant={desc} gutterBottom >
-                                {puesto}
-                            </Typography>
-                </Box>
                 </Paper>
         </div>
     );

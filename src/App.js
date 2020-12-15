@@ -13,8 +13,14 @@ import { Container } from '@material-ui/core';
 import Member from './components/Member';
 import DisplayWeather from './components/DisplayWeather';
 //import Content from './components/Content';
-//
+/*import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: 'Tenor Sans'
+    }
+});*/
 
 // Primer valor : energia electrica
 // Segundo valor: energia termica
