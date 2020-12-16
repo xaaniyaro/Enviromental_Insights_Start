@@ -24,10 +24,6 @@ function Banner(props) {
                 <Typography className="Title">
                     {props.item.Name}
                 </Typography>
-
-                <Typography className="Caption">
-                    {props.item.Caption}
-                </Typography>
             </CardContent>
         </Grid>
     )
@@ -71,46 +67,31 @@ function Banner(props) {
 const items = [
     {
         Name: "Potencial solar",
-        Caption: "Objetivos, alcance y metodologías",
-        contentPosition: "left",
+        //Caption: "Objetivos, alcance y metodologías",
+        contentPosition: "middle",
         Items: [
             {
-                //Name: "Macbook Pro",
+                Name: "Macbook Pro",
                 Image: "solarA.jpg"
             },
             {
-                //Name: "iPhone",
+                Name: "iPhone",
                 Image: "solarB.jpg"
             }
         ]
     },
     {
         Name: "Edificios sustentables",
-        Caption: "Objetivos, alcance y metodologías",
+        //Caption: "Objetivos, alcance y metodologías",
         contentPosition: "middle",
         Items: [
             {
-                //Name: "Washing Machine WX9102",
+                Name: "Washing Machine WX9102",
                 Image: "sustA.jpg"
             },
             {
-                //Name: "Learus Vacuum Cleaner",
+                Name: "Learus Vacuum Cleaner",
                 Image: "sustB.jpg"
-            }
-        ]
-    },
-    {
-        Name: "Tecnologías aplicadas",
-        Caption: "Algunos ejemplos",
-        contentPosition: "right",
-        Items: [
-            {
-                //Name: "Living Room Lamp",
-                Image: "solarC.jpg"
-            },
-            {
-                //Name: "Floral Vase",
-                Image: "sustC.png"
             }
         ]
     }
@@ -122,7 +103,7 @@ class BannerExample extends React.Component {
 
         this.state = {
             autoPlay: true,
-            timer: 500,
+            timer: 1000,
             animation: "fade",
             indicators: true,
             timeout: 500,
@@ -182,9 +163,9 @@ class BannerExample extends React.Component {
                     timeout={this.state.timeout}
                     navButtonsAlwaysVisible={this.state.navButtonsAlwaysVisible}
                     navButtonsAlwaysInvisible={this.state.navButtonsAlwaysInvisible}
-                    next={(now, previous) => console.log(`Next User Callback: Now displaying child${now}. Previously displayed child${previous}`)}
-                    prev={(now, previous) => console.log(`Prev User Callback: Now displaying child${now}. Previously displayed child${previous}`)}
-                    onChange={(now, previous) => console.log(`OnChange User Callback: Now displaying child${now}. Previously displayed child${previous}`)}
+                    //next={(now, previous) => console.log(`Next User Callback: Now displaying child${now}. Previously displayed child${previous}`)}
+                    //prev={(now, previous) => console.log(`Prev User Callback: Now displaying child${now}. Previously displayed child${previous}`)}
+                    //onChange={(now, previous) => console.log(`OnChange User Callback: Now displaying child${now}. Previously displayed child${previous}`)}
                 >
                     {
                         items.map((item, index) => {

@@ -3,26 +3,47 @@ import axios from 'axios';
 import CryptoJS from 'crypto-js';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid'
 import DisplayStat from './DisplayStat';
 import DisplayTemp from './DisplayTemp';
+import { makeStyles } from '@material-ui/core/styles';
+
+/*
+const dummy= [
+    {hour: '10:00', temperature: 20},
+    {hour: '10:00', temperature: 20},
+    {hour: '10:00', temperature: 20},
+    {hour: '10:00', temperature: 20},
+    {hour: '10:00', temperature: 20}
+]*/
+
+const useStyles = makeStyles({
+    back: {
+      marginTop: "20px",
+    },
+});
 
 const DisplayWeather = () => {
+
+    const classes = useStyles();
 
     const [wind, setWind] = useState(0);
     const [rad, setRad] = useState(0);
     const [buffer, setBuffer] = useState(null);
     const [data, setData] = useState(null);
+    const [time, setTime] = useState(null);
 
-    
     useEffect( () =>{
         const callApi = async () =>{
+            let currTime = (new Date()).toLocaleTimeString();
+            setTime(currTime);
             let ts = Math.round((new Date()).getTime() / 1000);
             let claveapi = 'cmktt6j4diosqgfidj0f9u0twtvmofzi';
             let plainText = 'api-key' + claveapi + 'station-id101004t' + ts;
             let secretKey = 'rxidkkcbjxdjh293omoownp3f9qoe2no'; 
             let signature = CryptoJS.HmacSHA256(plainText, secretKey).toString(CryptoJS.enc.Hex);
 
-            const { data } = await axios.get('https://api.weatherlink.com/v2/current/101004', {
+            const { data } = await axios.get('https://cors-anywhere.herokuapp.com/https://api.weatherlink.com/v2/current/101004', {
                 params:{
                     'api-key': claveapi,
                     'api-signature': signature,
@@ -44,7 +65,7 @@ const DisplayWeather = () => {
         const callHistoric = async () =>{
             //Objeto fecha
             let before = new Date();
-            before.setHours(before.getHours() - 4);
+            before.setHours(before.getHours() - 2);
             //Convirtiendo a UNIX timestamp la diferencia calculada
             let first = Math.round(before.getTime() / 1000);
             //Convirtiendo a UNIX timestamp la fecha actual
@@ -55,7 +76,7 @@ const DisplayWeather = () => {
             let secretKey = 'rxidkkcbjxdjh293omoownp3f9qoe2no'; 
             let signature = CryptoJS.HmacSHA256(plainText, secretKey).toString(CryptoJS.enc.Hex);
 
-            const { data } = await axios.get('https://api.weatherlink.com/v2/historic/101004', {
+            const { data } = await axios.get('https://cors-anywhere.herokuapp.com/https://api.weatherlink.com/v2/historic/101004', {
                 params:{
                     'api-key': claveapi,
                     'api-signature': signature,
@@ -66,31 +87,56 @@ const DisplayWeather = () => {
             });
             setBuffer(data.sensors[0].data);
         };
+        callHistoric();
+        const intervalo = setInterval(() => callHistoric(), 300000)
+        return () => {
+          clearInterval(intervalo);
+        }
+    }, []);
+
+    useEffect( () =>{
         const dataStructure = () =>{
-            if(buffer!= null){
+            if(buffer != null){
                 let arr = [];
                 buffer.forEach((item) => {
-                    let convertedTemp = (item.temp - 32) * (5/9);
+                    let convertedTemp = parseFloat(((item.temp_avg - 32) * (5/9)).toFixed(2));
                     let miliseconds = item.ts * 1000;
                     let time = new Date(miliseconds);
-                    let formattedTime = time.getHours() + ':' + time.getMinutes();
+                    let minutes = time.getMinutes();
+                    if(minutes === 0){
+                        minutes = '00'
+                    }
+                    let formattedTime = time.getHours() + ':' + minutes;
                     arr.push({hour: formattedTime, temperature: convertedTemp});
                 });
+            console.log(arr);
             setData(arr);
             }
-            
         };
-        callHistoric();
         dataStructure();
     }, [buffer]);
 
     return(
         <div>
-            <Paper elevation ={1}>
-                <Box p={2}>
-                    <DisplayStat title="Velocidad de viento" img="https://media.giphy.com/media/ygx8X4iqGFVwRDOCn7/giphy.gif" data={wind} units="m/s"/>
-                    <DisplayStat title="Radiación solar" img="https://media.giphy.com/media/QTBptzxDcMWsG9OeFw/giphy.gif" data={rad} units="w/m²"/>
-                    <DisplayTemp data={data}/> 
+            <Paper elevation ={1} className={classes.back}>
+                <Box p={3}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={12}>
+                            <Box fontSize={30}>
+                                Datos de Estación San José
+                            </Box>
+                            <Box>
+                                (datos obtenidos en tiempo real: {time})
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                            <Box display="flex" justifyContent="space-between">
+                            <DisplayStat title="Velocidad de viento" img="https://media.giphy.com/media/ygx8X4iqGFVwRDOCn7/giphy.gif" data={wind} units="mph"/>
+                            <DisplayStat title="Radiación solar" img="https://media.giphy.com/media/QTBptzxDcMWsG9OeFw/giphy.gif" data={rad} units="w/m²"/>
+                            <DisplayTemp data={data}/>
+                            </Box>
+                        </Grid>
+                    </Grid>
                 </Box>
             </Paper>
         </div>

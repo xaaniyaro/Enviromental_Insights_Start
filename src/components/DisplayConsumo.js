@@ -23,47 +23,14 @@ const useStyles = makeStyles(theme => ({
 const DisplayConsumo = ({ gei, percentageE, percentageH }) => {
     const classes = useStyles();
 
-    if( gei <= 0 && percentageE <= 0){
-        return(
-            <div>
-                <Paper>
-                    <Grid container spacing={1}>
-                        <Grid item xs={12} sm={12}>
-                            <Box display="flex" justifyContent="center" p={1}>
-                                <Typography variant="h6">
-                                    Resumen
-                                </Typography>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12} sm={12}>
-                            <Box display="flex" justifyContent="center" marginTop="10px">
-                                <Typography variant="subtitle1">
-                                Total GEI emitidos
-                                </Typography>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12} sm={12}>
-                            <Box display="flex" justifyContent="center">
-                                <Typography variant="subtitle2">
-                                    0 tCO2
-                                </Typography>
-                            </Box>
-                        </Grid>
-                    </Grid>
-                </Paper>
-            </div>
-        );
-    }
-    else{
+    if( gei > 0){
         return(
             <div>
                 <Paper>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={12}>
-                            <Box display="flex" justifyContent="center" p={1}>
-                                <Typography variant="h6">
-                                    Resumen
-                                </Typography>
+                            <Box display="flex" justifyContent="center" textAlign="center" fontSize={20} fontWeight="bold" p={2}>
+                                Resumen
                             </Box>
                         </Grid>
                         <Grid item xs={12} sm={12}>
@@ -113,6 +80,20 @@ const DisplayConsumo = ({ gei, percentageE, percentageH }) => {
                 </Paper>
             </div>
         );
+    }
+    else{
+        return(
+            <div>
+                <Paper>
+                    <Box display="flex" justifyContent="center" textAlign="center" fontSize={20} fontWeight="bold" p={2}>
+                        Resumen
+                    </Box>
+                    <Box display="flex" justifyContent="center" textAlign="center" fontSize={16} p={2}>
+                        Intenta cambiar los parámetros
+                    </Box>
+                </Paper>
+            </div>
+        );   
     }
     
 }

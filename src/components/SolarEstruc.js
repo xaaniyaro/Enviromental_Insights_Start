@@ -5,12 +5,12 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box'
-import Popover from '@material-ui/core/Popover';
 import Button from '@material-ui/core/Button';
 import DisplayEnergy from './DisplayEnergy';
-import DisplayFuel from './DisplayFuel';
+import DisplayCondition from './DisplayCondition';
 import DisplaySummary from './DisplaySummary';
-import InfoIcon from '@material-ui/icons/Info';
+import DisplayInsight from './DisplayInsight';
+import DisplayCalcu from './DisplayCalcu';
 
 const useStyles = makeStyles(theme => ({
     results: {
@@ -48,6 +48,12 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
+const combustibles = [
+    {"Diesel": [0.00027]},
+    {"Gas natural": [0.0002]},
+    {"GLP": [0.0023]}
+]
+
 const SolarEstruc = ( {tecnologia} ) => {
     
     const classes = useStyles();
@@ -63,18 +69,10 @@ const SolarEstruc = ( {tecnologia} ) => {
     const [geiE, setGeiE] = React.useState('');
     const [geiH, setGeiH] = React.useState('');
     const [sumGei, setSumGei] = React.useState(0);
-    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const [insightTree, setInsightTree] = React.useState(0);
+    const [insightEdif, setInsightEdif] = React.useState(0);
     
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
 
     const handleOption = (optionValue) => {
         setSelected(optionValue);
@@ -86,9 +84,11 @@ const SolarEstruc = ( {tecnologia} ) => {
 
     useEffect( () =>{
         const calculateResults = () => {
-            let calcuE = selectedE * 13400000 / 1000000;
+            let calcuE = selectedE * 13400000 / 1000;
+            let calcIns = calcuE * 1000 / 4116.4;
+            setInsightEdif(parseFloat(Math.round(calcIns)));
             setResultE(Math.round(calcuE));
-            let calcuH = selectedH * 13400000 / 1000000;
+            let calcuH = selectedH * 13400000 / 1000;
             setResultH(Math.round(calcuH));
         }
         const decideIcon = () => {
@@ -111,21 +111,17 @@ const SolarEstruc = ( {tecnologia} ) => {
 
     useEffect( () =>{
         const calculateGei = () => {
-            let calcGeiE = resultE * 1000000 * 0.0004536;
+            let calcGeiE = resultE * 1000 * 0.0004536;
             setGeiE(Math.round(calcGeiE));
-            let calcGeiH = resultH * 1000000 * fuel;
+            let calcGeiH = resultH * 1000 * fuel;
             setGeiH(Math.round(calcGeiH));
+            let sumG = calcGeiE + calcGeiH;
+            setSumGei(parseFloat(Math.round(sumG))); 
+            let calcInsTree = (sumG / 0.021) / 1000000;
+            setInsightTree(parseFloat(Math.round(calcInsTree)))
         }
         calculateGei();
     }, [resultE, resultH, fuel]);
-
-    useEffect( () =>{
-        const makeSum = () => {
-            let sumG = parseInt(geiE) + parseInt(geiH);
-            setSumGei(sumG);
-        }
-        makeSum();
-    }, [geiE, geiH]);
 
     const handleFuel = (fuelValue) =>{
         let val = parseFloat(fuelValue);
@@ -134,7 +130,6 @@ const SolarEstruc = ( {tecnologia} ) => {
     
     function reset() {
         setIconName('placeholder.png');
-        setFuel('');
         setSelected('');
         setSelectedE('');
         setSelectedH('');
@@ -153,12 +148,12 @@ const SolarEstruc = ( {tecnologia} ) => {
         <Grid container spacing={3} justify="space-between">
             <Grid item xs={12} sm={9}>
                 <Typography variant="h4" className={classes.header}>
-                    Calculadora total
+                Calculadora Potencial Solar Total
                 </Typography>
             </Grid>
             <Grid item xs={12} sm={3}>
                 <Box display="flex" justifyContent="flex-end">
-                    <Button variant="contained" onClick={reset}>Resetear</Button>
+                    <Button variant="contained" onClick={reset}>Limpiar</Button>
                 </Box>
             </Grid>
             <Grid item xs={12} sm={3}>
@@ -167,7 +162,7 @@ const SolarEstruc = ( {tecnologia} ) => {
                         <TestSelect options={tecnologia} label="Tecnología" selected={selected} onSelectedChange={handleOption}/>
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                        <DisplayFuel selectedH={selectedH} onFuelChange={handleFuel} />
+                        <DisplayCondition param={selectedH} onChange={handleFuel} options={combustibles} label="Combustibles"/>
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <Box p={1} marginTop={2}>
@@ -186,27 +181,6 @@ const SolarEstruc = ( {tecnologia} ) => {
                         </Paper>
                         </Box>
                     </Grid>
-                    <Grid item xd={12} sm={12}>
-                        <Button aria-describedby={id} onClick={handleClick}>
-                            <InfoIcon  color="primary"/>
-                        </Button>
-                        <Popover
-                            id={id}
-                            open={open}
-                            anchorEl={anchorEl}
-                            onClose={handleClose}
-                            anchorOrigin={{
-                                vertical: 'center',
-                                horizontal: 'right',
-                            }}
-                              transformOrigin={{
-                                vertical: 'center',
-                                horizontal: 'left',
-                            }}
-                            >
-                            <Typography cla ssName={classes.typography}>The content of the Popover.</Typography>
-                        </Popover>
-                    </Grid>
                 </Grid>
             </Grid>
             <Grid item xs={12} sm={7}>
@@ -219,7 +193,7 @@ const SolarEstruc = ( {tecnologia} ) => {
                     <Grid item xs={12} sm={6}>
                         <DisplayEnergy 
                         choice={true} 
-                        units="MWh/AC " 
+                        units="MWh AC" 
                         result={resultE}>
                         </DisplayEnergy>
                     </Grid>
@@ -232,22 +206,33 @@ const SolarEstruc = ( {tecnologia} ) => {
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <Typography variant="h5">
-                            Reducción de emisiones de GEI
+                            Reducción anual de emisiones de Gases de Efecto Invernadero (GEI) 
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <DisplayEnergy 
-                        choice={true} 
-                        units="tCO2/año" 
+                        <DisplayCalcu 
+                        choice={false} 
+                        units="tCO2" 
                         result={geiE}>
-                        </DisplayEnergy>
+                        </DisplayCalcu>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                    <DisplayEnergy 
+                        <DisplayCalcu 
                         choice={false} 
-                        units="tCO2/año" 
+                        units="tCO2" 
                         result={geiH}>
-                        </DisplayEnergy>
+                        </DisplayCalcu>
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <Typography variant="h6">
+                            Lo que equivale a:
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <DisplayInsight insight={insightEdif} toggle={true}/>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <DisplayInsight insight={insightTree} toggle={false}/>
                     </Grid>
                 </Grid>
                 

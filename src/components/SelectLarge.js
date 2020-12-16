@@ -5,7 +5,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from '@material-ui/core/FormControl';
 import Select from "@material-ui/core/Select";
 import { createMuiTheme } from '@material-ui/core/styles';
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     minWidth: '30ch',
     "& label.MuiInputLabel-outlined": {
       color: "black",
-      fontSize: "14px"
+      fontSize: "12px"
       //fontWeight: 'bold'
     }
   }

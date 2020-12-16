@@ -7,15 +7,15 @@ const useStyles = makeStyles(theme => ({
     fontStyle: {
         color: "white"
     },
-    heatBack: {
-        backgroundColor: "#FF0000",
+    geiBack: {
+        backgroundColor: "#616161",
         width: "100%",
-        height: "100%"
+        height: "80px"
     },
     electricBack: {
         backgroundColor: "#004783",
         width: "100%",
-        height: "100%"
+        height: "80px"
     },
     placeholder:{
         backgroundColor: "#e0e0e0",
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-const DisplayEnergy = ({choice, units, result}) => {
+const DisplayCalcu = ({choice, units, result}) => {
     const classes = useStyles();
 
     if(choice){
@@ -34,7 +34,7 @@ const DisplayEnergy = ({choice, units, result}) => {
                     <Paper className={classes.electricBack}>
                         <Box display="flex" justifyContent="space-around" alignItems="center" p={2} fontSize={18} color="white">
                             <img src="electricy_white.png" width="26px" height="50px" alt="icon"/>
-                            {result.toLocaleString()} {units}
+                                {result.toLocaleString()} {units}
                         </Box>
                     </Paper>
                 </div>
@@ -46,16 +46,17 @@ const DisplayEnergy = ({choice, units, result}) => {
 
                 </Paper>
             );
+            
         }
     }
     else{
         if(result > 0){
             return(
                 <div>
-                    <Paper className={classes.heatBack}>
+                    <Paper className={classes.geiBack}>
                         <Box display="flex" justifyContent="space-around" alignItems="center" p={2} fontSize={18} color="white">
-                        <img src="heat_white.png" width="42px" height="50px" alt="icon"/>
-                        {result.toLocaleString()} {units}
+                            <img src="emissions_icon.png" width="60px" height="50px" alt="icon"/>
+                                {result.toLocaleString()} {units}
                         </Box>
                     </Paper>
                 </div>
@@ -72,4 +73,4 @@ const DisplayEnergy = ({choice, units, result}) => {
     
 }
 
-export default DisplayEnergy;
+export default DisplayCalcu;

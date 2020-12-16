@@ -4,12 +4,11 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 300,
   },
 });
 
@@ -27,15 +26,11 @@ const DisplayStat = ({title, img, data, units}) => {
           title={title}
         />
         <CardContent>
-        <Box display='flex' justifyContent='center'>
-          <Typography gutterBottom variant="h6">
+          <Box display='flex' justifyContent='center' fontSize={24} fontWeight="bold">
             {title}
-          </Typography>
           </Box>
-          <Box display='flex' justifyContent='center'>
-          <Typography gutterBottom variant="h4">
+          <Box display='flex' justifyContent='center' fontSize={28} fontWeight="medium" marginTop="20px">
             {data} {units}
-          </Typography>
           </Box>
         </CardContent>
       </CardActionArea>

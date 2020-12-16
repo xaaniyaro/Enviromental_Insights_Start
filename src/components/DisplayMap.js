@@ -11,8 +11,8 @@ const DisplayMap = ({srcString}) => {
                 <Box display="flex" justifyContent="center">   
                 <iframe src={srcString} 
                 title="StationLocation"
-                width="100%" 
-                height="600px" 
+                width="300px" 
+                height="300px" 
                 frameBorder="0" 
                 style={{border: 0}} 
                 allowFullScreen="" 

@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+//import Typography from '@material-ui/core/Typography';
 //import IconButton from '@material-ui/core/IconButton';
 //import MenuIcon from '@material-ui/icons/Menu';
 //import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -53,10 +53,11 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    alignItems: "center"
   },
   appbar: {
     background: "#261149"
-  }
+  },
 }));
 
 export default function MenuAppBar(props) {
@@ -81,7 +82,9 @@ export default function MenuAppBar(props) {
       <AppBar className={classes.appbar}>
         <Toolbar>
           <div className={classes.title}>
-            <Link href="/" ><Button color="inherit">Logo</Button></Link>
+            <Link href="/">
+              <img src="logo.svg" alt="tec|s&b" style={{width:"170px", height:"80px"}}/>
+            </Link>
           </div>
             <div>
               <Button
@@ -109,7 +112,7 @@ export default function MenuAppBar(props) {
               >
                 <Link href="/potencialsolar"><MenuItem onClick={handleClose}>Potencial solar</MenuItem></Link>
                 <Link href="/edificiossustentables"><MenuItem onClick={handleClose}>Edificios sustentables</MenuItem></Link>
-                <Link href="/visualizacion"><MenuItem onClick={handleClose}>Visualizacion de datos</MenuItem></Link>
+                <Link href="/visualizacion"><MenuItem onClick={handleClose}>Visualización de datos</MenuItem></Link>
               </Menu>
             </div>
             <Link href="/contacto"><Button color="inherit">Contacto</Button></Link>

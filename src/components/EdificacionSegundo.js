@@ -8,7 +8,32 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button';
 import DisplayAhorro from './DisplayAhorro';
-import DisplayEnergy from './DisplayEnergy';
+import DisplayCalcu from './DisplayCalcu';
+import DisplayEdif from './DisplayEdif';
+import DisplayCondition from './DisplayCondition';
+import DisplaySaving from './DisplaySaving';
+import InfoIcon from '@material-ui/icons/Info';
+import Popover from '@material-ui/core/Popover';
+
+//Primer valor para ubicar tecnologia, segundo valor EUI base, tercer valor factor emisiones
+const residencial = [
+    { "Departamento": [0, 148.732684892857, 0.00058979379]}
+  ]
+  
+//Primer valor para ubicar tecnologia, segundo valor EUI base, tercer valor factor emisiones
+const noresidencial = [
+{ "Restaurante": [1, 294.401505017857, 0.0006005079144]},
+{ "Aulas": [2, 200.176775732143,0.00057703888]},
+{ "Oficina": [3, 143.148956196429, 0.00057703888]},
+{ "Hospital": [4, 391.969762803571, 0.0005887733972]}
+]
+
+//[1]: departamento [2]: restaurante [3]: aulas [4]: oficina [5]: hospital
+const tecnologias = [
+    {"PCM": [128.401676125, 273.662720607143, 194.604431875, 139.794239785714, 375.327964107143]},
+    {"PCM + Pintura Reflectiva": [118.344585839286, 242.4896195, 169.281653875, 117.708888553571, 328.334337625]},
+    {"PCM + Aislante": [118.888194053571, 257.602488910714, 184.651429357143, 134.1043315, 361.580940857143]}
+]
 
 const useStyles = makeStyles(theme => ({
     results: {
@@ -23,7 +48,8 @@ const useStyles = makeStyles(theme => ({
         height: "100%"
     },
     backPaper: {
-        marginTop: '30px'
+        marginTop: '30px',
+        marginBottom: "50px"
     },
     electricBack: {
         backgroundColor: "#004783",
@@ -49,105 +75,103 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const EdificacionSegundo = ( {edif, tech, temp} ) => {
+const Edificacion = ( {edif} ) => {
     const classes = useStyles();
 
-    const [selectedEdif, setSelectedEdif] = React.useState('');
-    const [selectedEdifE, setSelectedEdifE] = React.useState('');
-    const [selectedEdifH, setSelectedEdifH] = React.useState('');
-
-    const [selectedTec, setSelectedTec] = React.useState('');
-    const [selectedTecE, setSelectedTecE] = React.useState('');
-    const [selectedTecH, setSelectedTecH] = React.useState('');
-
-    const [selectedTem, setSelectedTem] = React.useState('');
-    const [selectedTemE, setSelectedTemE] = React.useState('');
-    const [selectedTemH, setSelectedTemH] = React.useState('');
-
-    const [resultE, setResultE] = React.useState('');
-    const [resultH, setResultH] = React.useState('');
-
-    const [geiE, setGeiE] = React.useState('');
-    const [geiH, setGeiH] = React.useState('');
-    const [difC, setDifC] = React.useState(0);
-    const [difE, setDifE] = React.useState(0);
-
+    const [selected, setSelected] = React.useState(null);
+    const [selectedAux, setSelectedAux] = React.useState(null);
+    const [selectedBase, setSelectedBase] = React.useState(null);
+    const [selectedFactor, setSelectedFactor] = React.useState(null);
+    const [selectedTech, setSelectedTech] = React.useState(null);
     const [area, setArea] = React.useState(0);
 
-    const handleOptionEdif = (optionValue) => {
-        setSelectedEdif(optionValue);
-        let arr = optionValue.split(',');
-        setSelectedEdifE(arr[0]);
-        setSelectedEdifH(arr[1]);
-    }
+    const [resultBase, setResultBase] = React.useState('');
+    const [resultProy, setResultProy] = React.useState('');
 
-    const handleOptionTec = (optionValue) => {
-        setSelectedTec(optionValue);
-        let arr = optionValue.split(',');
-        setSelectedTecE(arr[0]);
-        setSelectedTecH(arr[1]);
-    }
+    const [geiB, setGeiB] = React.useState('');
+    const [geiP, setGeiP] = React.useState('');
+    
+    const [ahorro, setAhorro] = React.useState(0);
+    const [insight, setInsight] = React.useState(null);
+    const [tree, setTree] = React.useState(null);
 
-    const handleOptionTem = (optionValue) => {
-        setSelectedTem(optionValue);
-        let arr = optionValue.split(',');
-        setSelectedTemE(arr[0]);
-        setSelectedTemH(arr[1]);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
+
+    const handleOption = (optionValue) => {
+        setSelected(optionValue)
     }
 
     const handleArea = (areaValue) =>{
         setArea(areaValue);
     }
 
+    const handleEdifType = (edifValue) =>{
+        if(edifValue != ''){
+            let arr = edifValue.split(",");
+            setSelectedAux(parseInt(arr[0]));
+            setSelectedBase(parseFloat(arr[1]));
+            setSelectedFactor(parseFloat(arr[2]));
+        }
+    }
+
+    const handleTech = (optionsArray) =>{
+        let arr = optionsArray.split(",");
+        setSelectedTech(arr[selectedAux]);
+    }
+
     useEffect( () =>{
         const calculateResults = () => {
-            let calcuE = selectedEdifE * selectedTecE * selectedTemE * area;
-            setResultE(calcuE.toFixed(2));
-            let calcuH = selectedEdifH * selectedTecH * selectedTemH * area;
-            setResultH(calcuH.toFixed(2));
+            let calcBase = area * selectedBase;
+            setResultBase(parseFloat(calcBase.toFixed(2)));
+            let calcProy = area * selectedTech;
+            setResultProy(parseFloat(calcProy.toFixed(2)));
+            let saving = 100 - (calcProy*100/calcBase);
+            setAhorro(parseFloat(saving.toFixed(2))); 
+            let calcuIns = (calcBase - calcProy) / 4116.4;
+            setInsight(parseFloat(Math.round(calcuIns)));
+            let calcuTree = (calcBase - calcProy)*3.64/10000;
+            setTree(parseFloat(Math.round(calcuTree)));
         }
         calculateResults();
-    }, [selectedEdifE, selectedEdifH, selectedTecE, selectedTecH, selectedTemE, selectedTemH, area]);
+    }, [selectedBase, selectedTech, area]);
 
     useEffect( () =>{
         const calculateGei = () => {
-            let calcuGE = resultE * 0.004;
-            setGeiE(calcuGE.toFixed(2));
-            let calcuGH = resultH * 0.04;
-            setGeiH(calcuGH.toFixed(2));
+            let calcGeiB = selectedFactor * resultBase;
+            setGeiB(parseFloat(calcGeiB.toFixed(2)));
+            let calcGeiP = selectedFactor * resultProy;
+            setGeiP(parseFloat(calcGeiP.toFixed(2)));
         }
         calculateGei();
-    }, [resultE, resultH]);
+    }, [resultBase, resultProy, selectedFactor]);
 
-    useEffect( () =>{
-        const calculateDif = () => {
-            let baseConsumo = 1000000
-            let difConsumo = parseFloat(resultH) + parseFloat(resultE) - baseConsumo
-            setDifC(difConsumo)
-            let baseEmisiones = 1000000
-            let difEmisiones = parseFloat(geiH) + parseFloat(geiE) - baseEmisiones
-            setDifE(difEmisiones)
-        }
-        calculateDif();
-    }, [resultH, resultE, geiE, geiH]);
+    
 
     function reset() {
-        setResultE('');
-        setResultH('');
+        setSelected(null);
         setArea(0);
-        setSelectedEdif('');
-        setSelectedEdifE('');
-        setSelectedEdifH('');
-        setSelectedTec('');
-        setSelectedTecE('');
-        setSelectedTecH('');
-        setSelectedTem('');
-        setSelectedTemE('');
-        setSelectedTemH('');
-        setGeiE('');
-        setGeiH('');
-        setDifC(0);
-        setDifE(0);
+        setSelectedBase('');
+
+        setResultBase('');
+        setResultProy('');
+
+        setGeiB('');
+        setGeiP('');
+
+        setAhorro(0);
+        setInsight(null);
+        setTree(null);
     }
     
     return(
@@ -156,77 +180,147 @@ const EdificacionSegundo = ( {edif, tech, temp} ) => {
             <Box p={2}>
         <Grid container spacing={3} justify="space-between">
             <Grid item xs={12} sm={9}>
-                <Typography variant="h5">
-                    Calculadora de emisiones de GEI aplicando tecnologías en techos
+                <Typography variant="h4" className={classes.header}>
+                    Aplicación de tecnologías en techos
                 </Typography>
             </Grid>
             <Grid item xs={12} sm={3}>
                 <Box display="flex" justifyContent="flex-end">
-                    <Button variant="contained" onClick={reset}>Resetear</Button>
+                    <Button variant="contained" onClick={reset}>Limpiar</Button>
                 </Box>
             </Grid>
             <Grid item xs={12} sm={3}>
-                <Grid container spacing={1}>
-                    <Grid item xs={12} sm={12}>
-                        < TestSelect options={edif} label="Tipo de edificio" selected={selectedEdif} onSelectedChange={handleOptionEdif}/>
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        < TestSelect options={tech} label="Tecnología" selected={selectedTec} onSelectedChange={handleOptionTec}/>
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        < TestSelect options={temp} label="Temporada" selected={selectedTem} onSelectedChange={handleOptionTem}/>
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        <AreaInput onValueChange={handleArea} areaValue={area} idInput="input1" idHelper="input1-helper"/>
-                    </Grid>
-                </Grid>
+                <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="center">
+                < TestSelect options={edif} label="Tipo de edificio" selected={selected} onSelectedChange={handleOption}/>
+                <DisplayEdif selectedEdif={selected} onEdifChange={handleEdifType} resi={residencial} noresi={noresidencial}/>
+                <DisplayCondition  options={tecnologias} label="Tecnología techo" param={selectedBase} onChange={handleTech}/>
+                <AreaInput onValueChange={handleArea} areaValue={area} idInput="input1" idHelper="input1-helper" label="Área de techo"/>
+                </Box>
+                <Button aria-describedby={id} onClick={handleClick}>
+                    <InfoIcon  color="primary"/>
+                </Button>
+                <Popover
+                    id={id}
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                        vertical: 'center',
+                        horizontal: 'right',
+                    }}
+                        transformOrigin={{
+                        vertical: 'center',
+                        horizontal: 'left',
+                    }}
+                    >
+                    <Box p={2}>
+                    Cálculos realizados bajo las siguientes consideraciones: 
+                    <ul>
+                        <li>Simulaciones energéticas transitorias para un caso típico.</li>
+                        <li>Características del modelo Base: </li>
+                        <ul>
+                            <li>Construcción de envolvente típica de México</li>
+                                <ul>
+                                    <li>Muros: block arcilla y acabado de yeso y pintura.</li>
+                                    <li>Techos: Losa de Concreto de 15 cm, acabado de cemento al exterior y de yeso al interior.</li>
+                                    <li>Ventanas: Residencial: sencilla con vidrio claro de 6mm</li>
+                                    <li>No residencial: Muro cortina doble con espacio de aire de 13 mm entre dos hojas de vidrio de 6mm c/u)</li>
+                                </ul>
+                            <li>Relación Muro- Ventana: Residencial: 20% / No residencial: 39%</li>
+                            <li>Ventanas sólo en la fachada sur.</li>
+                        </ul>
+                        <li>Características del Modelo con la Tecnología Aplicada: Sólo difiere al modelo base en la aplicación de la tecnología a evaluar.</li>
+                    </ul>
+                    </Box>
+                </Popover>
+                <Box display="flex" fontSize={16}>
+                *Cálculos para Monterrey, México
+                </Box>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={7}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={12}>
-                        <Typography variant="h5">
-                            Consumo energético anual
-                        </Typography>
+                        <Box textAlign="center">
+                            <Typography variant="h5">
+                                Consumo energético anual
+                            </Typography>
+                        </Box>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <DisplayEnergy 
+                        <Box textAlign="center">
+                            <Typography variant="h6">
+                                Sin tecnología
+                            </Typography>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Box textAlign="center">
+                            <Typography variant="h6">
+                                Con tecnología
+                            </Typography>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <DisplayCalcu 
                         choice={true} 
-                        units="MWh/AC" 
-                        result={resultE}>
-                        </DisplayEnergy>
+                        units="kWh/año" 
+                        result={resultBase}>
+                        </DisplayCalcu>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <DisplayEnergy 
-                        choice={false} 
-                        units="MWh" 
-                        result={resultH}>
-                        </DisplayEnergy>
+                        <DisplayCalcu 
+                        choice={true} 
+                        units="kWh/año" 
+                        result={resultProy}>
+                        </DisplayCalcu>
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                        <Typography variant="h5">
-                            GEI emitidos anualmente
-                        </Typography>
+                        <Box textAlign="center">
+                            <Typography variant="h5">
+                                Emisiones generadas al año
+                            </Typography>
+                        </Box>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <DisplayEnergy 
-                        choice={true} 
-                        units="MWh/AC" 
-                        result={geiE}>
-                        </DisplayEnergy>
+                        <Box textAlign="center">
+                            <Typography variant="h6">
+                                Sin tecnología
+                            </Typography>
+                        </Box>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <DisplayEnergy 
+                        <Box textAlign="center">
+                            <Typography variant="h6">
+                                Con tecnología
+                            </Typography>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <DisplayCalcu 
                         choice={false} 
-                        units="MWh" 
-                        result={geiH}>
-                        </DisplayEnergy>
+                        units="tCO2e/año" 
+                        result={geiB}>
+                        </DisplayCalcu>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <DisplayCalcu 
+                        choice={false} 
+                        units="tCO2e/año" 
+                        result={geiP}>
+                        </DisplayCalcu>
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <DisplayAhorro ahorro={ahorro}/>
                     </Grid>
                 </Grid>
-                
             </Grid>
-            <Grid item xs={12} sm={3}>
-                <DisplayAhorro ahorro={difC} evitados={difE}/>
-            </Grid>
+            <Grid item xs={12} sm={2}>
+                    <Box textAlign="center" fontSize={20} fontStyle="medium">
+                        Lo que equivale a:
+                    </Box>
+                    <DisplaySaving insight={insight} toggle={true} />
+                    <DisplaySaving insight={tree} toggle={false}/>
+                </Grid>
         </Grid>
         </Box>
         </Paper>
@@ -234,4 +328,4 @@ const EdificacionSegundo = ( {edif, tech, temp} ) => {
     );
 }
 
-export default EdificacionSegundo;
+export default Edificacion;

@@ -11,36 +11,29 @@ import SolarEstruc from './components/SolarEstruc';
 import SolarEstructure from './components/SolarEstructure';
 import { Container } from '@material-ui/core';
 import Member from './components/Member';
+import DisplayWeather from './components/DisplayWeather';
 //import Content from './components/Content';
+/*import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 
-//
-
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: 'Tenor Sans'
+    }
+});*/
 
 // Primer valor : energia electrica
 // Segundo valor: energia termica
 const tecnologia = [
-  { "Colectores térmicos": ['ct', 0, 280.1]},
-  { "Colectores híbridos PV/T": ['pv', 44.49, 228.97]},
-  { "Colectores híbridos LCPV/T": ['lc', 80.98, 120.56]},
-  { "Paneles fotovoltáicos": ['pf', 171.62, 0]}
+  { "Colectores térmicos": ['ct', 0, 447.83]},
+  { "Colectores híbridos PV/T": ['pv', 91.48, 168.31]},
+  { "Colectores híbridos LCPV/T": ['lc', 115.56, 339.12 ]},
+  { "Paneles fotovoltáicos": ['pf', 188.52, 0]}
 ];
 
 const edificacion = [
   { "Residencial": ['yes'] },
   { "No residencial": ['no'] }
-];
-
-
-
-const technology = [
-  { "PCM": [2, 3] },
-  { "Aislante": [4, 5] },
-  { "Pintura": [6, 7] }
-];
-
-const temporadas = [
-  { "Verano (Abr - Oct)": [2, 3] },
-  { "Invierno (Nov - Mar)": [4, 5] },
 ];
 
 const useStyles = makeStyles(theme => ({
@@ -75,15 +68,16 @@ function App() {
         <Container className={classes.mainContent}>
               <Edificacion edif={edificacion}></Edificacion>
               <br/>
-              
+              <EdificacionSegundo edif={edificacion} />
         </Container>
       </Route>
       <Route path="/visualizacion">
         <Container>
+          <DisplayWeather/>
           <ChartsManager></ChartsManager>
         </Container>
       </Route>
-      <Route path="/equipo">
+      <Route path="/contacto">
         <Member></Member>
       </Route>
     </div>
