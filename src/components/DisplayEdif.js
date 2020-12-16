@@ -9,6 +9,11 @@ const DisplayEdif = ({selectedEdif, onEdifChange, resi, noresi}) => {
         onEdifChange(optionValue);
     }
 
+    function clean(){
+        setSelected('');
+        onEdifChange('');
+    }
+
     if(selectedEdif === 'yes'){
         return(
             <div>
@@ -24,7 +29,10 @@ const DisplayEdif = ({selectedEdif, onEdifChange, resi, noresi}) => {
         );
     }
     else{
-        return null;
+        return (
+        <div>
+            {clean}
+        </div>);
     }
 }
 

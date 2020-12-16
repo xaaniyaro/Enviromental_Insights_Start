@@ -32,8 +32,8 @@ const DisplaySaving = ({insight, toggle}) => {
                         <Box display="flex" justifyContent="center" flexDirection="row" flexWrap="wrap" p={2} fontSize={18} color="white">
                             <img src="buildings_icon.png" alt="icon" width="50%" height="50%" />
                             <div className={classes.centertext}>Consumo&nbsp;anual&nbsp;de</div> 
-                            <strong>{insight}</strong> 
-                            <div className={classes.centertext}>edificios de Monterrey</div>
+                            <strong>{insight.toLocaleString()}</strong> 
+                            <div className={classes.centertext}>departamentos de Monterrey</div>
                         </Box>
                     </Paper>
                 </div>
@@ -55,7 +55,7 @@ const DisplaySaving = ({insight, toggle}) => {
                     <Paper elevation={1} className={classes.back}>
                         <Box display="flex" justifyContent="center" flexDirection="row" flexWrap="wrap" p={2} fontSize={18} color="white">
                             <img src="tree_icon.png" alt="icon" width="50%" height="50%"/>
-                            <strong>{insight}</strong>
+                            <strong>{insight.toLocaleString()}</strong>
                             <div className={classes.centertext}>
                                 hectáreas reforestadas
                             </div>

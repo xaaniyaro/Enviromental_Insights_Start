@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-const DisplayInsight = ({insight, toggle}) => {
+const DisplayInsight = ({insight, toggle, mil}) => {
     const classes = useStyles();
 
     if(toggle){
@@ -35,7 +35,7 @@ const DisplayInsight = ({insight, toggle}) => {
                         <Box display="flex"  p={2} fontSize={16} color="white">
                             <img src="buildings_icon.png" alt="icon" width="20%" height="20%" className={classes.imgFormat}/>
                             <div className={classes.centertext}>
-                                Consumo anual de <strong>{insight}</strong> edificios de Monterrey
+                                Consumo anual de <strong>{insight.toLocaleString()}</strong> departamentos de Monterrey
                             </div>
                         </Box>
                     </Paper>
@@ -53,19 +53,37 @@ const DisplayInsight = ({insight, toggle}) => {
     
     else{
         if(insight > 0){
-            return(
-                <div>
-                    <Paper elevation={1} className={classes.back}>
-                    <Box display="flex"  p={2} fontSize={16} color="white">
-                            <img src="tree_icon.png" alt="icon" width="20%" height="20%"/>
-                            <div className={classes.centertext}>
-                                <strong>{insight}</strong> hectáreas reforestadas
-                            </div>
-                        </Box>
-                        
-                    </Paper>
-                </div>
-            );
+            if(mil){
+                return(
+                    <div>
+                        <Paper elevation={1} className={classes.back}>
+                        <Box display="flex"  p={2} fontSize={16} color="white">
+                                <img src="tree_icon.png" alt="icon" width="20%" height="20%"/>
+                                <div className={classes.centertext}>
+                                    <strong>{insight.toLocaleString()}</strong> miles de árboles plantados
+                                </div>
+                            </Box>
+                            
+                        </Paper>
+                    </div>
+                );
+            }
+            else{
+                return(
+                    <div>
+                        <Paper elevation={1} className={classes.back}>
+                        <Box display="flex"  p={2} fontSize={16} color="white">
+                                <img src="tree_icon.png" alt="icon" width="20%" height="20%"/>
+                                <div className={classes.centertext}>
+                                    <strong>{insight.toLocaleString()}</strong> millones de árboles plantados
+                                </div>
+                            </Box>
+                            
+                        </Paper>
+                    </div>
+                );
+            }
+            
         }
         else{
             return(

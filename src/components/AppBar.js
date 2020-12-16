@@ -58,13 +58,6 @@ const useStyles = makeStyles((theme) => ({
   appbar: {
     background: "#261149"
   },
-  imgFormat:{
-    imageRendering: '-webkit-optimize-contrast',
-    imageRendering: '-o-crisp-edges',
-    imageRendering: '-moz-crisp-edges',
-    width: '134px',
-    height: '45px'
-  }
 }));
 
 export default function MenuAppBar(props) {
@@ -89,7 +82,9 @@ export default function MenuAppBar(props) {
       <AppBar className={classes.appbar}>
         <Toolbar>
           <div className={classes.title}>
-            <Link href="/" ><img src="logo.png" alt="tec|s&b" className={classes.imgFormat}/></Link>
+            <Link href="/">
+              <img src="logo.svg" alt="tec|s&b" style={{width:"170px", height:"80px"}}/>
+            </Link>
           </div>
             <div>
               <Button

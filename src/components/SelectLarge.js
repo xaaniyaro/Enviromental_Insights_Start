@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     minWidth: '30ch',
     "& label.MuiInputLabel-outlined": {
       color: "black",
-      fontSize: "14px"
+      fontSize: "12px"
       //fontWeight: 'bold'
     }
   }

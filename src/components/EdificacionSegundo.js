@@ -117,10 +117,12 @@ const Edificacion = ( {edif} ) => {
     }
 
     const handleEdifType = (edifValue) =>{
-        let arr = edifValue.split(",");
-        setSelectedAux(parseInt(arr[0]));
-        setSelectedBase(parseFloat(arr[1]));
-        setSelectedFactor(parseFloat(arr[2]));
+        if(edifValue != ''){
+            let arr = edifValue.split(",");
+            setSelectedAux(parseInt(arr[0]));
+            setSelectedBase(parseFloat(arr[1]));
+            setSelectedFactor(parseFloat(arr[2]));
+        }
     }
 
     const handleTech = (optionsArray) =>{
@@ -137,9 +139,9 @@ const Edificacion = ( {edif} ) => {
             let saving = 100 - (calcProy*100/calcBase);
             setAhorro(parseFloat(saving.toFixed(2))); 
             let calcuIns = (calcBase - calcProy) / 4116.4;
-            setInsight(parseFloat(calcuIns.toFixed(2)));
+            setInsight(parseFloat(Math.round(calcuIns)));
             let calcuTree = (calcBase - calcProy)*3.64/10000;
-            setTree(parseFloat(calcuTree.toFixed(2)));
+            setTree(parseFloat(Math.round(calcuTree)));
         }
         calculateResults();
     }, [selectedBase, selectedTech, area]);
@@ -158,11 +160,8 @@ const Edificacion = ( {edif} ) => {
 
     function reset() {
         setSelected(null);
-        setSelectedAux(null);
-        setSelectedBase(null);
-        setSelectedFactor(null);
-        setSelectedTech(null);
         setArea(0);
+        setSelectedBase('');
 
         setResultBase('');
         setResultProy('');
@@ -187,7 +186,7 @@ const Edificacion = ( {edif} ) => {
             </Grid>
             <Grid item xs={12} sm={3}>
                 <Box display="flex" justifyContent="flex-end">
-                    <Button variant="contained" onClick={reset}>Resetear</Button>
+                    <Button variant="contained" onClick={reset}>Limpiar</Button>
                 </Box>
             </Grid>
             <Grid item xs={12} sm={3}>
@@ -230,7 +229,7 @@ const Edificacion = ( {edif} ) => {
                             <li>Relación Muro- Ventana: Residencial: 20% / No residencial: 39%</li>
                             <li>Ventanas sólo en la fachada sur.</li>
                         </ul>
-                        <li>Características del modelo experimental: Sólo difiere al modelo base en la aplicación de la tecnología a evaluar.</li>
+                        <li>Características del Modelo con la Tecnología Aplicada: Sólo difiere al modelo base en la aplicación de la tecnología a evaluar.</li>
                     </ul>
                     </Box>
                 </Popover>

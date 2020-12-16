@@ -97,9 +97,9 @@ const Edificacion = ( {edif} ) => {
 
     useEffect( () =>{
         const calculateResults = () => {
-            let calcuE = area * selectedEUI * (selectedE/100) ;
+            let calcuE = area * selectedEUI * (selectedE/100);
             setResultE(parseFloat(calcuE.toFixed(2)));
-            let calcuH = area * selectedEUI * (selectedH/100) * 3.6;
+            let calcuH = area * selectedEUI * (selectedH/100);
             setResultH(parseFloat(calcuH.toFixed(2)));
         }
         const calculateGei = () => {
@@ -111,19 +111,17 @@ const Edificacion = ( {edif} ) => {
     }, [selectedE, selectedH, selectedEUI, selectedFactor, area]);
 
     const handleEdifType = (edifValue) =>{
-        let arr = edifValue.split(",");
-        setSelectedEUI(parseFloat(arr[0]));
-        setSelectedE(parseFloat(arr[1]));
-        setSelectedH(parseFloat(arr[2]));
-        setSelectedFactor(parseFloat(arr[3]));
+        if(edifValue !== ''){
+            let arr = edifValue.split(",");
+            setSelectedEUI(parseFloat(arr[0]));
+            setSelectedE(parseFloat(arr[1]));
+            setSelectedH(parseFloat(arr[2]));
+            setSelectedFactor(parseFloat(arr[3]));
+        }
     }
 
     function reset() {
         setSelected('');
-        setSelectedE('');
-        setSelectedH('');
-        setSelectedEUI('');
-        setSelectedFactor('');
         setResultE('');
         setResultH('');
         setGei('');
@@ -142,7 +140,7 @@ const Edificacion = ( {edif} ) => {
             </Grid>
             <Grid item xs={12} sm={3}>
                 <Box display="flex" justifyContent="flex-end">
-                    <Button variant="contained" onClick={reset}>Resetear</Button>
+                    <Button variant="contained" onClick={reset}>Limpiar</Button>
                 </Box>
             </Grid>
             <Grid item xs={12} sm={3}>
@@ -223,7 +221,7 @@ const Edificacion = ( {edif} ) => {
                     <Grid item xs={12} sm={6}>
                         <DisplayEnergy 
                         choice={false} 
-                        units="MJ/año" 
+                        units="kWh/año" 
                         result={resultH}>
                         </DisplayEnergy>
                     </Grid>

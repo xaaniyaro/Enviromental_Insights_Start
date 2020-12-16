@@ -57,7 +57,7 @@ const HomeComponent = () => {
         <Container>
         <div className={classes.section}></div>
         <div className={classes.imgDiv}>
-            <img src="original.png" alt="solarandbuildingslogo" height="40%" width="40%"/>
+            <img src="original.svg" alt="solarandbuildingslogo" height="40%" width="40%"/>
         </div>
             <Box fontSize={28} fontFamily='Tenor Sans' textAlign="center" p={4}>
         La urbanización está estresando la infraestructura de las ciudades, los ecosistemas y los servicios sociales. 
@@ -83,7 +83,7 @@ const HomeComponent = () => {
                         </div>
                         <Box fontSize={28} fontFamily='Tenor Sans' textAlign="center" fontWeight="bold" color="white" marginBottom={3}>Potencial Solar</Box>
                         <Box fontSize={22} fontFamily='Tenor Sans' textAlign="center" fontWeight="light" marginTop="10px" color="white" marginBottom={4}>Objetivos Específicos del Proyecto</Box>
-                        <Box fontSize={14} fontFamily='Tenor Sans' textAlign="center" color="white">
+                        <Box fontSize={14} fontFamily='Tenor Sans' textAlign="center" color="white" marginBottom="40px">
                             <div>
                             - Validar datos de radiación solar que utiliza la plataforma EIE para estimar el potencial de generación de energía fotovoltaica en el AMM.​
                             </div>
@@ -99,7 +99,7 @@ const HomeComponent = () => {
                             </div>
                     <Box fontSize={28} fontFamily='Tenor Sans' textAlign="center" fontWeight="bold" color="white"  marginBottom={3}>Edificios Sustentables</Box>
                     <Box fontSize={22} fontFamily='Tenor Sans' textAlign="center" marginTop="10px" color="white" marginBottom={4}>Objetivos Específicos del Proyecto</Box>
-                    <Box fontSize={14} fontFamily='Tenor Sans' textAlign="center" color="white">
+                    <Box fontSize={14} fontFamily='Tenor Sans' textAlign="center" color="white" marginBottom="40px">
                         <div>
                         - Mejorar la predicción de la plataforma EIE para determinar el consumo de energía y las emisiones en edificios residenciales y no residenciales del AMM.
                         </div>

@@ -111,8 +111,8 @@ const SolarEstruc = ( {tecnologia} ) => {
     useEffect( () =>{
         const calculateResults = () => {
             let calcuE = selectedE * area / 1000;
-            let calcIns = calcuE / 4116.4;
-            setInsightEdif(parseFloat(calcIns.toFixed(2)));
+            let calcIns = calcuE * 1000 / 4116.4;
+            setInsightEdif(parseFloat(Math.round(calcIns)));
             setResultE(parseFloat(calcuE.toFixed(2)));
             let calcuH = selectedH * area / 1000;
             setResultH(parseFloat(calcuH.toFixed(2)));
@@ -137,21 +137,20 @@ const SolarEstruc = ( {tecnologia} ) => {
 
     useEffect( () =>{
         const calculateGei = () => {
-            let calcGeiE = resultE * 1000000 * 0.0004536;
+            let calcGeiE = resultE * 1000 * 0.0004536;
             setGeiE(parseFloat(calcGeiE.toFixed(2)));
-            let calcGeiH = resultH * 1000000 * fuel;
+            let calcGeiH = resultH * 1000 * fuel;
             setGeiH(parseFloat(calcGeiH.toFixed(2)));
             let sumG = calcGeiE + calcGeiH;
-            setSumGei(parseFloat(sumG.toFixed(2))); 
-            let calcInsTree = sumG / 0.021;
-            setInsightTree(parseFloat(calcInsTree.toFixed(2)))
+            setSumGei(parseFloat(Math.round(sumG))); 
+            let calcInsTree = (sumG / 0.021) / 1000;
+            setInsightTree(parseFloat(Math.round(calcInsTree)))
         }
         calculateGei();
     }, [resultE, resultH, fuel]);
 
     function reset() {
         setIconName('placeholder.png');
-        setFuel('');
         setSelected('');
         setSelectedE('');
         setSelectedH('');
@@ -176,7 +175,7 @@ const SolarEstruc = ( {tecnologia} ) => {
             </Grid>
             <Grid item xs={12} sm={3}>
                 <Box display="flex" justifyContent="flex-end">
-                    <Button variant="contained" onClick={reset}>Resetear</Button>
+                    <Button variant="contained" onClick={reset}>Limpiar</Button>
                 </Box>
             </Grid>
             <Grid item xs={12} sm={3}>
@@ -261,7 +260,7 @@ const SolarEstruc = ( {tecnologia} ) => {
                     <Grid item xs={12} sm={6}>
                         <DisplayEnergy 
                         choice={true} 
-                        units="MWh/AC" 
+                        units="MWh AC" 
                         result={resultE}>
                         </DisplayEnergy>
                     </Grid>
@@ -274,7 +273,7 @@ const SolarEstruc = ( {tecnologia} ) => {
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <Typography variant="h5">
-                            Reducción de emisiones de GEI anual
+                            Reducción anual de emisiones de Gases de Efecto Invernadero (GEI) 
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -300,7 +299,7 @@ const SolarEstruc = ( {tecnologia} ) => {
                         <DisplayInsight insight={insightEdif} toggle={true}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <DisplayInsight insight={insightTree} toggle={false}/>
+                        <DisplayInsight insight={insightTree} toggle={false} mil={true}/>
                     </Grid>
                 </Grid>
                 

@@ -37,10 +37,10 @@ const termicData = [
     createData('Modelo', 'Maxol 2.5'),
     createData('Potencia térmica', '1.8kW'),
     createData('0a', 0.775),
-    createData('a1a', 3.1),
-    createData('a2a', 0.01),
-    createData('Flow rate', 0.02),
-    createData('Area', 2.326)
+    createData('a1a', '3.1 W/(m²K)'),
+    createData('a2a', '0.01 W/(m²K²)'),
+    createData('Flow rate', '0.02 kg/s'),
+    createData('Area', '2.326 m²')
 ]
 
 const pvtData = [

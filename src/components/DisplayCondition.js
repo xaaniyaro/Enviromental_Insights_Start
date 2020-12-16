@@ -13,6 +13,7 @@ const DisplayCondition = ({param, onChange, label, options}) => {
     
     function reset() {
         setSelected('');
+        onChange('');
     }
 
     if(param > 0){

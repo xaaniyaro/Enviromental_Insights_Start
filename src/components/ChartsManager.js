@@ -64,7 +64,7 @@ const ChartsManager = () =>{
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={12}>
                                 <Box fontSize={28}>
-                                    Datos históricos de las estaciones
+                                    Datos históricos de irrandiancia horizontal global (GHI)
                                 </Box>
                             </Grid> 
                             <Grid item xs={12} sm={12}>

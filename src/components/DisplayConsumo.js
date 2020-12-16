@@ -23,21 +23,7 @@ const useStyles = makeStyles(theme => ({
 const DisplayConsumo = ({ gei, percentageE, percentageH }) => {
     const classes = useStyles();
 
-    if( gei <= 0 && percentageE <= 0){
-        return(
-            <div>
-                <Paper>
-                    <Box display="flex" justifyContent="center" textAlign="center" fontSize={20} fontWeight="bold" p={2}>
-                        Resumen
-                    </Box>
-                    <Box display="flex" justifyContent="center" textAlign="center" fontSize={16} p={2}>
-                        Intenta cambiar los parámetros
-                    </Box>
-                </Paper>
-            </div>
-        );
-    }
-    else{
+    if( gei > 0){
         return(
             <div>
                 <Paper>
@@ -94,6 +80,20 @@ const DisplayConsumo = ({ gei, percentageE, percentageH }) => {
                 </Paper>
             </div>
         );
+    }
+    else{
+        return(
+            <div>
+                <Paper>
+                    <Box display="flex" justifyContent="center" textAlign="center" fontSize={20} fontWeight="bold" p={2}>
+                        Resumen
+                    </Box>
+                    <Box display="flex" justifyContent="center" textAlign="center" fontSize={16} p={2}>
+                        Intenta cambiar los parámetros
+                    </Box>
+                </Paper>
+            </div>
+        );   
     }
     
 }
