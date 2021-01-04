@@ -1,5 +1,5 @@
 import React from 'react';
-import Charts from './Charts';
+import DisplayHistoricData from './DisplayHistoricData';
 
 //Casa solar
 const data1 = [
@@ -45,7 +45,7 @@ const DisplayGraphs = ({selected}) => {
         if(chosen !== undefined){
             return(
                 <div>
-                    <Charts 
+                    <DisplayHistoricData 
                     data={chosen} />
                 </div>
             );

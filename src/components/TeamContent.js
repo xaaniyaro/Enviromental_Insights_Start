@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Member from './Member';
+import TeamComponent from './TeamComponent';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -22,12 +22,12 @@ const TeamContent = () => {
             <Grid container spacing={4}>
                 <Grid item xs={12} sm={12}>
                     <Paper elevation={3} className={classes.paper}>
-                        <Member></Member>
+                        <TeamComponent />
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={12}>
                     <Paper elevation={3} className={classes.paper}>
-                        <Member></Member>
+                        <TeamComponent />
                     </Paper>
                 </Grid>
             </Grid>

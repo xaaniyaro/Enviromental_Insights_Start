@@ -61,7 +61,7 @@ const noresidencial = [
     { "Hospital": [395.71, 77, 23, 0.000588773]}
 ]
 
-const Edificacion = ( {edif} ) => {
+const EdificacionPrimero = ( {edif} ) => {
     const classes = useStyles();
 
     const [selected, setSelected] = React.useState('');
@@ -238,4 +238,4 @@ const Edificacion = ( {edif} ) => {
     );
 }
 
-export default Edificacion;
+export default EdificacionPrimero;

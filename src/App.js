@@ -2,15 +2,15 @@ import './App.css';
 import AppBar from './components/AppBar';
 import { makeStyles } from "@material-ui/core/styles";
 import ChartsManager from './components/ChartsManager';
-import Route from './components/Route';
-import Edificacion from './components/Edificacion';
+import Route from './utilities/Route';
+import EdificacionPrimero from './components/EdificacionPrimero';
 import EdificacionSegundo from './components/EdificacionSegundo'
 import HomeComponent from './components/HomeComponent';
 import CarouselS from './components/CarouselS';
-import SolarEstruc from './components/SolarEstruc';
-import SolarEstructure from './components/SolarEstructure';
+import SolarPrimero from './components/SolarPrimero';
+import SolarSegundo from './components/SolarSegundo';
 import { Container } from '@material-ui/core';
-import Member from './components/Member';
+import Member from './components/TeamComponent';
 import DisplayWeather from './components/DisplayWeather';
 //import Content from './components/Content';
 /*import { createMuiTheme } from '@material-ui/core/styles';
@@ -59,14 +59,14 @@ function App() {
       <Route path="/potencialsolar">
           <CarouselS />
           <Container>
-              <SolarEstruc tecnologia={tecnologia}></SolarEstruc>
+              <SolarPrimero tecnologia={tecnologia}></SolarPrimero>
               <br/>
-              <SolarEstructure tecnologia={tecnologia}></SolarEstructure>
+              <SolarSegundo tecnologia={tecnologia}></SolarSegundo>
           </Container>
       </Route>
       <Route path="/edificiossustentables">
         <Container className={classes.mainContent}>
-              <Edificacion edif={edificacion}></Edificacion>
+              <EdificacionPrimero edif={edificacion} />
               <br/>
               <EdificacionSegundo edif={edificacion} />
         </Container>

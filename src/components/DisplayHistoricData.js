@@ -1,7 +1,7 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 
-const Charts = ({data}) => {
+const DisplayHistoricData = ({data}) => {
     
 
     return(
@@ -21,4 +21,4 @@ const Charts = ({data}) => {
     );
 };
 
-export default Charts;
+export default DisplayHistoricData;

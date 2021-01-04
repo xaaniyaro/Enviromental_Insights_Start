@@ -3,21 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-//import Typography from '@material-ui/core/Typography';
-//import IconButton from '@material-ui/core/IconButton';
-//import MenuIcon from '@material-ui/icons/Menu';
-//import AccountCircle from '@material-ui/icons/AccountCircle';
-//import Switch from '@material-ui/core/Switch';
-//import FormControlLabel from '@material-ui/core/FormControlLabel';
-//import FormGroup from '@material-ui/core/FormGroup';
-import Link from './Link';
+import Link from '../utilities/Link';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-//import Box from '@material-ui/core/Box';
-//import Container from '@material-ui/core/Container';
 
 function ElevationScroll(props) {
   const { children, window } = props;
@@ -37,10 +28,6 @@ function ElevationScroll(props) {
 
 ElevationScroll.propTypes = {
   children: PropTypes.element.isRequired,
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window: PropTypes.func,
 };
 

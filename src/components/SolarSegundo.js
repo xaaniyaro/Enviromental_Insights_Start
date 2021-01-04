@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
+import AreaInput from './AreaInput';
 import TestSelect from './TestSelect';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,8 +10,10 @@ import Button from '@material-ui/core/Button';
 import DisplayEnergy from './DisplayEnergy';
 import DisplayCondition from './DisplayCondition';
 import DisplaySummary from './DisplaySummary';
-import DisplayInsight from './DisplayInsight';
 import DisplayCalcu from './DisplayCalcu';
+import Popover from '@material-ui/core/Popover';
+import InfoIcon from '@material-ui/icons/Info';
+import DisplayInsight from './DisplayInsight';
 
 const useStyles = makeStyles(theme => ({
     results: {
@@ -25,7 +28,8 @@ const useStyles = makeStyles(theme => ({
         height: "100%"
     },
     backPaper: {
-        marginTop: '30px'
+        marginTop: '30px',
+        marginBottom: "60px"
     },
     electricBack: {
         backgroundColor: "#004783",
@@ -43,19 +47,19 @@ const useStyles = makeStyles(theme => ({
     heatR: {
         color: "white"
     },
-    typography: {
-        padding: theme.spacing(2),
-    },
+    helpImg: {
+        width: "116px",
+        height: "60px"
+    }
   }));
 
-const combustibles = [
+  const combustibles = [
     {"Diesel": [0.00027]},
     {"Gas natural": [0.0002]},
     {"GLP": [0.0023]}
 ]
 
-const SolarEstruc = ( {tecnologia} ) => {
-    
+const SolarSegundo = ( {tecnologia} ) => {
     const classes = useStyles();
 
     const [iconName, setIconName] = React.useState("placeholder.png");
@@ -66,13 +70,26 @@ const SolarEstruc = ( {tecnologia} ) => {
     const [selectedT, setSelectedT] = React.useState('');
     const [resultE, setResultE] = React.useState('');
     const [resultH, setResultH] = React.useState('');
+    const [area, setArea] = React.useState(0);
     const [geiE, setGeiE] = React.useState('');
     const [geiH, setGeiH] = React.useState('');
     const [sumGei, setSumGei] = React.useState(0);
 
     const [insightTree, setInsightTree] = React.useState(0);
     const [insightEdif, setInsightEdif] = React.useState(0);
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
     
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
 
     const handleOption = (optionValue) => {
         setSelected(optionValue);
@@ -82,14 +99,23 @@ const SolarEstruc = ( {tecnologia} ) => {
         setSelectedH(arr[2]);
     }
 
+    const handleArea = (areaValue) =>{
+        setArea(areaValue);
+    }
+
+    const handleFuel = (fuelValue) =>{
+        let val = parseFloat(fuelValue);
+        setFuel(val);
+    }
+
     useEffect( () =>{
         const calculateResults = () => {
-            let calcuE = selectedE * 13400000 / 1000;
+            let calcuE = selectedE * area / 1000;
             let calcIns = calcuE * 1000 / 4116.4;
             setInsightEdif(parseFloat(Math.round(calcIns)));
-            setResultE(Math.round(calcuE));
-            let calcuH = selectedH * 13400000 / 1000;
-            setResultH(Math.round(calcuH));
+            setResultE(parseFloat(calcuE.toFixed(2)));
+            let calcuH = selectedH * area / 1000;
+            setResultH(parseFloat(calcuH.toFixed(2)));
         }
         const decideIcon = () => {
             if(selectedT === 'ct'){
@@ -107,27 +133,22 @@ const SolarEstruc = ( {tecnologia} ) => {
         }
         calculateResults();
         decideIcon();
-    }, [selectedE, selectedH, selectedT]);
+    }, [selectedE, selectedH, area, selectedT]);
 
     useEffect( () =>{
         const calculateGei = () => {
             let calcGeiE = resultE * 1000 * 0.0004536;
-            setGeiE(Math.round(calcGeiE));
+            setGeiE(parseFloat(calcGeiE.toFixed(2)));
             let calcGeiH = resultH * 1000 * fuel;
-            setGeiH(Math.round(calcGeiH));
+            setGeiH(parseFloat(calcGeiH.toFixed(2)));
             let sumG = calcGeiE + calcGeiH;
             setSumGei(parseFloat(Math.round(sumG))); 
-            let calcInsTree = (sumG / 0.021) / 1000000;
+            let calcInsTree = (sumG / 0.021) / 1000;
             setInsightTree(parseFloat(Math.round(calcInsTree)))
         }
         calculateGei();
     }, [resultE, resultH, fuel]);
 
-    const handleFuel = (fuelValue) =>{
-        let val = parseFloat(fuelValue);
-        setFuel(val);
-    }
-    
     function reset() {
         setIconName('placeholder.png');
         setSelected('');
@@ -138,9 +159,10 @@ const SolarEstruc = ( {tecnologia} ) => {
         setResultH('');
         setGeiE('');
         setGeiH('');
+        setArea(0);
         setSumGei(0);
     }
-
+    
     return(
         <div>
         <Paper elevation={1} className={classes.backPaper}>
@@ -148,7 +170,7 @@ const SolarEstruc = ( {tecnologia} ) => {
         <Grid container spacing={3} justify="space-between">
             <Grid item xs={12} sm={9}>
                 <Typography variant="h4" className={classes.header}>
-                Calculadora Potencial Solar Total
+                Calculadora Potencial Solar Específico
                 </Typography>
             </Grid>
             <Grid item xs={12} sm={3}>
@@ -159,27 +181,72 @@ const SolarEstruc = ( {tecnologia} ) => {
             <Grid item xs={12} sm={3}>
                 <Grid container spacing={1}>
                     <Grid item xs={12} sm={12}>
-                        <TestSelect options={tecnologia} label="Tecnología" selected={selected} onSelectedChange={handleOption}/>
+                        < TestSelect options={tecnologia} label="Tecnología" selected={selected} onSelectedChange={handleOption}/>
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <DisplayCondition param={selectedH} onChange={handleFuel} options={combustibles} label="Combustibles"/>
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                        <Box p={1} marginTop={2}>
-                        <Paper elevation={1}>
-                            <Box p={1}>
-                                <Typography variant="body1">
-                                    Área considerada:
-                                </Typography>
-                                <Typography variant="body1">
-                                    13,400,000 m²
-                                </Typography>
-                                <Typography variant="body2">
-                                    *Corresponde al área de Monterrey
-                                </Typography>
+                        <AreaInput onValueChange={handleArea} areaValue={area} idInput="input2" idHelper="input2-helper" label="Área"/>
+                    </Grid>
+                    <Grid item xd={12} sm={12}>
+                        <Button aria-describedby={id} onClick={handleClick}>
+                            <InfoIcon  color="primary"/>
+                        </Button>
+                        <Popover
+                            id={id}
+                            open={open}
+                            anchorEl={anchorEl}
+                            onClose={handleClose}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'center',
+                            }}
+                              transformOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'center',
+                            }}
+                            >
+                            <Box p={2}>
+                            <strong>Suposiciones y consideraciones</strong>
+                            <div>
+                            Simulaciones dinámicas anuales realizadas en el software TRSNYS.
+                            <br/>Inclinación de paneles 25.4.
+                            <br/>Time step de simulaciones: 5 minutos 
+                            <br/>Orientación N-S.
+                            </div>
+                                <br/>
+                            <strong>Paneles PV:</strong>
+                            <div>
+                                Capacidad de instalación PV para simulaciones: de 1kW a 1000kW.
+                                <br/>Área de instalación de paneles PV: 3m²/panel
+                                <br/>Eficiencia de conversión DC-AC del 92%.                                 
+                            </div>
+                            <br/>
+                            <strong>Colectores térmicos:</strong>
+                            <div>
+                                Área de instalación de colectores PV: 4.5m²/panel			
+                                <br/>Capacidad de almacenamiento térmico 50lt por cada m² de colectores.			
+                                <br/>Temperatura máxima de agua 80 C.	
+                            </div>
+                                <br/>
+                            <strong>PV/T:</strong>
+                            <div>
+                                Capacidad de instalación PVT para simulaciones: de 28kW a 756kW.				
+                                <br/>Área de instalación de paneles PV: 3m²/panel				
+                                <br/>Eficiencia de conversión DC-AC del 92%. 
+                                <br/>Capacidad de almacenamiento térmico 50lt por cada m² de colectores.	
+                            </div>
+                                <br/>
+                            <strong>LCPV/T</strong>
+                            <div>
+                                Capacidad de instalación PVT para simulaciones: de 28kW a 756kW.				
+                                <br/>Área de instalación de paneles PV: 4.5m2/panel				
+                                <br/>Eficiencia de conversión DC-AC del 92%. 
+                                <br/>Capacidad de almacenamiento térmico 50lt por cada m² de colectores.	
+                            </div>		
                             </Box>
-                        </Paper>
-                        </Box>
+                        </Popover>
                     </Grid>
                 </Grid>
             </Grid>
@@ -232,7 +299,7 @@ const SolarEstruc = ( {tecnologia} ) => {
                         <DisplayInsight insight={insightEdif} toggle={true}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <DisplayInsight insight={insightTree} toggle={false}/>
+                        <DisplayInsight insight={insightTree} toggle={false} mil={true}/>
                     </Grid>
                 </Grid>
                 
@@ -247,4 +314,4 @@ const SolarEstruc = ( {tecnologia} ) => {
     );
 }
 
-export default SolarEstruc;
+export default SolarSegundo;

@@ -4,7 +4,7 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import MemberView from './MemberView';
 import Box from '@material-ui/core/Box';
-import ContactForm from './ContactForm';
+import ContactCard from './ContactCard';
 
 const useStyles = makeStyles(theme => ({
     photos: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-const Member = () => {
+const TeamComponent = () => {
     const classes = useStyles();
 
     return(
@@ -69,10 +69,10 @@ const Member = () => {
             </Grid>
             </Container>
             <div className={classes.footer}>
-                <ContactForm />
+                <ContactCard />
             </div>
         </div>
     );
 }
 
-export default Member;
+export default TeamComponent;

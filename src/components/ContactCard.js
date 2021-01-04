@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     } 
   }));
 
-const ContactForm = () => {
+const ContactCard = () => {
     const classes = useStyles();
     return(
         <div>
@@ -37,4 +37,4 @@ const ContactForm = () => {
     );
 }
 
-export default ContactForm;
+export default ContactCard;
