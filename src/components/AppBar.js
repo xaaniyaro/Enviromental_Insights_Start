@@ -106,7 +106,7 @@ export default function MenuAppBar(props) {
         </Toolbar>
       </AppBar>
       </ElevationScroll>
-      <Toolbar />
+      <Toolbar /> {/* Se pone para agregar un pequeño espacio de la barra y el contenido */}
     </div>
   );
 }

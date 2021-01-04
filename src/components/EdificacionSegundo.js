@@ -117,7 +117,7 @@ const Edificacion = ( {edif} ) => {
     }
 
     const handleEdifType = (edifValue) =>{
-        if(edifValue != ''){
+        if(edifValue !== ''){
             let arr = edifValue.split(",");
             setSelectedAux(parseInt(arr[0]));
             setSelectedBase(parseFloat(arr[1]));

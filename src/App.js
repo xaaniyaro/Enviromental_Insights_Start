@@ -10,7 +10,7 @@ import CarouselS from './components/CarouselS';
 import SolarPrimero from './components/SolarPrimero';
 import SolarSegundo from './components/SolarSegundo';
 import { Container } from '@material-ui/core';
-import Member from './components/TeamComponent';
+import TeamComponent from './components/TeamComponent';
 import DisplayWeather from './components/DisplayWeather';
 //import Content from './components/Content';
 /*import { createMuiTheme } from '@material-ui/core/styles';
@@ -78,7 +78,7 @@ function App() {
         </Container>
       </Route>
       <Route path="/contacto">
-        <Member></Member>
+        <TeamComponent />
       </Route>
     </div>
     
