@@ -15,19 +15,28 @@ const useStyles = makeStyles(theme => ({
     },
     footer:{
         backgroundColor: "#e7ebf6",
-        height: "150px",
+        height: "250px",
         width: "100%",
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         marginTop: '50px'
     },
-    logo:{
-        width: "200px",
-        height: "52px",
+    footersection:{
+        height: "150px",
+        width: "100%",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "white"
     },
     lineas:{
         color: "white"
+    },
+    logo:{
+        margin: "10px"
     },
     lineasBack:{
         backgroundColor: "#261149"
@@ -114,7 +123,17 @@ const HomeComponent = () => {
         </Paper>
         </Container>
         <div className={classes.footer}>
-            <img src="https://javier.rodriguez.org.mx/itesm/2014/tecnologico-de-monterrey-blue.png" width="400px" height="105px" alt="logo" className={classes.logo}></img>
+            <Box fontSize={16} fontFamily='Tenor Sans' textAlign="center" color="black" marginTop="20px" marginBottom="20px" fontWeight="bold">
+                Proyecto financiado por ICLEI-Gobiernos Locales por la Sustentabilidad, <br />
+                Secretariado para México, Centroamérica y el Caribe, con recursos de Google.org <br/>
+                en el marco del Proyecto Fondo de Acción México 2020
+            </Box>
+            <div className={classes.footersection}>
+                <img src="https://javier.rodriguez.org.mx/itesm/2014/tecnologico-de-monterrey-blue.png" width="200px" height="52px" alt="logo" className={classes.logo}></img>
+                <img src="sponsor1.jpg" width="188px" height="106px" alt="logo" className={classes.logo}></img>
+                <img src="sponsor2.png" width="238px" height="52px" alt="logo" className={classes.logo}></img>
+                <img src="sponsor3.jpg" width="197px" height="115px" alt="logo" className={classes.logo}></img>
+            </div>
         </div>
         </div>
     );
